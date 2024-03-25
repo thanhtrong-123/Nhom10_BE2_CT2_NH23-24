@@ -16,10 +16,10 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/welcome', function () {
+Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/', [PageController::class, 'index'])->name('index');
+Route::get('index', [PageController::class, 'index'])->name('index');
 Route::get('wishlist', [PageController::class, 'wishlist'])->name('wishlist');
 Route::get('cart', [PageController::class, 'cart'])->name('cart');
 Route::get('checkout', [PageController::class, 'checkout'])->name('checkout');
