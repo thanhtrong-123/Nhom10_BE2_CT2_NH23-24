@@ -100,7 +100,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Slider</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="{{URL::to('/manage-slider')}}">Liệt kê slider</a></li>
+                        <li><a href="{{ URL('/manage-slider')}}">Liệt kê slider</a></li>
                         <li><a href="{{URL::to('/add-slider')}}">Thêm slider</a></li>
                     </ul>
                 </li>
