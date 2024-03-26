@@ -17,13 +17,13 @@
                                         <figure class="slide-image">
                                             <picture>
                                                 <source media="(max-width: 480px)" srcset="assets/images/slider/slide-1-480w.jpg">
-                                                <img src="assets/images/slider/slide-1.jpg" alt="Image Desc">
+                                                <img src="assets/images/demos/demo-5/banners/banner-1.jpg" alt="Image Desc">
                                             </picture>
                                         </figure><!-- End .slide-image -->
 
                                         <div class="intro-content">
-                                            <h3 class="intro-subtitle">Topsale Collection</h3><!-- End .h3 intro-subtitle -->
-                                            <h1 class="intro-title">Living Room<br>Furniture</h1><!-- End .intro-title -->
+                                            <h3 class="intro-subtitle">Trending now</h3><!-- End .h3 intro-subtitle -->
+                                            <h1 class="intro-title">This Week's<br>Most Wanted</h1><!-- End .intro-title -->
 
                                             <a href="category.html" class="btn btn-outline-white">
                                                 <span>SHOP NOW</span>
@@ -35,17 +35,17 @@
                                     <div class="intro-slide">
                                         <figure class="slide-image">
                                             <picture>
-                                                <source media="(max-width: 480px)" srcset="assets/images/slider/slide-2-480w.jpg">
-                                                <img src="assets/images/slider/slide-2.jpg" alt="Image Desc">
+                                                <source media="(max-width: 480px)" srcset="assets/images/demos/demo-6/slider/slide-1.jpg">
+                                                <img src="assets/images/demos/demo-6/slider/slide-1.jpg" alt="Image Desc">
                                             </picture>
                                         </figure><!-- End .slide-image -->
 
                                         <div class="intro-content">
-                                            <h3 class="intro-subtitle">News and Inspiration</h3><!-- End .h3 intro-subtitle -->
-                                            <h1 class="intro-title">New Arrivals</h1><!-- End .intro-title -->
+                                            <h3 class="intro-subtitle">You're Looking Good</h3><!-- End .h3 intro-subtitle -->
+                                            <h1 class="intro-title">New Lookbook</h1><!-- End .intro-title -->
 
                                             <a href="category.html" class="btn btn-outline-white">
-                                                <span>SHOP NOW</span>
+                                                <span>Discover More</span>
                                                 <i class="icon-long-arrow-right"></i>
                                             </a>
                                         </div><!-- End .intro-content -->
@@ -55,16 +55,16 @@
                                         <figure class="slide-image">
                                             <picture>
                                                 <source media="(max-width: 480px)" srcset="assets/images/slider/slide-3-480w.jpg">
-                                                <img src="assets/images/slider/slide-3.jpg" alt="Image Desc">
+                                                <img src="assets/images/demos/demo-6/slider/slide-2.jpg" alt="Image Desc">
                                             </picture>
                                         </figure><!-- End .slide-image -->
 
                                         <div class="intro-content">
-                                            <h3 class="intro-subtitle">Outdoor Furniture</h3><!-- End .h3 intro-subtitle -->
-                                            <h1 class="intro-title">Outdoor Dining <br>Furniture</h1><!-- End .intro-title -->
+                                            <h3 class="intro-subtitle">Don’t Miss</h3><!-- End .h3 intro-subtitle -->
+                                            <h1 class="intro-title">Mysrety Deals</h1><!-- End .intro-title -->
 
                                             <a href="category.html" class="btn btn-outline-white">
-                                                <span>SHOP NOW</span>
+                                                <span>Discover More</span>
                                                 <i class="icon-long-arrow-right"></i>
                                             </a>
                                         </div><!-- End .intro-content -->
@@ -80,12 +80,12 @@
                                     <div class="col-md-6 col-lg-12">
                                         <div class="banner banner-display">
                                             <a href="#">
-                                                <img src="assets/images/banners/home/intro/banner-1.jpg" alt="Banner">
+                                                <img src="assets/images/demos/demo-7/banners/banner-2.jpg" alt="Banner">
                                             </a>
 
                                             <div class="banner-content">
-                                                <h4 class="banner-subtitle text-darkwhite"><a href="#">Clearence</a></h4><!-- End .banner-subtitle -->
-                                                <h3 class="banner-title text-white"><a href="#">Chairs & Chaises <br>Up to 40% off</a></h3><!-- End .banner-title -->
+                                                <h4 class="banner-subtitle text-darkwhite"><a href="#">Limited time only.</a></h4><!-- End .banner-subtitle -->
+                                                <h3 class="banner-title text-white"><a href="#">Trainers & Sportwear<br>Sale Up to 70% off</a></h3><!-- End .banner-title -->
                                                 <a href="#" class="btn btn-outline-white banner-link">Shop Now<i class="icon-long-arrow-right"></i></a>
                                             </div><!-- End .banner-content -->
                                         </div><!-- End .banner -->
@@ -94,12 +94,12 @@
                                     <div class="col-md-6 col-lg-12">
                                         <div class="banner banner-display mb-0">
                                             <a href="#">
-                                                <img src="assets/images/banners/home/intro/banner-2.jpg" alt="Banner">
+                                                <img src="assets/images/demos/demo-7/banners/banner-1.jpg" alt="Banner">
                                             </a>
 
                                             <div class="banner-content">
-                                                <h4 class="banner-subtitle text-darkwhite"><a href="#">New in</a></h4><!-- End .banner-subtitle -->
-                                                <h3 class="banner-title text-white"><a href="#">Best Lighting <br>Collection</a></h3><!-- End .banner-title -->
+                                                <h4 class="banner-subtitle text-darkwhite"><a href="#">This week we love...</a></h4><!-- End .banner-subtitle -->
+                                                <h3 class="banner-title text-white"><a href="#">Womens <br>Holiday Clothes</a></h3><!-- End .banner-title -->
                                                 <a href="#" class="btn btn-outline-white banner-link">Discover Now<i class="icon-long-arrow-right"></i></a>
                                             </div><!-- End .banner-content -->
                                         </div><!-- End .banner -->
@@ -1244,104 +1244,7 @@
 
                 <div class="mb-2"></div><!-- End .mb-2 -->
             </div><!-- End .container -->
-            <div class="blog-posts pt-7 pb-7" style="background-color: #fafafa;">
-                <div class="container">
-                   <h2 class="title-lg text-center mb-3 mb-md-4">From Our Blog</h2><!-- End .title-lg text-center -->
-
-                    <div class="owl-carousel owl-simple carousel-with-shadow" data-toggle="owl" 
-                        data-owl-options='{
-                            "nav": false, 
-                            "dots": true,
-                            "items": 3,
-                            "margin": 20,
-                            "loop": false,
-                            "responsive": {
-                                "0": {
-                                    "items":1
-                                },
-                                "600": {
-                                    "items":2
-                                },
-                                "992": {
-                                    "items":3
-                                }
-                            }
-                        }'>
-                        <article class="entry entry-display">
-                            <figure class="entry-media">
-                                <a href="single.html">
-                                    <img src="assets/images/blog/home/post-1.jpg" alt="image desc">
-                                </a>
-                            </figure><!-- End .entry-media -->
-
-                            <div class="entry-body pb-4 text-center">
-                                <div class="entry-meta">
-                                    <a href="#">Nov 22, 2018</a>, 0 Comments
-                                </div><!-- End .entry-meta -->
-
-                                <h3 class="entry-title">
-                                    <a href="single.html">Sed adipiscing ornare.</a>
-                                </h3><!-- End .entry-title -->
-
-                                <div class="entry-content">
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.<br>Pelletesque aliquet nibh necurna. </p>
-                                    <a href="single.html" class="read-more">Read More</a>
-                                </div><!-- End .entry-content -->
-                            </div><!-- End .entry-body -->
-                        </article><!-- End .entry -->
-
-                        <article class="entry entry-display">
-                            <figure class="entry-media">
-                                <a href="single.html">
-                                    <img src="assets/images/blog/home/post-2.jpg" alt="image desc">
-                                </a>
-                            </figure><!-- End .entry-media -->
-
-                            <div class="entry-body pb-4 text-center">
-                                <div class="entry-meta">
-                                    <a href="#">Dec 12, 2018</a>, 0 Comments
-                                </div><!-- End .entry-meta -->
-
-                                <h3 class="entry-title">
-                                    <a href="single.html">Fusce lacinia arcuet nulla.</a>
-                                </h3><!-- End .entry-title -->
-
-                                <div class="entry-content">
-                                    <p>Sed pretium, ligula sollicitudin laoreet<br>viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis justo. </p>
-                                    <a href="single.html" class="read-more">Read More</a>
-                                </div><!-- End .entry-content -->
-                            </div><!-- End .entry-body -->
-                        </article><!-- End .entry -->
-
-                        <article class="entry entry-display">
-                            <figure class="entry-media">
-                                <a href="single.html">
-                                    <img src="assets/images/blog/home/post-3.jpg" alt="image desc">
-                                </a>
-                            </figure><!-- End .entry-media -->
-
-                            <div class="entry-body pb-4 text-center">
-                                <div class="entry-meta">
-                                    <a href="#">Dec 19, 2018</a>, 2 Comments
-                                </div><!-- End .entry-meta -->
-
-                                <h3 class="entry-title">
-                                    <a href="single.html">Quisque volutpat mattis eros.</a>
-                                </h3><!-- End .entry-title -->
-
-                                <div class="entry-content">
-                                    <p>Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. </p>
-                                    <a href="single.html" class="read-more">Read More</a>
-                                </div><!-- End .entry-content -->
-                            </div><!-- End .entry-body -->
-                        </article><!-- End .entry -->
-                    </div><!-- End .owl-carousel -->
-                </div><!-- container -->
-
-                <div class="more-container text-center mb-0 mt-3">
-                    <a href="blog.html" class="btn btn-outline-darker btn-more"><span>View more articles</span><i class="icon-long-arrow-right"></i></a>
-                </div><!-- End .more-container -->
-            </div>
+            
             <div class="cta cta-display bg-image pt-4 pb-4" style="background-image: url(assets/images/backgrounds/cta/bg-6.jpg);">
                 <div class="container">
                     <div class="row justify-content-center">
