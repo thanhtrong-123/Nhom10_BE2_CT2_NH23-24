@@ -105,7 +105,7 @@
         </div>
         <div class="col-sm-7 text-right text-center-xs">                
           <ul class="pagination pagination-sm m-t-none m-b-none">
-             {!!$all_category_product->links()!!}
+             
           </ul>
         </div>
       </div>
