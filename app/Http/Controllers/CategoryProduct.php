@@ -10,14 +10,20 @@ session_start();
 
 class CategoryProduct extends Controller
 {
+
+    //hiển thị page add category product (danh mục san pham)
     public function add_category_product(){
         return  view('admin.add_category_product');
     }
+
+    //all category product (hiển thị danh mục sản phẩm)
     public function all_category_product(){
         $all_category_product = DB::table('tbl_category_product')->get();
         $manager_category_product = view('admin.all_category_product')->with('all_category_product',$all_category_product);
         return view('admin_layout')->with('admin.all_caterory_product',$manager_category_product);
     }
+
+    //add category product (thêm danh mục sản phẩm)
     public function save_category_product(Request $request ){
         $data = array();
         $data['category_name'] = $request->category_product_name;
@@ -43,6 +49,8 @@ class CategoryProduct extends Controller
         Session::put('message','Kích hoạt danh mục sản phẩm thành công');
         return Redirect::to('all-category-product');
     }
+
+    //edit category product (sửa danh mục sản phẩm)
     public function edit_category_product($category_product_id){
         //$this->AuthLogin();
         $edit_category_product = DB::table('tbl_category_product')->where('category_id',$category_product_id)->get();
@@ -51,6 +59,8 @@ class CategoryProduct extends Controller
 
         return view('admin_layout')->with('admin.edit_category_product', $manager_category_product);
     }
+
+    //update category product (cập nhập danh mục sản phẩm)
     public function update_category_product(Request $request,$category_product_id){
         //$this->AuthLogin();
         $data = array();
@@ -62,6 +72,8 @@ class CategoryProduct extends Controller
         Session::put('message','Cập nhật danh mục sản phẩm thành công');
         return Redirect::to('all-category-product');
     }
+
+    //delete category product (xóa danh mục sản phẩm)
     public function delete_category_product($category_product_id){
         //$this->AuthLogin();
         DB::table('tbl_category_product')->where('category_id',$category_product_id)->delete();
