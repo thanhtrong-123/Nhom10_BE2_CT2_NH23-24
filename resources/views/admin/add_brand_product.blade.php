@@ -17,7 +17,7 @@
 
                             <div class="position-center">
                                 <form role="form" action="{{URL::to('/save-brand-product')}}" method="post">
-                                    {{ csrf_field() }}
+                                    
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tên thương hiệu</label>
                                     <input type="text" name="brand_product_name" class="form-control" onkeyup="ChangeToSlug();" id="slug" placeholder="Tên danh mục">
