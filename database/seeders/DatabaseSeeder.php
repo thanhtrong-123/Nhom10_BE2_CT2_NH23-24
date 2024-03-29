@@ -16,12 +16,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        DB::table('tbl_admin')->insert([
-            'admin_email' => 'admin',
-            'admin_password' => '123123',
-            'admin_name' => 'admin',
-            'admin_phone' => '123456456'
-
+        DB::table('admins')->insert([
+            'username' => 'admin',
+            'password' => '123123',
+            'name' => 'admin',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }

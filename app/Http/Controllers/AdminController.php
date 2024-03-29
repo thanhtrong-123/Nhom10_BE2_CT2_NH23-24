@@ -23,11 +23,11 @@ class AdminController extends Controller
     public function dashboard(Request $request)
     {   
         $admin_email = $request -> admin_email;
-        $admin_password = md5($request -> admin_password);
-        $result = DB::table('tbl_admin')->where('admin_email',$admin_email)->where('admin_password',$admin_password)->first();
+        $admin_password = $request -> admin_password;
+        $result = DB::table('admins')->where('username',$admin_email)->where('password',$admin_password)->first();
         if ($result) {
-            Session::put('admin_name',$result->admin_name);
-            Session::put('admin_id', $result->admin_id);
+            Session::put('admin_name',$result->name);
+            Session::put('admin_id', $result->id);
             return Redirect::to('/dashboard');
         }else{
             Session::put('message','mat khau hoac tai khoan khong ton tai, lam on nhap lai');
@@ -36,8 +36,8 @@ class AdminController extends Controller
     }
     public function logout()
     {
-        Session::put('admin_name',null);
-        Session::put('admin_id', null);
+        Session::put('name',null);
+        Session::put('id', null);
         return Redirect::to('/admin');
     }
     public function add_product()
