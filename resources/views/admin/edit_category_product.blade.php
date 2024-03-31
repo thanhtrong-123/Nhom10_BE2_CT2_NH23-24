@@ -24,7 +24,7 @@
                                 </div>
                                   <div class="form-group">
                                     <label for="exampleInputEmail1">Slug</label>
-                                    <input type="text" value="{{$edit_value->slug_category_product}}" name="slug_category_product" class="form-control" id="convert_slug" >
+                                    <input type="text" value="{{$edit_value->category_slug}}" name="slug_category_product" class="form-control" id="convert_slug" >
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Mô tả danh mục</label>
