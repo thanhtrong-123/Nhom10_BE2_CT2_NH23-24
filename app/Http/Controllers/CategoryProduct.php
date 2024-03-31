@@ -28,9 +28,11 @@ class CategoryProduct extends Controller
         $data = array();
         $data['category_name'] = $request->category_product_name;
         $data['category_slug'] = $request->slug_category_product;
-        //$data['category_desc'] = $request->category_product_desc;
+        $data['category_description'] = $request->category_product_desc;
         $data['category_keywords'] = $request->category_product_keywords;
         $data['category_status'] = $request->category_product_status;
+        $data['created_at'] = now();
+        $data['updated_at'] = now();
 
         DB::table('categories')->insert($data);
         Session::put('message','Thêm danh mục sản phẩm thành công');
@@ -38,14 +40,14 @@ class CategoryProduct extends Controller
     }
     public function unactive_category_product($category_product_id){
         //$this->AuthLogin();
-        DB::table('categories')->where('id',$category_product_id)->update(['category_status'=>1]);
+        DB::table('categories')->where('id',$category_product_id)->update(['category_status'=>0]);
         Session::put('message','Không kích hoạt danh mục sản phẩm thành công');
         return Redirect::to('all-category-product');
 
     }
     public function active_category_product($category_product_id){
         //$this->AuthLogin();
-        DB::table('categories')->where('id',$category_product_id)->update(['category_status'=>0]);
+        DB::table('categories')->where('id',$category_product_id)->update(['category_status'=>1]);
         Session::put('message','Kích hoạt danh mục sản phẩm thành công');
         return Redirect::to('all-category-product');
     }
@@ -66,8 +68,9 @@ class CategoryProduct extends Controller
         $data = array();
         $data['category_name'] = $request->category_product_name;
         $data['category_keywords'] = $request->category_product_keywords;
-        $data['category_slug'] = $request->category_slug;
-        //$data['category_desc'] = $request->category_product_desc;
+        $data['category_slug'] = $request->slug_category_product;
+        $data['category_description'] = $request->category_product_desc;
+        $data['updated_at'] = now();
         DB::table('categories')->where('id',$category_product_id)->update($data);
         Session::put('message','Cập nhật danh mục sản phẩm thành công');
         return Redirect::to('all-category-product');
