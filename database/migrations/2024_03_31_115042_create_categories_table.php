@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->integer('transaction_id');
-            $table->integer('product_id');
-            $table->string('price');
-            $table->integer('qty');
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id('category_id');
+            $table->string('category_name');
+            $table->string('category_slug');
+            $table->text('category_desc');
+            $table->string('category_keywords');
+            $table->integer('category_status'); // Corrected method name
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('categories');
     }
 };
