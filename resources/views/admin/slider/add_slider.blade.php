@@ -6,13 +6,13 @@
                         <header class="panel-heading">
                            Thêm Slider
                         </header>
-                         <?php
+                        <?php
                             $message = Session::get('message');
                             if($message){
                                 echo '<span class="text-alert">'.$message.'</span>';
                                 Session::put('message',null);
                             }
-                            ?>
+                        ?>
                         <div class="panel-body">
 
                             <div class="position-center">

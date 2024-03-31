@@ -54,7 +54,7 @@
           <tr>
             <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
             <td>{{ $cate_pro->category_name }}</td>
-            <td>{{ $cate_pro->slug_category_product }}</td>
+            <td>{{ $cate_pro->category_slug }}</td>
             <td><span class="text-ellipsis">
               <?php
                if($cate_pro->category_status==0){
