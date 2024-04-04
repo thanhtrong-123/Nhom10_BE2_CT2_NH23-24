@@ -177,8 +177,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Users</span>
                     </a>
                     <ul class="sub">
-                         <li><a href="{{URL::to('/add-users')}}">Thêm user</a></li>
-                        <li><a href="{{URL::to('/users')}}">Liệt kê user</a></li>
+                         <li><a href="{{URL::to('/customer/create')}}">Thêm user</a></li>
+                        <li><a href="{{URL::to('/customer')}}">Liệt kê user</a></li>
                       
                     </ul>
                 </li>
