@@ -51,30 +51,30 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($all_slide as $key => $slide)
+          @foreach($data as $slider)
           <tr>
             <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-            <td>{{ $slide->slider_name }}</td>
-            <td><img src="public/uploads/slider/{{ $slide->slider_image }}" height="120" width="500"></td>
-            <td>{{ $slide->slider_desc }}</td>
+            <td>{{ $slider->slider_name }}</td>
+            <td><img src="{{ asset('storage/images/banners\/') . $slider->slider_image }}" height="120" width="500"></td>
+            <td>{{ $slider->slider_desc }}</td>
             <td><span class="text-ellipsis">
-              <?php
-               if($slide->slider_status==1){
-                ?>
-                <a href="{{URL::to('/unactive-slide/'.$slide->slider_id)}}"><span class="fa-thumb-styling fa fa-thumbs-up"></span></a>
-                <?php
-                 }else{
-                ?>  
-                 <a href="{{URL::to('/active-slide/'.$slide->slider_id)}}"><span class="fa-thumb-styling fa fa-thumbs-down"></span></a>
-                <?php
-               }
-              ?>
+
+              <form action="{{ URL::to('slider/' . $slider->slider_id) }}" method="post">
+                {{ csrf_field() }}
+                {{ method_field('put') }}
+                <button type="submit"><span class="fa-thumb-styling fa {{ ($slider->slider_status == 0) ? 'fa-thumbs-up' : 'fa-thumbs-down' }}"></button>
+              </form>
+              
             </span></td>
             <td>
              
-              <a onclick="return confirm('Bạn có chắc là muốn xóa slide này ko?')" href="{{URL::to('/delete-slide/'.$slide->slider_id)}}" class="active styling-edit" ui-toggle-class="">
-                <i class="fa fa-times text-danger text"></i>
-              </a>
+              <form action="{{ URL::to('slider/' . $slider->slider_id) }}" method="post">
+                {{ csrf_field() }}
+                {{ method_field('delete') }}
+                <button type="submit" class="active styling-edit"
+                    onclick="return confirm('Bạn có chắc là muốn xóa slider này không?')"><i
+                        class="fa fa-times text-danger text"></i></button>
+              </form>
 
             </td>
           </tr>
@@ -90,7 +90,7 @@
         </div>
         <div class="col-sm-7 text-right text-center-xs">                
           <ul class="pagination pagination-sm m-t-none m-b-none">
-              {!!$all_slide->links()!!}
+              {{-- {!!$all_slide->links()!!} --}}
           </ul>
         </div>
       </div>

@@ -22,22 +22,22 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên users</label>
                                 <input type="text" value="{{ $data->customer_name }}" name="customer_name"
-                                    class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
+                                    class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục" required>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email</label>
                                 <input type="text" value="{{ $data->customer_email }}" name="customer_email"
-                                    class="form-control" id="exampleInputEmail1" placeholder="Slug">
+                                    class="form-control" id="exampleInputEmail1" placeholder="Slug" required>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Phone</label>
-                                <input type="text" value="{{ $data->customer_phone }}" name="customer_phone"
-                                    class="form-control" id="exampleInputEmail1" placeholder="Slug">
+                                <input type="number" value="{{ $data->customer_phone }}" name="customer_phone"
+                                    class="form-control" id="exampleInputEmail1" placeholder="Slug" required>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Password</label>
                                 <input type="text" value="{{ $data->customer_password }}" name="customer_password"
-                                    class="form-control" id="exampleInputEmail1" placeholder="Slug">
+                                    class="form-control" id="exampleInputEmail1" placeholder="Slug" required>
                             </div>
 
                             <button type="submit" class="btn btn-info">Cập nhật users</button>

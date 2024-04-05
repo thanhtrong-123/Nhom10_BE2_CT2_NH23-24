@@ -21,22 +21,22 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên users</label>
                                 <input type="text" name="customer_name" class="form-control" id="exampleInputEmail1"
-                                    placeholder="Tên danh mục">
+                                    placeholder="Tên danh mục" required>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email</label>
                                 <input type="text" name="customer_email" class="form-control" id="exampleInputEmail1"
-                                    placeholder="Slug">
+                                    placeholder="Slug" required>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Phone</label>
-                                <input type="text" name="customer_phone" class="form-control" id="exampleInputEmail1"
-                                    placeholder="Slug">
+                                <input type="number" name="customer_phone" class="form-control" id="exampleInputEmail1"
+                                    placeholder="Slug" required>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Password</label>
                                 <input type="password" name="customer_password" class="form-control" id="exampleInputEmail1"
-                                    placeholder="Slug">
+                                    placeholder="Slug" required>
                             </div>
 
                             <button type="submit" class="btn btn-info">Thêm users</button>
