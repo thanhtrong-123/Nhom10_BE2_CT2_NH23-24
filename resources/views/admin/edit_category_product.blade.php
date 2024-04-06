@@ -14,30 +14,31 @@
                             }
                             ?>
                         <div class="panel-body">
-                            @foreach($edit_category_product as $key => $edit_value)
+                            
                             <div class="position-center">
-                                <form role="form" action="{{URL::to('/update-category-product/'.$edit_value->category_id)}}" method="post">
+                                <form role="form" action="{{URL::to('categoryProduct/'.$data->category_id)}}" method="post">
                                     {{ csrf_field() }}
+                                    {{ method_field('put') }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tên danh mục</label>
-                                    <input type="text" value="{{$edit_value->category_name}}" onkeyup="ChangeToSlug();" name="category_product_name" class="form-control" id="slug" >
+                                    <input type="text" value="{{$data->category_name}}" onkeyup="ChangeToSlug();" name="category_product_name" class="form-control" id="slug" >
                                 </div>
                                   <div class="form-group">
                                     <label for="exampleInputEmail1">Slug</label>
-                                    <input type="text" value="{{$edit_value->category_slug}}" name="slug_category_product" class="form-control" id="convert_slug" readonly>
+                                    <input type="text" value="{{$data->category_slug}}" name="slug_category_product" class="form-control" id="convert_slug" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Mô tả danh mục</label>
-                                    <textarea style="resize: none" rows="8" class="form-control" name="category_product_desc" id="exampleInputPassword1" >{{$edit_value->category_desc}}</textarea>
+                                    <textarea style="resize: none" rows="8" class="form-control" name="category_product_desc" id="exampleInputPassword1" >{{$data->category_desc}}</textarea>
                                 </div>
                                  <div class="form-group">
                                     <label for="exampleInputPassword1">Từ khóa danh mục</label>
-                                    <textarea style="resize: none" rows="8" class="form-control" name="category_product_keywords" id="exampleInputPassword1" placeholder="Mô tả danh mục">{{$edit_value->category_keywords}}</textarea>
+                                    <textarea style="resize: none" rows="8" class="form-control" name="category_product_keywords" id="exampleInputPassword1" placeholder="Mô tả danh mục">{{$data->category_keywords}}</textarea>
                                 </div>
-                                <button type="submit" name="update_category_product" class="btn btn-info">Cập nhật danh mục</button>
+                                <button type="submit" class="btn btn-info">Cập nhật danh mục</button>
                                 </form>
                             </div>
-                            @endforeach
+                            
                         </div>
                     </section>
 
