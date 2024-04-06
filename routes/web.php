@@ -5,7 +5,7 @@ use App\Http\Controllers\SliderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CategoryProduct;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandProduct;
 
 
@@ -54,14 +54,15 @@ Route::get('/all-product', [AdminController::class, 'all_product'])->name('all_p
 
 
 // //Category Product
-Route::get('/add-category-product', [CategoryProduct::class, 'add_category_product'])->name('add_category_product');
-Route::get('/all-category-product', [CategoryProduct::class, 'all_category_product'])->name('all_category_product');
-Route::post('/save-category-product', [CategoryProduct::class, 'save_category_product'])->name('save_category_product');
-Route::get('/edit-category-product/{category_product_id}',[CategoryProduct::class , 'edit_category_product']);
-Route::get('/delete-category-product/{category_product_id}',[CategoryProduct::class, 'delete_category_product']);
-Route::post('/update-category-product/{category_product_id}',[CategoryProduct::class, 'update_category_product']);
-Route::get('/unactive-category-product/{category_product_id}',[CategoryProduct::class, 'unactive_category_product']);
-Route::get('/active-category-product/{category_product_id}',[CategoryProduct::class, 'active_category_product']);
+Route::resource('categoryProduct',CategoryController ::class);
+Route::get('/unactive-category-product/{category_product_id}',[CategoryController::class, 'unactive_category_product']);
+Route::get('/active-category-product/{category_product_id}',[CategoryController::class, 'active_category_product']);
+// Route::get('/add-category-product', [CategoryProduct::class, 'add_category_product'])->name('add_category_product');
+// Route::get('/all-category-product', [CategoryProduct::class, 'all_category_product'])->name('all_category_product');
+// Route::post('/save-category-product', [CategoryProduct::class, 'save_category_product'])->name('save_category_product');
+// Route::get('/edit-category-product/{category_product_id}',[CategoryProduct::class , 'edit_category_product']);
+// Route::get('/delete-category-product/{category_product_id}',[CategoryProduct::class, 'delete_category_product']);
+
 
 
 

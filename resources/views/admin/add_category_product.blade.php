@@ -16,7 +16,7 @@
                         <div class="panel-body">
 
                             <div class="position-center">
-                                <form role="form" action="{{URL::to('/save-category-product')}}" method="post">
+                                <form role="form" action="{{URL::to('/categoryProduct')}}" method="post">
                                     {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tên danh mục</label>
@@ -43,7 +43,7 @@
                                     </select>
                                 </div>
                                
-                                <button type="submit" name="add_category_product" class="btn btn-info">Thêm danh mục</button>
+                                <button type="submit" class="btn btn-info">Thêm danh mục</button>
                                 </form>
                             </div>
 
