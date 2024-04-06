@@ -17,14 +17,14 @@
 
                             <div class="position-center">
                                 <form role="form" action="{{URL::to('/save-brand-product')}}" method="post">
-                                    
+                                    {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tên thương hiệu</label>
                                     <input type="text" name="brand_product_name" class="form-control" onkeyup="ChangeToSlug();" id="slug" placeholder="Tên danh mục">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Slug</label>
-                                    <input type="text" name="brand_slug" class="form-control" id="convert_slug" placeholder="Slug">
+                                    <input type="text" name="slug_brand_product" class="form-control" id="convert_slug" placeholder="Tên thương hiệu" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Mô tả thương hiệu</label>
@@ -39,7 +39,7 @@
                                     </select>
                                 </div>
                                
-                                <button type="submit" name="add_category_product" class="btn btn-info">Thêm thương hiệu</button>
+                                <button type="submit" name="add_brand_product" class="btn btn-info">Thêm thương hiệu</button>
                                 </form>
                             </div>
 
