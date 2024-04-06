@@ -99,8 +99,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Slider</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="{{URL::to('/manage-slider')}}">Liệt kê slider</a></li>
-                        <li><a href="{{URL::to('/add-slider')}}">Thêm slider</a></li>
+                        <li><a href="{{URL::to('slider/create')}}">Thêm slider</a></li>
+                        <li><a href="{{URL::to('slider')}}">Liệt kê slider</a></li>
                     </ul>
                 </li>
                    
@@ -177,8 +177,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Users</span>
                     </a>
                     <ul class="sub">
-                         <li><a href="{{URL::to('/add-users')}}">Thêm user</a></li>
-                        <li><a href="{{URL::to('/users')}}">Liệt kê user</a></li>
+                         <li><a href="{{URL::to('/customer/create')}}">Thêm user</a></li>
+                        <li><a href="{{URL::to('/customer')}}">Liệt kê user</a></li>
                       
                     </ul>
                 </li>

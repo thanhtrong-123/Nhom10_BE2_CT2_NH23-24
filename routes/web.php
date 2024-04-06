@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SliderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
@@ -81,3 +83,8 @@ Route::post('/update-brand-product/{brand_product_id}',[BrandProduct::class, 'up
 // Route::post('/save-brand-product','BrandProduct@save_brand_product');
 // Route::post('/update-brand-product/{brand_product_id}','BrandProduct@update_brand_product');
 
+// Customers
+Route::resource('customer', CustomerController::class);
+
+// Sliders
+Route::resource('slider', SliderController::class);
