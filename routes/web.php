@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\BrandProduct;
+use App\Http\Controllers\BrandController;
 
 
 
@@ -64,18 +64,19 @@ Route::get('/active-category-product/{category_product_id}',[CategoryController:
 // Route::get('/delete-category-product/{category_product_id}',[CategoryProduct::class, 'delete_category_product']);
 
 
-
-
-Route::get('/add-brand-product', [BrandProduct::class, 'add_brand_product'])->name('add_brand_product');
-Route::get('/all-brand-product', [BrandProduct::class, 'all_brand_product'])->name('all_brand_product');
-Route::post('/save-brand-product', [BrandProduct::class, 'save_brand_product'])->name('save_brand_product');
-Route::get('/edit-brand-product/{brand_product_id}',[BrandProduct::class , 'edit_brand_product']);
-Route::get('/delete-brand-product/{brand_product_id}',[BrandProduct::class, 'delete_brand_product']);
-Route::post('/update-brand-product/{brand_product_id}',[BrandProduct::class, 'update_brand_product']);
-Route::get('/unactive-brand-product/{brand_product_id}',[BrandProduct::class, 'unactive_brand_product']);
-Route::get('/active-brand-product/{brand_product_id}',[BrandProduct::class, 'active_brand_product']);
-
 // //Brand Product
+Route::resource('brandProduct', BrandController ::class);
+Route::get('/unactive-brand-product/{brand_product_id}',[BrandController::class, 'unactive_brand_product']);
+Route::get('/active-brand-product/{brand_product_id}',[BrandController::class, 'active_brand_product']);
+// Route::get('/add-brand-product', [BrandProduct::class, 'add_brand_product'])->name('add_brand_product');
+// Route::get('/all-brand-product', [BrandProduct::class, 'all_brand_product'])->name('all_brand_product');
+// Route::post('/save-brand-product', [BrandProduct::class, 'save_brand_product'])->name('save_brand_product');
+// Route::get('/edit-brand-product/{brand_product_id}',[BrandProduct::class , 'edit_brand_product']);
+// Route::get('/delete-brand-product/{brand_product_id}',[BrandProduct::class, 'delete_brand_product']);
+// Route::post('/update-brand-product/{brand_product_id}',[BrandProduct::class, 'update_brand_product']);
+
+
+
 // Route::get('/add-brand-product','BrandProduct@add_brand_product');
 // Route::get('/edit-brand-product/{brand_product_id}','BrandProduct@edit_brand_product');
 // Route::get('/delete-brand-product/{brand_product_id}','BrandProduct@delete_brand_product');
