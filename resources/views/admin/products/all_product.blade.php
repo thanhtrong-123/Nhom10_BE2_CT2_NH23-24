@@ -65,8 +65,8 @@
                                 <td>{{ $value->product_slug }}</td>
                                 <td>{{ $value->product_price }}</td>
                                 <td>{{ $value->product_image }}</td>
-                                <td>{{ $value->product_desc }}</td>
-                                <td>{{ $value->product_content }}</td>
+                                <td>{{ $value->category_name }}</td>
+                                <td>{{ $value->brand_name }}</td>
                                 <td>{{ $value->product_status }}</td>
                                 <td>
                                     <a href="{{ URL::to('product/' . $value->product_id . '/edit') }}"

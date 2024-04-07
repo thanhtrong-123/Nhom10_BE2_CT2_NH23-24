@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Brand;
+use App\Models\Category;
+use Illuminate\Support\Facades\DB as FacadesDB;
+use Storage;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 
@@ -17,8 +22,7 @@ class ProductController extends Controller
     public function index()
     {
         //
-        return view('admin.products.all_products', ['data' => Product::all()]);
-        
+        return view('admin.products.all_product', ['data' => Product::all()]);
     }
 
     /**
@@ -28,8 +32,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //create product
-        return  view('admin.products.add_products');
+        $cate_product = DB::table('categories')->orderby('category_id', 'desc')->get();
+        $brand_product = DB::table('brands')->orderby('brand_id', 'desc')->get();
+
+        return view('admin.products.add_product')->with('cate_product', $cate_product)->with('brand_product', $brand_product);
     }
 
     /**
@@ -42,17 +48,35 @@ class ProductController extends Controller
     {
         //
         $data = new Product;
+
         $data->product_name = $request->product_name;
-        $data->product_qty = $request->product_qty;
+        $data->product_qty = $request->product_quantity;
         $data->product_slug = $request->product_slug;
         $data->product_price = $request->product_price;
-        $data->product_image = $request->product_image;
+        // Ràng buộc Image
+        $validation = $request->validate([
+            'product_image' => 'required|file|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
+        ]);
+        // Kiểm tra xem người dùng có upload hình ảnh hay không?
+        if ($request->hasFile('product_image')) {
+            $file = $request->product_image;
+
+            // Lưu tên hình vào column slider_image
+            $data->product_image = $file->store('profile');
+
+            // Chép file vào thư mục "storate/public/images/products"
+            $fileSaved = $file->storeAs('public/images/products', $data->product_image);
+        }
+        $data->category_id = $request->product_cate;
+        $data->brand_id = $request->product_brand;
+
         $data->product_desc = $request->product_desc;
         $data->product_content = $request->product_content;
         $data->product_status = $request->product_status;
+        $data->product_qty = $request->product_quantity;
         $data->save();
-        Session::put('message','Thêm sản phẩm thành công');
-        return Redirect::to('product');
+        Session::put('message', 'Thêm sản phẩm thành công');
+        return Redirect::to('products');
     }
 
     /**
@@ -92,13 +116,25 @@ class ProductController extends Controller
         $data->product_qty = $request->product_qty;
         $data->product_slug = $request->product_slug;
         $data->product_price = $request->product_price;
-        $data->product_image = $request->product_image;
+        $validation = $request->validate([
+            'product_image' => 'required|file|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
+        ]);
+        // Kiểm tra xem người dùng có upload hình ảnh hay không?
+        if ($request->hasFile('product_image')) {
+            $file = $request->product_image;
+
+            // Lưu tên hình vào column slider_image
+            $data->product_image = $file->store('profile');
+
+            // Chép file vào thư mục "storate/public/images/products"
+            $fileSaved = $file->storeAs('public/images/products', $data->product_image);
+        }
         $data->product_desc = $request->product_desc;
         $data->product_content = $request->product_content;
         $data->product_status = $request->product_status;
         $data->save();
-        Session::put('message','Cập nhật sản phẩm thành công');
-        return Redirect::to('product');
+        Session::put('message', 'Cập nhật sản phẩm thành công');
+        return Redirect::to('products');
     }
 
     /**
@@ -109,9 +145,12 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        $data = Product::find($id);
+        // Xóa image cua product
+        Storage::delete('public/images/products/' . $data->product_image);
         //Delete San Pham
         Product::destroy($id);
-        Session::put('message','Xóa sản phẩm thành công');
-        return Redirect::to('product');
+        Session::put('message', 'Xóa sản phẩm thành công');
+        return Redirect::to('products');
     }
 }
