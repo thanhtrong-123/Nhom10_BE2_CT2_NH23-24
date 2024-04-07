@@ -55,7 +55,36 @@
             <th style="width:30px;"></th>
           </tr>
         </thead>
-        
+        <tbody>
+                        @foreach ($data as $value)
+                            <tr>
+                                <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label>
+                                </td>
+                                <td>{{ $value->product_name }}</td>
+                                <td>{{ $value->product_qty }}</td>
+                                <td>{{ $value->product_slug }}</td>
+                                <td>{{ $value->product_price }}</td>
+                                <td>{{ $value->product_image }}</td>
+                                <td>{{ $value->product_desc }}</td>
+                                <td>{{ $value->product_content }}</td>
+                                <td>{{ $value->product_status }}</td>
+                                <td>
+                                    <a href="{{ URL::to('product/' . $value->product_id . '/edit') }}"
+                                        class="active styling-edit" ui-toggle-class="">
+                                        <i class="fa fa-pencil-square-o text-success text-active"></i>
+                                    </a>
+
+                                    <form action="{{ URL::to('product/' . $value->product_id) }}" method="post">
+                                        {{ csrf_field() }}
+                                        {{ method_field('delete') }}
+                                        <button type="submit" class="active styling-edit"
+                                            onclick="return confirm('Bạn có chắc là muốn xóa sản phẩm này không?')"><i
+                                                class="fa fa-times text-danger text"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
       </table>
     </div>
     <footer class="panel-footer">
