@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use Illuminate\Http\Request;
+use DB;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Category;
@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB as FacadesDB;
 use Storage;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+
 
 class ProductController extends Controller
 {
@@ -32,10 +33,12 @@ class ProductController extends Controller
      */
     public function create()
     {
+        //
         $cate_product = DB::table('categories')->orderby('category_id', 'desc')->get();
         $brand_product = DB::table('brands')->orderby('brand_id', 'desc')->get();
 
         return view('admin.products.add_product')->with('cate_product', $cate_product)->with('brand_product', $brand_product);
+
     }
 
     /**
@@ -77,6 +80,7 @@ class ProductController extends Controller
         $data->save();
         Session::put('message', 'Thêm sản phẩm thành công');
         return Redirect::to('products');
+
     }
 
     /**
@@ -99,7 +103,9 @@ class ProductController extends Controller
     public function edit($id)
     {
         //
-        return view('admin.products.edit_products', ['data' => Product::find($id)]);
+        $cate_product = DB::table('categories')->orderby('category_id', 'desc')->get();
+        $brand_product = DB::table('brands')->orderby('brand_id', 'desc')->get();
+        return view('admin.products.edit_product', ['data' => Product::find($id), 'cate_product' => $cate_product, 'brand_product' => $brand_product]);
     }
 
     /**
@@ -111,27 +117,34 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //
         $data = Product::find($id);
         $data->product_name = $request->product_name;
-        $data->product_qty = $request->product_qty;
+        $data->product_qty = $request->product_quantity;
         $data->product_slug = $request->product_slug;
         $data->product_price = $request->product_price;
+        $data->product_desc = $request->product_desc;
+        $data->product_content = $request->product_content;
+        $data->product_status = $request->product_status;
         $validation = $request->validate([
-            'product_image' => 'required|file|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
+            'product_image' => 'file|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
         ]);
         // Kiểm tra xem người dùng có upload hình ảnh hay không?
         if ($request->hasFile('product_image')) {
             $file = $request->product_image;
 
+            // Xóa hình cũ
+            Storage::delete('public/images/products/' . $data->product_image);   
+
             // Lưu tên hình vào column slider_image
             $data->product_image = $file->store('profile');
 
+
             // Chép file vào thư mục "storate/public/images/products"
             $fileSaved = $file->storeAs('public/images/products', $data->product_image);
+
+            
         }
-        $data->product_desc = $request->product_desc;
-        $data->product_content = $request->product_content;
-        $data->product_status = $request->product_status;
         $data->save();
         Session::put('message', 'Cập nhật sản phẩm thành công');
         return Redirect::to('products');
@@ -145,6 +158,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        //
         $data = Product::find($id);
         // Xóa image cua product
         Storage::delete('public/images/products/' . $data->product_image);
@@ -152,5 +166,6 @@ class ProductController extends Controller
         Product::destroy($id);
         Session::put('message', 'Xóa sản phẩm thành công');
         return Redirect::to('products');
+
     }
 }
