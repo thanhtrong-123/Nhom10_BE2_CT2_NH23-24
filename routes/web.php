@@ -8,6 +8,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
+
 
 
 
@@ -97,3 +99,5 @@ Route::resource('slider', SliderController::class);
 
 // Products
 Route::resource('products', ProductController::class);
+//users
+Route::resource('user', UserController::class);
