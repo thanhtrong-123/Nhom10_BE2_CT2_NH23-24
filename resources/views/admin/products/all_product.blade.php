@@ -27,13 +27,13 @@
       </div>
     </div>
     <div class="table-responsive">
-                      <!-- <?php
-                            //$message = Session::get('message');
-                            //if($message){
-                                //echo '<span class="text-alert">'.$message.'</span>';
-                                //Session::put('message',null);
-                            //}
-                            ?> -->
+                      <?php
+                            $message = Session::get('message');
+                            if($message){
+                                echo '<span class="text-alert">'.$message.'</span>';
+                                Session::put('message',null);
+                            }
+                            ?>
       <table class="table table-striped b-t b-light">
         <thead>
           <tr>
@@ -69,12 +69,12 @@
                                 <td>{{ $value->brand_name }}</td>
                                 <td>{{ $value->product_status }}</td>
                                 <td>
-                                    <a href="{{ URL::to('product/' . $value->product_id . '/edit') }}"
+                                    <a href="{{ URL::to('products/' . $value->product_id . '/edit') }}"
                                         class="active styling-edit" ui-toggle-class="">
                                         <i class="fa fa-pencil-square-o text-success text-active"></i>
                                     </a>
 
-                                    <form action="{{ URL::to('product/' . $value->product_id) }}" method="post">
+                                    <form action="{{ URL::to('products/' . $value->product_id) }}" method="post">
                                         {{ csrf_field() }}
                                         {{ method_field('delete') }}
                                         <button type="submit" class="active styling-edit"
