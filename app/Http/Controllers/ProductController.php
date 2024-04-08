@@ -34,7 +34,6 @@ class ProductController extends Controller
     {
         $cate_product = DB::table('categories')->orderby('category_id', 'desc')->get();
         $brand_product = DB::table('brands')->orderby('brand_id', 'desc')->get();
-
         return view('admin.products.add_product')->with('cate_product', $cate_product)->with('brand_product', $brand_product);
     }
 
