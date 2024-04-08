@@ -28,7 +28,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Slug</label>
-                            <input type="text" name="product_slug" class="form-control " id="convert_slug" placeholder="Tên danh mục">
+                            <input type="text" name="product_slug" class="form-control " id="convert_slug" placeholder="Tên danh mục" readonly>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá sản phẩm</label>

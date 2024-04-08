@@ -9,4 +9,16 @@ class Product extends Model
 {
     use  HasFactory;    
     public $primaryKey = "product_id";
+    protected $table = 'products';
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id');
+    }
+    
 }

@@ -22,7 +22,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        //phân trang
+        // $data = Product::with('category', 'brand')->paginate(5); // Lấy 10 sản phẩm mỗi trang
+        
         return view('admin.products.all_product', ['data' => Product::all()]);
     }
 
