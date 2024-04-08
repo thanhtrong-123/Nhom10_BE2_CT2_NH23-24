@@ -199,20 +199,7 @@
                                     </div><!-- End .container -->
                                 </div><!-- End .product-desc-row -->
 
-                                <div class="product-desc-row bg-image"  style="background-image: url('assets/images/products/single/extended/bg-3.jpg')">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-lg-5">
-                                                <blockquote>
-                                                    <p>“ Everything is important - <br>that success is in the details. ”</p>
-
-                                                    <cite>– Steve Jobs</cite>
-                                                </blockquote>
-                                                <p>Nullam mollis. Ut justo. Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. </p>
-                                            </div><!-- End .col-lg-5 -->
-                                        </div><!-- End .row -->
-                                    </div><!-- End .container -->
-                                </div><!-- End .product-desc-row -->
+                                
                             </div><!-- End .product-desc-content -->
                         </div><!-- .End .tab-pane -->
                         <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
