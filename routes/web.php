@@ -37,6 +37,8 @@ Route::get('login', [PageController::class, 'login'])->name('login');
 Route::get('product', [PageController::class, 'product'])->name('product');
 Route::get('error404', [PageController::class, 'error404'])->name('error404');
 Route::get('about', [PageController::class, 'about'])->name('about');
+Route::get('blog', [PageController::class, 'blog'])->name('blog');
+Route::get('elements', [PageController::class, 'elements'])->name('elements');
 
 
 //admin
