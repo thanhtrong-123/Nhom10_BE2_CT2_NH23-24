@@ -1,14 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DB;
 
 class PageController extends Controller
 {
     public function index()
     {
-        return view('index');
+        $sliders = Slider::where('slider_status', 0)->get();
+        $categories = Category::where('category_status', 0)->get();
+        $products = Product::where('product_status', 0)->get();
+        return view('index')->with('sliders', $sliders)->with('categories', $categories)->with('products', $products);
     }
 
     public function wishlist()
@@ -41,9 +50,14 @@ class PageController extends Controller
         return view('login');
     }
 
-    public function product()
+    public function product($product_id)
     {
-        return view('product');
+        $product = Product::find($product_id);
+        $same_products = Product::where([
+            ['product_id', '<>', $product_id],
+            ['category_id', '=', $product->category_id]
+        ])->get();
+        return view('product')->with('product', $product)->with('same_products', $same_products);
     }
 
     public function contact()
@@ -51,9 +65,18 @@ class PageController extends Controller
         return view('contact');
     }
 
-    public function category()
+    public function store()
     {
-        return view('category');
+        $categories = Category::where('category_status', 0)->get();
+        $totals = DB::table('products')
+            ->selectRaw("count(case when category_id = '1' then 1 end) as confirmed")
+            ->selectRaw("count(case when category_id = '2' then 1 end) as unconfirmed")
+            ->selectRaw("count(case when category_id = '3' then 1 end) as cancelled")
+            ->selectRaw("count(case when category_id = '4' then 1 end) as rejected")
+            ->first();
+        $brands = Brand::where('brand_status', 0);
+        $products = Product::where('product_status', 0)->get();
+        return view('store')->with('categories', $categories)->with('brands', $brands)->with('products', $products);
     }
 
     public function about()

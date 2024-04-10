@@ -29,12 +29,12 @@ Route::get('/', [PageController::class, 'index'])->name('index');
 Route::get('wishlist', [PageController::class, 'wishlist'])->name('wishlist');
 Route::get('cart', [PageController::class, 'cart'])->name('cart');
 Route::get('checkout', [PageController::class, 'checkout'])->name('checkout');
-Route::get('category', [PageController::class, 'category'])->name('category');
+Route::get('store', [PageController::class, 'store'])->name('store');
 Route::get('contact', [PageController::class, 'contact'])->name('contact');
 Route::get('dashboard_user', [PageController::class, 'dashboard_user'])->name('dashboard_user');
 Route::get('faq', [PageController::class, 'faq'])->name('faq');
 Route::get('login', [PageController::class, 'login'])->name('login');
-Route::get('product', [PageController::class, 'product'])->name('product');
+Route::get('product/{product_id}', [PageController::class, 'product'])->name('product');
 Route::get('error404', [PageController::class, 'error404'])->name('error404');
 Route::get('about', [PageController::class, 'about'])->name('about');
 
