@@ -121,13 +121,10 @@
                                     <a href="{{ route('product') }}" class="sf-with-ul">Product</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="sf-with-ul">Pages</a>
+                                    <a href="{{ route('blog') }}" class="sf-with-ul">Blog</a>
                                 </li>
                                 <li>
-                                    <a href="blog.html" class="sf-with-ul">Blog</a>
-                                </li>
-                                <li>
-                                    <a href="elements-list.html" class="sf-with-ul">Elements</a>
+                                    <a href="{{ route('elements') }}" class="sf-with-ul">Elements</a>
                                 </li>
                             </ul><!-- End .menu -->
                         </nav><!-- End .main-nav -->
