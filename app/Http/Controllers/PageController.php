@@ -88,4 +88,12 @@ class PageController extends Controller
     {
         return view('error404');
     }
+    public function blog()
+    {
+        return view('blog');
+    }
+    public function elements()
+    {
+        return view('elements');
+    }
 }
