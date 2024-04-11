@@ -110,29 +110,11 @@
                                 }
                             }
                         }'>
-                <a href="#" class="brand">
-                    <img src="assets/images/brands/1.png" alt="Brand Name">
-                </a>
-
-                <a href="#" class="brand">
-                    <img src="assets/images/brands/2.png" alt="Brand Name">
-                </a>
-
-                <a href="#" class="brand">
-                    <img src="assets/images/brands/3.png" alt="Brand Name">
-                </a>
-
-                <a href="#" class="brand">
-                    <img src="assets/images/brands/4.png" alt="Brand Name">
-                </a>
-
-                <a href="#" class="brand">
-                    <img src="assets/images/brands/5.png" alt="Brand Name">
-                </a>
-
-                <a href="#" class="brand">
-                    <img src="assets/images/brands/6.png" alt="Brand Name">
-                </a>
+                @foreach ($brands as $brand)
+                    <a href="#" class="brand">
+                        <img src="{{ asset('storage/images/brands/' . $brand->brand_image) }}" alt="Brand Name">
+                    </a>
+                @endforeach
             </div><!-- End .owl-carousel -->
         </div><!-- End .container -->
     </div><!-- End .bg-lighter -->
@@ -206,14 +188,16 @@
 
                                     <div class="product-body">
                                         <h3 class="product-title"><a
-                                                href="{{ URL::to('product/' . $product->product_id) }}">{{ $product->product_name }}</a></h3>
+                                                href="{{ URL::to('product/' . $product->product_id) }}">{{ $product->product_name }}</a>
+                                        </h3>
                                         <!-- End .product-title -->
                                         <div class="product-price">
                                             {{ $product->product_price }} VND
                                         </div><!-- End .product-price -->
                                     </div><!-- End .product-body -->
                                     <div class="product-action">
-                                        <a href="{{ URL::to('cart') }}" class="btn-product btn-cart"><span>add to cart</span></a>
+                                        <a href="{{ URL::to('cart') }}" class="btn-product btn-cart"><span>add to
+                                                cart</span></a>
                                     </div><!-- End .product-action -->
                                 </div><!-- End .product -->
                             @endif
@@ -270,7 +254,7 @@
         </div><!-- End .container -->
 
         <div class="cta cta-display bg-image pt-4 pb-4"
-            style="background-image: url(assets/images/backgrounds/cta/bg-6.jpg);">
+            style="background-image: url('{{ asset('assets/images/backgrounds/cta/bg-6.jpg') }}');">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-10 col-lg-9 col-xl-8">
@@ -282,7 +266,7 @@
                             </div><!-- End .col -->
 
                             <div class="col-auto">
-                                <a href="login.html" class="btn btn-outline-white"><span>SIGN UP</span><i
+                                <a href="{{ route('login') }}" class="btn btn-outline-white"><span>SIGN UP</span><i
                                         class="icon-long-arrow-right"></i></a>
                             </div><!-- End .col-auto -->
                         </div><!-- End .row no-gutters -->

@@ -56,7 +56,7 @@
                         <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
                         <td>{{ $brandProduct->brand_name }}</td>
                         <td>{{ $brandProduct->brand_slug }}</td>
-                        <td><img src="{{ asset('storage/images/brands/') . $brandProduct->brand_image }}" height="150" width="200"></td>
+                        <td><img src="{{ asset('storage/images/brands/' . $brandProduct->brand_image) }}" height="150" width="150"></td>
                         <td><span class="text-ellipsis">
                                 <?php
                                 if ($brandProduct->brand_status == 0) {

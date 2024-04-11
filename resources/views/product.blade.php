@@ -87,8 +87,6 @@
                                 <div class="details-action-wrapper">
                                     <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to
                                             Wishlist</span></a>
-                                    <a href="#" class="btn-product btn-compare" title="Compare"><span>Add to
-                                            Compare</span></a>
                                 </div><!-- End .details-action-wrapper -->
                             </div><!-- End .product-details-action -->
 
@@ -321,8 +319,6 @@
                                 </div><!-- End .ratings -->
                                 <span class="ratings-text">( 2 Reviews )</span>
                             </div><!-- End .rating-container -->
-
-
                         </div><!-- End .product-body -->
                     </div><!-- End .product -->
                 @endforeach

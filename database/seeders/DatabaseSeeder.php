@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         DB::table('brands')->insert([
             'brand_name' => 'GODSON',
             'brand_slug' => 'godson',
-            'brand_image' => 'profile/brand01.jpg',
+            'brand_image' => 'profile/brand01.png',
             'brand_desc' => 'Được biết đến là một thương hiệu trẻ mới ra mắt thị trường cách đây không lâu. Nhưng Godson đã được rất nhiều bạn trẻ ưa thích và lựa chọn bởi những sản phẩm vô cùng đặc biệt, mang những dấu ấn riêng. Mỗi sản phẩm mà Godson tung ra thị trường thường rất chỉnh chu trong thiết kế cho đến chất lượng sản phẩm. Được làm từ chất vải cotton 100% nhằm tạo đến cho người mặc sự thoải mái. Về hình ảnh được in nơi áo, Godson đã có sự kết hợp giữa Screen Printing và DTG Printing. Hai chất liệu in này khi kết hợp sẽ mang tới sự bền bỉ, tạo nên những hình ảnh sắc nét dành cho sản phẩm. Godson đã có sự đầu tư tìm hiểu rất kỹ lưỡng cho từng sản phẩm trước khi cho ra mắt, đó chính là điều khiến thương hiệu này có thể thu hút được lượng lớn khách hàng, mặc dù chỉ mới ra mắt cách đây không lâu.',
             'brand_status' => 0,
             'created_at' => now(),
@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
         DB::table('brands')->insert([
             'brand_name' => 'COOLMATE',
             'brand_slug' => 'coolmate',
-            'brand_image' => 'profile/brand02.jpg',
+            'brand_image' => 'profile/brand02.png',
             'brand_desc' => 'Một tên thương hiệu được nhiều bạn trẻ ưa chuộng hiện nay đó là Coolmate. Nghe cái tên chúng ta cũng đã có thể thấy được dấu ấn phong cách nổi bật của thương hiệu này. Coolmate với sự kết hợp giữa "Cool" và "Mate". Với ý nghĩa muốn mang đến cho khách hàng một vẻ ngoài vừa “cool” ngầu vừa mới mẻ, năng động. Hơn nữa, giữa người bán và người mua sẽ có sự đồng hành- “mate” với nhau để cùng phát triển.',
             'brand_status' => 0,
             'created_at' => now(),
@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
         DB::table('brands')->insert([
             'brand_name' => 'CLOWNZ',
             'brand_slug' => 'clownz',
-            'brand_image' => 'profile/brand03.jpg',
+            'brand_image' => 'profile/brand03.png',
             'brand_desc' => 'Nếu như những thương hiệu trên đều mang một style riêng biệt thì ClownZ lại là nơi mà các tính đồ streetwear Hà Thành có thể tìm thấy tất cả những gì mình cần.Từ Baseball Jacket, Tee, Jogger Pants cho đến sneakers trong bức ảnh này đều có thể tìm thấy ở ClownZ.',
             'brand_status' => 0,
             'created_at' => now(),
@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder
         DB::table('brands')->insert([
             'brand_name' => 'BOBUI',
             'brand_slug' => 'bobui',
-            'brand_image' => 'profile/brand04.jpg',
+            'brand_image' => 'profile/brand04.png',
             'brand_desc' => 'BOBUI là một thương hiệu quần áo đường phố được thành lập tại Sài Gòn, Việt Nam vào năm 2014 bởi Nguyễn Thanh Dũng. Không chỉ là thương hiệu thời trang đường phố BOBUI vừa là nhà sản xuất quần áo tại Sài Gòn. Các thiết kế lấy cảm hứng từ thời trang của các nền văn hóa Hip Hop, Rock mang đậm hơi thở thời trang đường phố. Brand đa dạng về mẫu mã qua các items như: Tee, Shirt, Jacket, Pant, Accessories,…Với mong muốn mang đến cái nhìn tích cực hơn về chất lượng thời trang trong nước BOBUI không ngừng đổi mới và hoàn thiện mình từng ngày.',
             'brand_status' => 0,
             'created_at' => now(),
@@ -75,7 +75,7 @@ class DatabaseSeeder extends Seeder
         DB::table('brands')->insert([
             'brand_name' => 'DEGREY',
             'brand_slug' => 'degrey',
-            'brand_image' => 'profile/brand05.jpg',
+            'brand_image' => 'profile/brand05.png',
             'brand_desc' => 'Degrey là một local brand giá rẻ được thành lập từ năm 2016 cho đến nay đã phát triển và được giới trẻ săn đón không chỉ bởi giá thành mà còn ở chất lượng sản phẩm.',
             'brand_status' => 0,
             'created_at' => now(),

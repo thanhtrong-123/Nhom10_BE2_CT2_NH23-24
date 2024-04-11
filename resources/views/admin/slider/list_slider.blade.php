@@ -55,7 +55,7 @@
           <tr>
             <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
             <td>{{ $slider->slider_name }}</td>
-            <td><img src="{{ asset('storage/images/banners\/') . $slider->slider_image }}" height="120" width="500"></td>
+            <td><img src="{{ asset('storage/images/banners/' . $slider->slider_image) }}" height="120" width="500"></td>
             <td>{{ $slider->slider_desc }}</td>
             <td><span class="text-ellipsis">
 

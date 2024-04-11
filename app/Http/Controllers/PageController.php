@@ -16,8 +16,9 @@ class PageController extends Controller
     {
         $sliders = Slider::where('slider_status', 0)->get();
         $categories = Category::where('category_status', 0)->get();
+        $brands = Brand::where('brand_status', 0)->get();
         $products = Product::where('product_status', 0)->get();
-        return view('index')->with('sliders', $sliders)->with('categories', $categories)->with('products', $products);
+        return view('index')->with('sliders', $sliders)->with('categories', $categories)->with('brands', $brands)->with('products', $products);
     }
 
     public function wishlist()
@@ -68,20 +69,22 @@ class PageController extends Controller
     public function store()
     {
         $categories = Category::where('category_status', 0)->get();
-        $totals = DB::table('products')
-            ->selectRaw("count(case when category_id = '1' then 1 end) as confirmed")
-            ->selectRaw("count(case when category_id = '2' then 1 end) as unconfirmed")
-            ->selectRaw("count(case when category_id = '3' then 1 end) as cancelled")
-            ->selectRaw("count(case when category_id = '4' then 1 end) as rejected")
-            ->first();
-        $brands = Brand::where('brand_status', 0);
-        $products = Product::where('product_status', 0)->get();
+        foreach ($categories as $key => $category) {
+            $categories[$key]['total_product'] = Product::where([
+                ['category_id', $category->category_id],
+                ['product_status', 0]
+            ])->count();
+        }
+        $brands = Brand::where('brand_status', 0)->get();
+        // $products = Product::where('product_status', 0)->get();
+        $products = Product::where('product_status', 0)->paginate(6);
         return view('store')->with('categories', $categories)->with('brands', $brands)->with('products', $products);
     }
 
     public function about()
     {
-        return view('about');
+        $brands = Brand::where('brand_status', 0)->get();
+        return view('about')->with('brands', $brands);
     }
 
     public function error404()
