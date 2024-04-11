@@ -44,6 +44,7 @@
                         </th>
                         <th>Tên thương hiệu</th>
                         <th>Brand Slug</th>
+                        <th>Brand Image</th>
                         <th>Hiển thị</th>
 
                         <th style="width:30px;"></th>
@@ -55,6 +56,7 @@
                         <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
                         <td>{{ $brandProduct->brand_name }}</td>
                         <td>{{ $brandProduct->brand_slug }}</td>
+                        <td><img src="{{ asset('storage/images/brands/') . $brandProduct->brand_image }}" height="150" width="200"></td>
                         <td><span class="text-ellipsis">
                                 <?php
                                 if ($brandProduct->brand_status == 0) {

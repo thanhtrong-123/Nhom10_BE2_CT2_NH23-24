@@ -16,17 +16,22 @@
             <div class="panel-body">
 
                 <div class="position-center">
-                    <form role="form" action="{{URL::to('/brandProduct')}}" method="post">
+                    <form role="form" action="{{URL::to('brandProduct')}}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên thương hiệu</label>
-                            <input type="text" name="brand_product_name" class="form-control" onkeyup="ChangeToSlug();" 
-                            id="slug" placeholder="Tên thương hiệu">
+                            <input type="text" name="brand_product_name" class="form-control" onkeyup="ChangeToSlug();"
+                                id="slug" placeholder="Tên thương hiệu">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Slug</label>
                             <input type="text" name="slug_brand_product" class="form-control" id="convert_slug"
                                 placeholder="Tên thương hiệu" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Hình ảnh</label>
+                            <input type="file" name="brand_image" class="form-control" id="exampleInputEmail1"
+                                placeholder="Brand" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả thương hiệu</label>
@@ -42,7 +47,7 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-info">Thêm thương hiệu</button>
+                        <button type="submit" name="add_brand" class="btn btn-info">Thêm thương hiệu</button>
                     </form>
                 </div>
 

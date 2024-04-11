@@ -17,7 +17,7 @@
                         <div class="panel-body">
 
                             <div class="position-center">
-                                <form role="form" action="{{URL::to('brandProduct/'.$data->brand_id)}}" method="post">
+                                <form role="form" action="{{URL::to('brandProduct/'.$data->brand_id)}}" method="post" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 {{ method_field('put') }}
                                 <div class="form-group">
@@ -27,6 +27,11 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Slug</label>
                                     <input type="text" value="{{$data->brand_slug}}" name="slug_brand_product" class="form-control" id="convert_slug" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Hình ảnh thương hiệu</label>
+                                    <input type="file" name="brand_image" class="form-control" id="exampleInputEmail1">
+                                    <img src="{{URL::to('public/uploads/brand/'.$data->brand_image)}}" height="150" width="200">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Mô tả thương hiệu</label>
