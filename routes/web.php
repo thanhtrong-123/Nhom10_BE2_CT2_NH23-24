@@ -24,7 +24,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
-
+//page
 Route::get('/', [PageController::class, 'index'])->name('index');
 Route::get('wishlist', [PageController::class, 'wishlist'])->name('wishlist');
 Route::get('cart', [PageController::class, 'cart'])->name('cart');
@@ -39,14 +39,18 @@ Route::get('error404', [PageController::class, 'error404'])->name('error404');
 Route::get('about', [PageController::class, 'about'])->name('about');
 Route::get('blog', [PageController::class, 'blog'])->name('blog');
 Route::get('elements', [PageController::class, 'elements'])->name('elements');
-
-
+//users
+Route::post('/register-user', [UserController::class, 'register_user'])->name('register_user');
+Route::get('/user', [UserController::class, 'user'])->name('user');
+Route::get('/logout-user',[UserController::class,'logout_user'])->name('logout_user');
+Route::post('/user-login',[UserController::class,'user_login'])->name('user_login');
 //admin
 Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
 Route::get('/dashboard',[AdminController::class,'show_dashboard'])->name('show_dashboard');
 Route::get('/logout',[AdminController::class,'logout'])->name('logout');
 Route::post('/admin-dashboard',[AdminController::class,'dashboard'])->name('dashboard');
-
+//send mail
+Route::get('/send-mail', [PageController::class, 'send_mail'])->name('send_mail');
 //product
 Route::get('/add-product', [AdminController::class, 'add_product'])->name('add_product');
 Route::get('/all-product', [AdminController::class, 'all_product'])->name('all_product');
@@ -101,5 +105,3 @@ Route::resource('slider', SliderController::class);
 
 // Products
 Route::resource('products', ProductController::class);
-//users
-Route::resource('user', UserController::class);
