@@ -95,17 +95,5 @@ class PageController extends Controller
     {
         return view('elements');
     }
-    public function send_mail()
-    {
-        $to_name = "Thanh Trong";
-                $to_email = "huynhthanhtrong.tdc2223@gmail.com";//send to this email
-                $data = array("name"=>"Mail từ tài khoản Khách hàng","body"=>'Mail gửi về vấn về hàng hóa'); //body of mail.blade.php
-                Mail::send('mail.send_mail',$data,function($message) use ($to_name,$to_email){
-
-                    $message->to($to_email)->subject('Test thử gửi mail google');//send this mail with subject
-                    $message->from($to_email,$to_name);//send from this mail
-                });
-                //return redirect('/')->with('message','');
-                //--send mail
-    }
+    
 }

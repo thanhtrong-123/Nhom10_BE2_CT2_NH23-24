@@ -45,7 +45,7 @@ Route::post('add-cart', [CartController::class, 'add'])->name('cart.add');
 // Users
 Route::post('/register-user', [UserController::class, 'register_user'])->name('register_user');
 Route::get('/user', [UserController::class, 'user'])->name('user');
-Route::get('/logout-user',[UserController::class,'logout_user'])->name('logout_user');
+Route::get('/logoutuser',[UserController::class,'logoutuser'])->name('logoutuser');
 Route::post('/user-login',[UserController::class,'user_login'])->name('user_login');
 // Admin
 Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
