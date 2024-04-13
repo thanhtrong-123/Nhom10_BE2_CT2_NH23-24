@@ -73,3 +73,6 @@ Route::resource('slider', SliderController::class);
 
 // Products
 Route::resource('products', ProductController::class);
+
+//Order_detail
+Route::resource('order-detail', OrderDetailController::class);
