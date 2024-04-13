@@ -34,29 +34,31 @@
 									</thead>
 
 									<tbody>
+										@foreach ($cart->list() as $key => $item)
 										<tr>
 											<td class="product-col">
 												<div class="product">
 													<figure class="product-media">
-														<a href="#">
-															<img src="assets/images/products/table/product-1.jpg" alt="Product image">
+														<a href="{{ url('product/' . $key) }}">
+															<img src="{{ asset('storage/images/products/' . $item['product_image']) }}" alt="Product image">
 														</a>
 													</figure>
 
 													<h3 class="product-title">
-														<a href="#">Beige knitted elastic runner shoes</a>
+														<a href="#">{{ $item['product_name'] }}</a>
 													</h3><!-- End .product-title -->
 												</div><!-- End .product -->
 											</td>
-											<td class="price-col">$84.00</td>
+											<td class="price-col">{{ number_format($item['product_price']) }} VND</td>
 											<td class="quantity-col">
                                                 <div class="cart-product-quantity">
-                                                    <input type="number" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                                                    <input type="number" class="form-control" name="qty" value="{{ $item['qty'] }}" min="1" step="1" data-decimals="0" required>
                                                 </div><!-- End .cart-product-quantity -->
                                             </td>
-											<td class="total-col">$84.00</td>
+											<td class="total-col">{{ number_format($item['product_price'] * $item['qty']) }} VND</td>
 											<td class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button></td>
-										</tr>
+										</tr>											
+										@endforeach
 										
 									</tbody>
 								</table><!-- End .table table-wishlist -->
@@ -84,7 +86,7 @@
 	                					<tbody>
 	                						<tr class="summary-subtotal">
 	                							<td>Subtotal:</td>
-	                							<td>$160.00</td>
+	                							<td>{{ number_format($cart->getTotalPrice()) }} VND</td>
 	                						</tr><!-- End .summary-subtotal -->
 	                						<tr class="summary-shipping">
 	                							<td>Shipping:</td>
@@ -128,7 +130,7 @@
 
 	                						<tr class="summary-total">
 	                							<td>Total:</td>
-	                							<td>$160.00</td>
+	                							<td>{{ number_format($cart->getTotalPrice()) }} VND</td>
 	                						</tr><!-- End .summary-total -->
 	                					</tbody>
 	                				</table><!-- End .table table-summary -->
@@ -136,7 +138,7 @@
 	                				<a href="{{ route('checkout') }}" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO CHECKOUT</a>
 	                			</div><!-- End .summary -->
 
-		            			<a href="{{ route('category') }}" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
+		            			<a href="{{ route('store') }}" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
 	                		</aside><!-- End .col-lg-3 -->
 	                	</div><!-- End .row -->
 	                </div><!-- End .container -->

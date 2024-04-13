@@ -36,7 +36,7 @@
                             </div><!-- End .rating-container -->
 
                             <div class="product-price">
-                                {{ $product->product_price }} VND
+                                {{ number_format($product->product_price) }} VND
                             </div><!-- End .product-price -->
 
                             <div class="product-content">
@@ -72,24 +72,26 @@
 
                                 <a href="#" class="size-guide"><i class="icon-th-list"></i>size guide</a>
                             </div><!-- End .details-filter-row -->
+                            <form action="{{ route('cart.add') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                                <div class="details-filter-row details-row-size">
+                                    <label for="qty">Qty:</label>
+                                    <div class="product-details-quantity">
+                                        <input type="number" id="qty" name="qty" class="form-control" value="1"
+                                            min="1" max="10" step="1" data-decimals="0" required>
+                                    </div><!-- End .product-details-quantity -->
+                                </div><!-- End .details-filter-row -->
 
-                            <div class="details-filter-row details-row-size">
-                                <label for="qty">Qty:</label>
-                                <div class="product-details-quantity">
-                                    <input type="number" id="qty" class="form-control" value="1" min="1"
-                                        max="10" step="1" data-decimals="0" required>
-                                </div><!-- End .product-details-quantity -->
-                            </div><!-- End .details-filter-row -->
+                                <div class="product-details-action">
+                                    <button type="submit" class="btn-product btn-cart"><span>add to cart</span></button>
 
-                            <div class="product-details-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-
-                                <div class="details-action-wrapper">
-                                    <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to
-                                            Wishlist</span></a>
-                                </div><!-- End .details-action-wrapper -->
-                            </div><!-- End .product-details-action -->
-
+                                    <div class="details-action-wrapper">
+                                        <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to
+                                                Wishlist</span></a>
+                                    </div><!-- End .details-action-wrapper -->
+                                </div><!-- End .product-details-action -->
+                            </form>
                             <div class="product-details-footer">
                                 <div class="product-cat">
                                     <span>Category: {{ $product->category->category_name }}</span>
@@ -311,7 +313,7 @@
                             </h3>
                             <!-- End .product-title -->
                             <div class="product-price">
-                                {{ $value->product_price }} VND
+                                {{ number_format($value->product_price) }} VND
                             </div><!-- End .product-price -->
                             <div class="ratings-container">
                                 <div class="ratings">

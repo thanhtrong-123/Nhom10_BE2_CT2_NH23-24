@@ -52,7 +52,7 @@
                                                     href="{{ url('product/' . $product->product_id) }}">{{ $product->product_name }}</a>
                                             </h3><!-- End .product-title -->
                                             <div class="product-price">
-                                                {{ $product->product_price }} VND
+                                                {{ number_format($product->product_price) }} VND
                                             </div><!-- End .product-price -->
                                             <div class="ratings-container">
                                                 <div class="ratings">

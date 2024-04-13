@@ -192,7 +192,7 @@
                                         </h3>
                                         <!-- End .product-title -->
                                         <div class="product-price">
-                                            {{ $product->product_price }} VND
+                                            {{ number_format($product->product_price) }} VND
                                         </div><!-- End .product-price -->
                                     </div><!-- End .product-body -->
                                     <div class="product-action">

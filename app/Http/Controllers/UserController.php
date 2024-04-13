@@ -29,9 +29,9 @@ class UserController extends Controller
     }
     public function logout_user()
     {
-        Session::put('admin_name',null);
-        Session::put('admin_id', null);
-        return Redirect::to('/admin');
+        Session::put('customer_name',null);
+        Session::put('customer_name', null);
+        return Redirect::to('/');
     } public function register_user(Request $request)
     {
         $data = new Customer;

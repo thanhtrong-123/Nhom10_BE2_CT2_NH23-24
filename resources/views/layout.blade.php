@@ -85,10 +85,9 @@
                                             <b class="caret"></b>
                                         </a>
                                         <ul class="dropdown-menu extended logout">
-                                            <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                                            <li><a href="{{ URL::to('/dashboard_user') }}"><i class=" fa fa-suitcase"></i>Profile</a></li>
                                             <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                                            <li><a href="{{ URL::to('/logout') }}"><i class="fa fa-key"></i>Đăng
-                                                    xuất</a></li>
+                                            <li><a href="{{ URL::to('/logout-user') }}"><i class="fa fa-key"></i>Logout</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -183,7 +182,7 @@
                                 </div><!-- End .dropdown-cart-total -->
 
                                 <div class="dropdown-cart-action">
-                                    <a href="{{ route('cart') }}" class="btn btn-primary">View Cart</a>
+                                    <a href="{{ route('cart.index') }}" class="btn btn-primary">View Cart</a>
                                     <a href="{{ route('checkout') }}"
                                         class="btn btn-outline-primary-2"><span>Checkout</span><i
                                             class="icon-long-arrow-right"></i></a>

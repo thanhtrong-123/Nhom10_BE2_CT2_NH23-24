@@ -27,11 +27,6 @@ class PageController extends Controller
         return view('wishlist');
     }
 
-    public function cart()
-    {
-        return view('cart');
-    }
-
     public function checkout()
     {
         return view('checkout');
