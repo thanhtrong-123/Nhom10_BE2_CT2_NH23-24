@@ -26,15 +26,7 @@
                                         </picture>
                                     </figure><!-- End .slide-image -->
 
-                                    <div class="intro-content">
-                                        <h3 class="intro-subtitle">Trending now</h3><!-- End .h3 intro-subtitle -->
-                                        <h1 class="intro-title">This Week's<br>Most Wanted</h1><!-- End .intro-title -->
-
-                                        <a href="category.html" class="btn btn-outline-white">
-                                            <span>SHOP NOW</span>
-                                            <i class="icon-long-arrow-right"></i>
-                                        </a>
-                                    </div><!-- End .intro-content -->
+                                    
                                 </div><!-- End .intro-slide -->
                             @endforeach
 
@@ -174,8 +166,8 @@
                                 <div class="product product-11 text-center">
                                     <figure class="product-media">
                                         <a href="{{ URL::to('product/' . $product->product_id) }}">
-                                            <img src="{{ asset('storage/images/products/' . $product->product_image) }}"
-                                                alt="Product image" class="product-image">
+                                            <img style="width: 100%;" src="{{ asset('storage/images/products/' . $product->product_image) }}"
+                                                alt="Product image" class="product-image" >
 
                                         </a>
 

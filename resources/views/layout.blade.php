@@ -30,23 +30,8 @@
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
-    <link rel="stylesheet" href="{{asset('backend/css/font.css')}}" type="text/css" />
     <link href="{{asset('backend/css/font-awesome.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('backend/css/morris.css')}}" type="text/css" />
-    <style>
-    .dropdown-menu {
-        display: none;
-        position: absolute;
-        background-color: #fff;
-        min-width: 160px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-    }
 
-    .dropdown:hover .dropdown-menu {
-        display: block;
-    }
-    </style>
 </head>
 
 <body>
@@ -79,7 +64,6 @@
 
                     <div class="header-right">
                         <ul class="top-menu">
-
                             <li>
                                 <a href="#">Links</a>
                                 <ul>
@@ -91,32 +75,22 @@
 
                                     @if(Session::has('customer_name'))
                                     <li class="dropdown">
-                                        <!-- <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                            <i class="icon-user"></i>
-                                            <span class="username">{{ Session::get('customer_name') }}</span>
-                                            <b class="caret"></b>
-                                        </a> -->
                                         <div class="header-dropdown">
-                                            <a href="#">Usd</a>
+                                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                                <i class="icon-user"></i>
+                                                <span class="username">{{ Session::get('customer_name') }}</span>
+                                                <b class="caret"></b>
+                                            </a>
                                             <div class="header-menu">
                                                 <ul>
-                                                    <li><a href="#">Eur</a></li>
-                                                    <li><a href="#">Usd</a></li>
+                                                    <li><a href="{{ URL::to('/dashboard_user') }}"><i
+                                                                class=" fa fa-suitcase"></i>Profile</a></li>
+                                                    <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                                                    <li><a href="{{ URL::to('/logoutuser') }}"><i
+                                                                class="fa fa-key"></i>Logout</a></li>
                                                 </ul>
                                             </div><!-- End .header-menu -->
                                         </div><!-- End .header-dropdown -->
-                                        <div class="header-menu">
-                                            <ul>
-                                                <li><a href="#">Eur</a></li>
-                                                <li><a href="#">Usd</a></li>
-                                            </ul>
-                                        </div><!-- End .header-menu -->
-                                        <!-- <ul class="dropdown-menu extended logout">
-                                            <li><a href="{{ URL::to('/dashboard_user') }}"><i
-                                                        class=" fa fa-suitcase"></i>Profile</a></li>
-                                            <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                                            <li><a href="{{ URL::to('/logout-user') }}"><i
-                                                        class="fa fa-key"></i>Logout</a></li> -->
 
                                     </li>
                                     @else
