@@ -21,7 +21,6 @@
       <table class="table table-striped b-t b-light">
         <thead>
           <tr>
-           
             <th>Thứ tự</th>
             <th>Mã đơn hàng</th>
             <th>Ngày tháng đặt hàng</th>
