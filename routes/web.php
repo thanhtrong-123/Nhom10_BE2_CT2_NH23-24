@@ -73,6 +73,10 @@ Route::resource('slider', SliderController::class);
 
 // Products
 Route::resource('products', ProductController::class);
+Route::get('/unactive-product/{product_id}',[ProductController::class, 'unactive_product']);
+Route::get('/active-product/{product_id}',[ProductController::class, 'active_product']);
 
 //Order_detail
 Route::resource('order-detail', OrderDetailController::class);
+
+

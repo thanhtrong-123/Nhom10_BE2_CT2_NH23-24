@@ -110,7 +110,7 @@ class CategoryController extends Controller
         //$this->AuthLogin();
         $data = new Category;
         $data->where('category_id',$category_product_id)->update(['category_status'=>1]);
-        Session::put('message','Không hiẻn thị danh mục sản phẩm thành công');
+        Session::put('message','Không hiển thị danh mục sản phẩm thành công!');
         return Redirect::to('categoryProduct');
 
     }
@@ -118,7 +118,7 @@ class CategoryController extends Controller
         //$this->AuthLogin();
         $data = new Category;
         $data->where('category_id',$category_product_id)->update(['category_status'=>0]);
-        Session::put('message','Hiển thị danh mục sản phẩm thành công');
+        Session::put('message','Hiển thị danh mục sản phẩm thành công!');
         return Redirect::to('categoryProduct');
     }
 }

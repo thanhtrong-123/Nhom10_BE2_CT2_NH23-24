@@ -67,9 +67,9 @@
             <td><img src="{{ asset('storage/images/products/' . $value->product_image) }}" alt="Hình sản phẩm" style="width: 50px;"></td>
             <td>{{ $value->category->category_name ?? 'Chưa cập nhật' }}</td>
             <td>{{ $value->brand->brand_name ?? 'Chưa cập nhật' }}</td>
-            <td>
+            <!-- <td> -->
               <!-- Nút Like hoặc Dislike -->
-              @if($value->product_status)
+              <!-- @if($value->product_status)
               <a href="#" class="active styling-edit" ui-toggle-class="">
                 <i class="fa fa-thumbs-down text-danger text"></i>
               </a>
@@ -78,7 +78,24 @@
                 <i class="fa fa-thumbs-up text-info text"></i>
               </a>
               @endif
-            </td>
+            </td> -->
+
+            <td><span class="text-ellipsis">
+                <?php
+                if ($value->product_status == 0) {
+                ?>
+                  <a href="{{URL::to('/unactive-product/'.$value->product_id)}}"><span class="fa-thumb-styling fa fa-thumbs-up"></span></a>
+                <?php
+                } else {
+                ?>
+                  <a href="{{URL::to('/active-product/'.$value->product_id)}}"><span class="fa-thumb-styling fa fa-thumbs-down"></span></a>
+                <?php
+                }
+                ?>
+              </span></td>
+
+            <td>
+
             <td>
               <a href="{{ URL::to('products/' . $value->product_id . '/edit') }}" class="active styling-edit" ui-toggle-class="">
                 <i class="fa fa-pencil-square-o text-success text-active"></i>

@@ -169,4 +169,19 @@ class ProductController extends Controller
         return Redirect::to('products');
 
     }
+    public function unactive_product($product_id){
+        //$this->AuthLogin();
+        $data = new Product;
+        $data->where('product_id',$product_id)->update(['product_status'=>1]);
+        Session::put('message','Hiển thị sản phẩm không thành công!');
+        return Redirect::to('products');
+
+    }
+    public function active_product($product_id){
+        //$this->AuthLogin();
+        $data = new Product;
+        $data->where('product_id',$product_id)->update(['product_status'=>0]);
+        Session::put('message','Hiển thị sản phẩm thành công!');
+        return Redirect::to('products');
+    }
 }
