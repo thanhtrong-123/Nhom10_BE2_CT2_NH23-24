@@ -41,6 +41,9 @@ Route::get('blog', [PageController::class, 'blog'])->name('blog');
 // Cart
 Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('add-cart', [CartController::class, 'add'])->name('cart.add');
+Route::post('update-cart', [CartController::class, 'update'])->name('cart.update');
+Route::post('delete-cart', [CartController::class, 'delete'])->name('cart.delete');
+Route::get('delete-all-cart', [CartController::class, 'deleteAll'])->name('cart.deleteall');
 
 // Users
 Route::post('/register-user', [UserController::class, 'register_user'])->name('register_user');

@@ -37,11 +37,6 @@ class PageController extends Controller
         return view('dashboard_user');
     }
 
-    public function faq()
-    {
-        return view('faq');
-    }
-
     public function login()
     {
         return view('login');
@@ -91,9 +86,4 @@ class PageController extends Controller
     {
         return view('blog');
     }
-    public function elements()
-    {
-        return view('elements');
-    }
-    
 }
