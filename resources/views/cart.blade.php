@@ -8,8 +8,8 @@
     <nav aria-label="breadcrumb" class="breadcrumb-nav">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('index') }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('store') }}">Shop</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
             </ol>
         </div><!-- End .container -->
@@ -44,7 +44,7 @@
                                                 </figure>
 
                                                 <h3 class="product-title">
-                                                    <a href="#">{{ $item['product_name'] }}</a>
+                                                    <a href="{{ url('product/' . $key) }}">{{ $item['product_name'] }}</a>
                                                 </h3><!-- End .product-title -->
                                             </div><!-- End .product -->
                                         </td>

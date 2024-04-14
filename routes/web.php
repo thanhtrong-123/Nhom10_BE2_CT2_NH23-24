@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderDetailController;
 
 
 
@@ -27,7 +29,6 @@ use App\Http\Controllers\UserController;
 
 // Page
 Route::get('/', [PageController::class, 'index'])->name('index');
-Route::get('wishlist', [PageController::class, 'wishlist'])->name('wishlist');
 Route::get('checkout', [PageController::class, 'checkout'])->name('checkout');
 Route::get('store', [PageController::class, 'store'])->name('store');
 Route::get('contact', [PageController::class, 'contact'])->name('contact');
@@ -44,6 +45,12 @@ Route::post('add-cart', [CartController::class, 'add'])->name('cart.add');
 Route::post('update-cart', [CartController::class, 'update'])->name('cart.update');
 Route::post('delete-cart', [CartController::class, 'delete'])->name('cart.delete');
 Route::get('delete-all-cart', [CartController::class, 'deleteAll'])->name('cart.deleteall');
+
+// Wishlist
+Route::get('wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+Route::get('add-wishlist/{product_id}', [WishlistController::class, 'add'])->name('wishlist.add');
+Route::post('delete-wishlist', [WishlistController::class, 'delete'])->name('wishlist.delete');
+Route::get('delete-all-wishlist', [WishlistController::class, 'deleteAll'])->name('wishlist.deleteall');
 
 // Users
 Route::post('/register-user', [UserController::class, 'register_user'])->name('register_user');

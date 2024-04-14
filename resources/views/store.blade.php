@@ -33,15 +33,19 @@
                                             </a>
 
                                             <div class="product-action-vertical">
-                                                <a href="#"
+                                                <a href="{{ url('add-wishlist/' . $product->product_id) }}"
                                                     class="btn-product-icon btn-wishlist btn-expandable"><span>add
                                                         to wishlist</span></a>
                                             </div><!-- End .product-action-vertical -->
-
-                                            <div class="product-action">
-                                                <a href="#" class="btn-product btn-cart"><span>add to
-                                                        cart</span></a>
-                                            </div><!-- End .product-action -->
+                                            <form action="{{ route('cart.add') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                                                <input type="hidden" name="qty" value="1">
+                                                <div class="product-action">
+                                                    <button class="btn-product btn-cart" type="submit"><span>add to
+                                                            cart</span></button>
+                                                </div><!-- End .product-action -->
+                                            </form>
                                         </figure><!-- End .product-media -->
 
                                         <div class="product-body">

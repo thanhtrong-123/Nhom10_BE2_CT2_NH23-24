@@ -30,7 +30,7 @@
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
-    <link href="{{asset('backend/css/font-awesome.css')}}" rel="stylesheet">
+    <link href="{{ asset('backend/css/font-awesome.css') }}" rel="stylesheet">
 
 </head>
 
@@ -68,33 +68,34 @@
                                 <a href="#">Links</a>
                                 <ul>
                                     <li><a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
-                                    <li><a href="{{ route('wishlist') }}"><i class="icon-heart-o"></i>Wishlist
-                                            <span>(3)</span></a></li>
+                                    <li><a href="{{ route('wishlist.index') }}"><i class="icon-heart-o"></i>Wishlist
+                                            <span>({{ $wishlist->getTotalQty() }})</span></a></li>
                                     <li><a href="{{ route('about') }}">About Us</a></li>
                                     <li><a href="{{ route('contact') }}">Contact Us</a></li>
 
-                                    @if(Session::has('customer_name'))
-                                    <li class="dropdown">
-                                        <div class="header-dropdown">
-                                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                                <i class="icon-user"></i>
-                                                <span class="username">{{ Session::get('customer_name') }}</span>
-                                                <b class="caret"></b>
-                                            </a>
-                                            <div class="header-menu">
-                                                <ul>
-                                                    <li><a href="{{ URL::to('/dashboard_user') }}"><i
-                                                                class=" fa fa-suitcase"></i>Profile</a></li>
-                                                    <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                                                    <li><a href="{{ URL::to('/logoutuser') }}"><i
-                                                                class="fa fa-key"></i>Logout</a></li>
-                                                </ul>
-                                            </div><!-- End .header-menu -->
-                                        </div><!-- End .header-dropdown -->
+                                    @if (Session::has('customer_name'))
+                                        <li class="dropdown">
+                                            <div class="header-dropdown">
+                                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                                    <i class="icon-user"></i>
+                                                    <span class="username">{{ Session::get('customer_name') }}</span>
+                                                    <b class="caret"></b>
+                                                </a>
+                                                <div class="header-menu">
+                                                    <ul>
+                                                        <li><a href="{{ URL::to('/dashboard_user') }}"><i
+                                                                    class=" fa fa-suitcase"></i>Profile</a></li>
+                                                        <li><a href="#"><i class="fa fa-cog"></i> Settings</a>
+                                                        </li>
+                                                        <li><a href="{{ URL::to('/logoutuser') }}"><i
+                                                                    class="fa fa-key"></i>Logout</a></li>
+                                                    </ul>
+                                                </div><!-- End .header-menu -->
+                                            </div><!-- End .header-dropdown -->
 
-                                    </li>
+                                        </li>
                                     @else
-                                    <li><a href="{{ route('login') }}"><i class="icon-user"></i> Login</a></li>
+                                        <li><a href="{{ route('login') }}"><i class="icon-user"></i> Login</a></li>
                                     @endif
                                 </ul>
                             </li>
@@ -112,7 +113,8 @@
                         </button>
 
                         <a href="{{ route('index') }}" class="logo">
-                            <img src="{{ asset('assets/images/logo.png') }}" alt="Molla Logo" width="105" height="25">
+                            <img src="{{ asset('assets/images/logo.png') }}" alt="Molla Logo" width="105"
+                                height="25">
                         </a>
 
                         <nav class="main-nav">
@@ -139,8 +141,8 @@
                             <form action="#" method="get">
                                 <div class="header-search-wrapper">
                                     <label for="q" class="sr-only">Search</label>
-                                    <input type="search" class="form-control" name="q" id="q" placeholder="Search in..."
-                                        required>
+                                    <input type="search" class="form-control" name="q" id="q"
+                                        placeholder="Search in..." required>
                                 </div><!-- End .header-search-wrapper -->
                             </form>
                         </div><!-- End .header-search -->
@@ -156,26 +158,33 @@
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-cart-products">
                                     @foreach ($cart->list() as $item)
-                                    <div class="product">
-                                        <div class="product-cart-details">
-                                            <h4 class="product-title">
-                                                <a href="{{ url('product/' . $item['product_id']) }}">{{ $item['product_name'] }}</a>
-                                            </h4>
+                                        <div class="product">
+                                            <div class="product-cart-details">
+                                                <h4 class="product-title">
+                                                    <a
+                                                        href="{{ url('product/' . $item['product_id']) }}">{{ $item['product_name'] }}</a>
+                                                </h4>
 
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty">{{ $item['qty'] }}</span>
-                                                x {{ number_format($item['product_price']) }}
-                                            </span>
-                                        </div><!-- End .product-cart-details -->
+                                                <span class="cart-product-info">
+                                                    <span class="cart-product-qty">{{ $item['qty'] }}</span>
+                                                    x {{ number_format($item['product_price']) }}
+                                                </span>
+                                            </div><!-- End .product-cart-details -->
 
-                                        <figure class="product-image-container">
-                                            <a href="{{ url('product/' . $item['product_id']) }}" class="product-image">
-                                            <img src="{{ asset('storage/images/products/' . $item['product_image']) }}" alt="product">
-                                            </a>
-                                        </figure>
-                                        <a href="#" class="btn-remove" title="Remove Product"><i
-                                                class="icon-close"></i></a>
-                                    </div><!-- End .product -->                                        
+                                            <figure class="product-image-container">
+                                                <a href="{{ url('product/' . $item['product_id']) }}"
+                                                    class="product-image">
+                                                    <img src="{{ asset('storage/images/products/' . $item['product_image']) }}"
+                                                        alt="product">
+                                                </a>
+                                            </figure>
+                                            <form action="{{ route('cart.delete') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="product_id" value="{{ $item['product_id'] }}">
+                                                <button class="btn-remove" title="Remove Product" type="submit"><i
+                                                        class="icon-close"></i></button>
+                                            </form>
+                                        </div><!-- End .product -->
                                     @endforeach
                                 </div><!-- End .cart-product -->
 

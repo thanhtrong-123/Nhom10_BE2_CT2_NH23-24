@@ -26,7 +26,8 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer("*", function($view) {
             $view->with([
-                'cart' => new Cart()
+                'cart' => new Cart(),
+                'wishlist' => new Wishlist
             ]);
         });
     }

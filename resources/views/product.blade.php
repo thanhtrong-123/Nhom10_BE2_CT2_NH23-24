@@ -78,8 +78,9 @@
                                 <div class="details-filter-row details-row-size">
                                     <label for="qty">Qty:</label>
                                     <div class="product-details-quantity">
-                                        <input type="number" id="qty" name="qty" class="form-control" value="1"
-                                            min="1" max="10" step="1" data-decimals="0" required>
+                                        <input type="number" id="qty" name="qty" class="form-control"
+                                            value="1" min="1" max="10" step="1" data-decimals="0"
+                                            required>
                                     </div><!-- End .product-details-quantity -->
                                 </div><!-- End .details-filter-row -->
 
@@ -87,7 +88,7 @@
                                     <button type="submit" class="btn-product btn-cart"><span>add to cart</span></button>
 
                                     <div class="details-action-wrapper">
-                                        <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to
+                                        <a href="{{ url('add-wishlist/' . $product->product_id) }}" class="btn-product btn-wishlist" title="Wishlist"><span>Add to
                                                 Wishlist</span></a>
                                     </div><!-- End .details-action-wrapper -->
                                 </div><!-- End .product-details-action -->
@@ -295,13 +296,17 @@
                             </a>
 
                             <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
+                                <a href="{{ url('add-wishlist/' . $value->product_id) }}" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
                                         wishlist</span></a>
                             </div><!-- End .product-action-vertical -->
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
+                            <form action="{{ route('cart.add') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $value->product_id }}">
+                                <input type="hidden" name="qty" value="1">
+                                <div class="product-action">
+                                    <button class="btn-product btn-cart" type="submit"><span>add to cart</span></button>
+                                </div><!-- End .product-action -->
+                            </form>
                         </figure><!-- End .product-media -->
 
                         <div class="product-body">
