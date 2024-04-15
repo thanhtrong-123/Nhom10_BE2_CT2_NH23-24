@@ -17,126 +17,126 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // Data of admins
-        DB::table('admins')->insert([
-            'admin_email' => 'admin',
-            'admin_password' => md5('123123'),
-            'admin_name' => 'admin',
-            'admin_phone' => '0123456789',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // DB::table('admins')->insert([
+        //     'admin_email' => 'admin',
+        //     'admin_password' => md5('123123'),
+        //     'admin_name' => 'admin',
+        //     'admin_phone' => '0123456789',
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
 
-        // Data of brands
-        // 1
-        DB::table('brands')->insert([
-            'brand_name' => 'GODSON',
-            'brand_slug' => 'godson',
-            'brand_image' => 'profile/brand01.png',
-            'brand_desc' => 'Được biết đến là một thương hiệu trẻ mới ra mắt thị trường cách đây không lâu. Nhưng Godson đã được rất nhiều bạn trẻ ưa thích và lựa chọn bởi những sản phẩm vô cùng đặc biệt, mang những dấu ấn riêng. Mỗi sản phẩm mà Godson tung ra thị trường thường rất chỉnh chu trong thiết kế cho đến chất lượng sản phẩm. Được làm từ chất vải cotton 100% nhằm tạo đến cho người mặc sự thoải mái. Về hình ảnh được in nơi áo, Godson đã có sự kết hợp giữa Screen Printing và DTG Printing. Hai chất liệu in này khi kết hợp sẽ mang tới sự bền bỉ, tạo nên những hình ảnh sắc nét dành cho sản phẩm. Godson đã có sự đầu tư tìm hiểu rất kỹ lưỡng cho từng sản phẩm trước khi cho ra mắt, đó chính là điều khiến thương hiệu này có thể thu hút được lượng lớn khách hàng, mặc dù chỉ mới ra mắt cách đây không lâu.',
-            'brand_status' => 0,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // // Data of brands
+        // // 1
+        // DB::table('brands')->insert([
+        //     'brand_name' => 'GODSON',
+        //     'brand_slug' => 'godson',
+        //     'brand_image' => 'profile/brand01.png',
+        //     'brand_desc' => 'Được biết đến là một thương hiệu trẻ mới ra mắt thị trường cách đây không lâu. Nhưng Godson đã được rất nhiều bạn trẻ ưa thích và lựa chọn bởi những sản phẩm vô cùng đặc biệt, mang những dấu ấn riêng. Mỗi sản phẩm mà Godson tung ra thị trường thường rất chỉnh chu trong thiết kế cho đến chất lượng sản phẩm. Được làm từ chất vải cotton 100% nhằm tạo đến cho người mặc sự thoải mái. Về hình ảnh được in nơi áo, Godson đã có sự kết hợp giữa Screen Printing và DTG Printing. Hai chất liệu in này khi kết hợp sẽ mang tới sự bền bỉ, tạo nên những hình ảnh sắc nét dành cho sản phẩm. Godson đã có sự đầu tư tìm hiểu rất kỹ lưỡng cho từng sản phẩm trước khi cho ra mắt, đó chính là điều khiến thương hiệu này có thể thu hút được lượng lớn khách hàng, mặc dù chỉ mới ra mắt cách đây không lâu.',
+        //     'brand_status' => 0,
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
 
-        // 2
-        DB::table('brands')->insert([
-            'brand_name' => 'COOLMATE',
-            'brand_slug' => 'coolmate',
-            'brand_image' => 'profile/brand02.png',
-            'brand_desc' => 'Một tên thương hiệu được nhiều bạn trẻ ưa chuộng hiện nay đó là Coolmate. Nghe cái tên chúng ta cũng đã có thể thấy được dấu ấn phong cách nổi bật của thương hiệu này. Coolmate với sự kết hợp giữa "Cool" và "Mate". Với ý nghĩa muốn mang đến cho khách hàng một vẻ ngoài vừa “cool” ngầu vừa mới mẻ, năng động. Hơn nữa, giữa người bán và người mua sẽ có sự đồng hành- “mate” với nhau để cùng phát triển.',
-            'brand_status' => 0,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // // 2
+        // DB::table('brands')->insert([
+        //     'brand_name' => 'COOLMATE',
+        //     'brand_slug' => 'coolmate',
+        //     'brand_image' => 'profile/brand02.png',
+        //     'brand_desc' => 'Một tên thương hiệu được nhiều bạn trẻ ưa chuộng hiện nay đó là Coolmate. Nghe cái tên chúng ta cũng đã có thể thấy được dấu ấn phong cách nổi bật của thương hiệu này. Coolmate với sự kết hợp giữa "Cool" và "Mate". Với ý nghĩa muốn mang đến cho khách hàng một vẻ ngoài vừa “cool” ngầu vừa mới mẻ, năng động. Hơn nữa, giữa người bán và người mua sẽ có sự đồng hành- “mate” với nhau để cùng phát triển.',
+        //     'brand_status' => 0,
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
 
-        // 3
-        DB::table('brands')->insert([
-            'brand_name' => 'CLOWNZ',
-            'brand_slug' => 'clownz',
-            'brand_image' => 'profile/brand03.png',
-            'brand_desc' => 'Nếu như những thương hiệu trên đều mang một style riêng biệt thì ClownZ lại là nơi mà các tính đồ streetwear Hà Thành có thể tìm thấy tất cả những gì mình cần.Từ Baseball Jacket, Tee, Jogger Pants cho đến sneakers trong bức ảnh này đều có thể tìm thấy ở ClownZ.',
-            'brand_status' => 0,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // // 3
+        // DB::table('brands')->insert([
+        //     'brand_name' => 'CLOWNZ',
+        //     'brand_slug' => 'clownz',
+        //     'brand_image' => 'profile/brand03.png',
+        //     'brand_desc' => 'Nếu như những thương hiệu trên đều mang một style riêng biệt thì ClownZ lại là nơi mà các tính đồ streetwear Hà Thành có thể tìm thấy tất cả những gì mình cần.Từ Baseball Jacket, Tee, Jogger Pants cho đến sneakers trong bức ảnh này đều có thể tìm thấy ở ClownZ.',
+        //     'brand_status' => 0,
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
 
-        // 4
-        DB::table('brands')->insert([
-            'brand_name' => 'BOBUI',
-            'brand_slug' => 'bobui',
-            'brand_image' => 'profile/brand04.png',
-            'brand_desc' => 'BOBUI là một thương hiệu quần áo đường phố được thành lập tại Sài Gòn, Việt Nam vào năm 2014 bởi Nguyễn Thanh Dũng. Không chỉ là thương hiệu thời trang đường phố BOBUI vừa là nhà sản xuất quần áo tại Sài Gòn. Các thiết kế lấy cảm hứng từ thời trang của các nền văn hóa Hip Hop, Rock mang đậm hơi thở thời trang đường phố. Brand đa dạng về mẫu mã qua các items như: Tee, Shirt, Jacket, Pant, Accessories,…Với mong muốn mang đến cái nhìn tích cực hơn về chất lượng thời trang trong nước BOBUI không ngừng đổi mới và hoàn thiện mình từng ngày.',
-            'brand_status' => 0,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // // 4
+        // DB::table('brands')->insert([
+        //     'brand_name' => 'BOBUI',
+        //     'brand_slug' => 'bobui',
+        //     'brand_image' => 'profile/brand04.png',
+        //     'brand_desc' => 'BOBUI là một thương hiệu quần áo đường phố được thành lập tại Sài Gòn, Việt Nam vào năm 2014 bởi Nguyễn Thanh Dũng. Không chỉ là thương hiệu thời trang đường phố BOBUI vừa là nhà sản xuất quần áo tại Sài Gòn. Các thiết kế lấy cảm hứng từ thời trang của các nền văn hóa Hip Hop, Rock mang đậm hơi thở thời trang đường phố. Brand đa dạng về mẫu mã qua các items như: Tee, Shirt, Jacket, Pant, Accessories,…Với mong muốn mang đến cái nhìn tích cực hơn về chất lượng thời trang trong nước BOBUI không ngừng đổi mới và hoàn thiện mình từng ngày.',
+        //     'brand_status' => 0,
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
 
-        // 5
-        DB::table('brands')->insert([
-            'brand_name' => 'DEGREY',
-            'brand_slug' => 'degrey',
-            'brand_image' => 'profile/brand05.png',
-            'brand_desc' => 'Degrey là một local brand giá rẻ được thành lập từ năm 2016 cho đến nay đã phát triển và được giới trẻ săn đón không chỉ bởi giá thành mà còn ở chất lượng sản phẩm.',
-            'brand_status' => 0,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // // 5
+        // DB::table('brands')->insert([
+        //     'brand_name' => 'DEGREY',
+        //     'brand_slug' => 'degrey',
+        //     'brand_image' => 'profile/brand05.png',
+        //     'brand_desc' => 'Degrey là một local brand giá rẻ được thành lập từ năm 2016 cho đến nay đã phát triển và được giới trẻ săn đón không chỉ bởi giá thành mà còn ở chất lượng sản phẩm.',
+        //     'brand_status' => 0,
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
 
-        // Data of categories
-        // 1
-        DB::table('categories')->insert([
-            'category_name' => 'T-Shirt',
-            'category_slug' => 't-shirt',
-            'category_desc' => 'Áo thun, hay áo phông thường được dệt theo nốt jersey và bằng sợi cotton, đôi khi bằng chất liệu khác, tạo sự mềm mại đặc trưng. Áo thun có thể được trang trí bằng chữ và/hoặc hình ảnh thường dùng để quảng bá điều gì đó hoặc quảng cáo sản phẩm, công ty hoặc trang web.',
-            'category_keywords' => '#t-shirt',
-            'category_status' => 0,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // // Data of categories
+        // // 1
+        // DB::table('categories')->insert([
+        //     'category_name' => 'T-Shirt',
+        //     'category_slug' => 't-shirt',
+        //     'category_desc' => 'Áo thun, hay áo phông thường được dệt theo nốt jersey và bằng sợi cotton, đôi khi bằng chất liệu khác, tạo sự mềm mại đặc trưng. Áo thun có thể được trang trí bằng chữ và/hoặc hình ảnh thường dùng để quảng bá điều gì đó hoặc quảng cáo sản phẩm, công ty hoặc trang web.',
+        //     'category_keywords' => '#t-shirt',
+        //     'category_status' => 0,
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
 
-        // 2
-        DB::table('categories')->insert([
-            'category_name' => 'Shorts',
-            'category_slug' => 'shorts',
-            'category_desc' => 'Quần short là kiểu quần có chiều dài khoảng 5-7cm đến phía trên đầu gối, với thiết kế tương tự như quần thông thường, chỉ khác biệt chủ yếu ở độ dài. Việc lựa chọn chất liệu cho quần short rất đa dạng, từ kaki, thun, cotton đến lanh, đũi, tùy thuộc vào nhu cầu và mục đích sử dụng của mỗi người.',
-            'category_keywords' => '#shorts',
-            'category_status' => 0,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // // 2
+        // DB::table('categories')->insert([
+        //     'category_name' => 'Shorts',
+        //     'category_slug' => 'shorts',
+        //     'category_desc' => 'Quần short là kiểu quần có chiều dài khoảng 5-7cm đến phía trên đầu gối, với thiết kế tương tự như quần thông thường, chỉ khác biệt chủ yếu ở độ dài. Việc lựa chọn chất liệu cho quần short rất đa dạng, từ kaki, thun, cotton đến lanh, đũi, tùy thuộc vào nhu cầu và mục đích sử dụng của mỗi người.',
+        //     'category_keywords' => '#shorts',
+        //     'category_status' => 0,
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
 
-        // 3
-        DB::table('categories')->insert([
-            'category_name' => 'Hoodie',
-            'category_slug' => 'hoodie',
-            'category_desc' => 'Áo hoodie là một loại áo nỉ có mũ trùm đầu che một phần hoặc toàn bộ đầu hoặc mặt của người mặc. Áo hoodie có khóa kéo thường có hai túi ở mặt trước phía dưới, một túi ở hai bên dây kéo, trong khi áo hoodie "áo thun" thường có một túi hoặc một túi bịt lớn duy nhất ở cùng một vị trí.',
-            'category_keywords' => '#hoodie',
-            'category_status' => 0,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // // 3
+        // DB::table('categories')->insert([
+        //     'category_name' => 'Hoodie',
+        //     'category_slug' => 'hoodie',
+        //     'category_desc' => 'Áo hoodie là một loại áo nỉ có mũ trùm đầu che một phần hoặc toàn bộ đầu hoặc mặt của người mặc. Áo hoodie có khóa kéo thường có hai túi ở mặt trước phía dưới, một túi ở hai bên dây kéo, trong khi áo hoodie "áo thun" thường có một túi hoặc một túi bịt lớn duy nhất ở cùng một vị trí.',
+        //     'category_keywords' => '#hoodie',
+        //     'category_status' => 0,
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
 
-        // 4
-        DB::table('categories')->insert([
-            'category_name' => 'Jacket',
-            'category_slug' => 'jacket',
-            'category_desc' => 'Áo khoác là loại trang phục dành cho phần thân trên, thường kéo dài đến dưới hông. Áo khoác thường có tay áo và buộc chặt ở phía trước hoặc hơi lệch sang một bên. Áo khoác thường nhẹ hơn, bó sát hơn và ít cách nhiệt hơn áo khoác ngoài. Một số áo khoác là thời trang, trong khi một số khác dùng làm quần áo bảo hộ.',
-            'category_keywords' => '#jacket',
-            'category_status' => 0,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // // 4
+        // DB::table('categories')->insert([
+        //     'category_name' => 'Jacket',
+        //     'category_slug' => 'jacket',
+        //     'category_desc' => 'Áo khoác là loại trang phục dành cho phần thân trên, thường kéo dài đến dưới hông. Áo khoác thường có tay áo và buộc chặt ở phía trước hoặc hơi lệch sang một bên. Áo khoác thường nhẹ hơn, bó sát hơn và ít cách nhiệt hơn áo khoác ngoài. Một số áo khoác là thời trang, trong khi một số khác dùng làm quần áo bảo hộ.',
+        //     'category_keywords' => '#jacket',
+        //     'category_status' => 0,
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
 
-        // 5
-        DB::table('categories')->insert([
-            'category_name' => 'Pants',
-            'category_slug' => 'pants',
-            'category_desc' => 'Quần là một loại trang phục che phần thân dưới của con người. Quần có nhiều kiểu dáng và chất liệu khác nhau, được sử dụng cho nhiều mục đích và trong nhiều hoàn cảnh khác nhau.',
-            'category_keywords' => '#pants',
-            'category_status' => 0,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // // 5
+        // DB::table('categories')->insert([
+        //     'category_name' => 'Pants',
+        //     'category_slug' => 'pants',
+        //     'category_desc' => 'Quần là một loại trang phục che phần thân dưới của con người. Quần có nhiều kiểu dáng và chất liệu khác nhau, được sử dụng cho nhiều mục đích và trong nhiều hoàn cảnh khác nhau.',
+        //     'category_keywords' => '#pants',
+        //     'category_status' => 0,
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
 
         // Data of products
         // 1
