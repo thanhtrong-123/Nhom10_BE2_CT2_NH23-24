@@ -59,10 +59,12 @@
                                 <td>{{ $value->customer_password }}</td>
                                 <td>{{ $value->customer_phone }}</td>
                                 <td>
-                                    <a href="{{ URL::to('customer/' . $value->customer_id . '/edit') }}"
-                                        class="active styling-edit" ui-toggle-class="">
-                                        <i class="fa fa-pencil-square-o text-success text-active"></i>
-                                    </a>
+                                    <div class="edit" style="border: 1px solid #000;  text-align: center; border-radius: 2px; margin-bottom:5px">
+                                        <a style="pading: 10px;" href="{{ URL::to('customer/' . $value->customer_id . '/edit') }}"
+                                            class="active styling-edit" ui-toggle-class="">
+                                            <i class="fa fa-pencil-square-o text-success text-active"></i>
+                                        </a>
+                                    </div>
 
                                     <form action="{{ URL::to('customer/' . $value->customer_id) }}" method="post">
                                         {{ csrf_field() }}

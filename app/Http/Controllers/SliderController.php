@@ -94,12 +94,7 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Edit slider
-        $data = Slider::find($id);
-        ($data->slider_status == 0) ? $data->slider_status = 1 : $data->slider_status = 0;
-        $data->save();
-        Session::put('message','Cập nhật sider thành công');
-        return Redirect::to('slider');
+        // 
     }
 
     /**
@@ -116,6 +111,23 @@ class SliderController extends Controller
         // Delete slider
         Slider::destroy($id);
         Session::put('message','Xóa slider thành công');
+        return Redirect::to('slider');
+    }
+
+    public function unactive_slider($slider_id){
+        //$this->AuthLogin();
+        $data = new Slider;
+        $data->where('slider_id', $slider_id)->update(['slider_status' => 1]);
+        Session::put('message','Không hiển thị banner thành công');
+        return Redirect::to('slider');
+
+    }
+
+    public function active_slider($slider_id){
+        //$this->AuthLogin();
+        $data = new Slider;
+        $data->where('slider_id', $slider_id)->update(['slider_status' => 0]);
+        Session::put('message','Hiển thị banner thành công');
         return Redirect::to('slider');
     }
 }

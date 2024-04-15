@@ -59,16 +59,24 @@
             <td>{{ $slider->slider_desc }}</td>
             <td><span class="text-ellipsis">
 
-              <form action="{{ URL::to('slider/' . $slider->slider_id) }}" method="post">
-                {{ csrf_field() }}
-                {{ method_field('put') }}
-                <button type="submit"><span class="fa-thumb-styling fa {{ ($slider->slider_status == 0) ? 'fa-thumbs-up' : 'fa-thumbs-down' }}"></button>
-              </form>
+              <?php
+              if ($slider->slider_status == 0) {
+              ?>
+              <a href="{{ url('unactive-slider/' . $slider->slider_id) }}"><span
+                      class="fa-thumb-styling fa fa-thumbs-up"></span></a>
+              <?php
+              } else {
+              ?>
+              <a href="{{ url('active-slider/' . $slider->slider_id) }}"><span
+                      class="fa-thumb-styling fa fa-thumbs-down"></span></a>
+              <?php
+              }
+              ?>
               
             </span></td>
             <td>
              
-              <form action="{{ URL::to('slider/' . $slider->slider_id) }}" method="post">
+              <form action="{{ url('slider/' . $slider->slider_id) }}" method="post">
                 {{ csrf_field() }}
                 {{ method_field('delete') }}
                 <button type="submit" class="active styling-edit"

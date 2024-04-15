@@ -80,6 +80,8 @@ Route::resource('customer', CustomerController::class);
 
 // Sliders
 Route::resource('slider', SliderController::class);
+Route::get('/unactive-slider/{slider_id}',[SliderController::class, 'unactive_slider']);
+Route::get('/active-slider/{slider_id}',[SliderController::class, 'active_slider']);
 
 // Products
 Route::resource('products', ProductController::class);
