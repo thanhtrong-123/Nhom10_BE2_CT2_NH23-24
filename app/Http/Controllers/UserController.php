@@ -29,7 +29,6 @@ class UserController extends Controller
     }
     public function logoutuser()
     {
-
         Session::put('customer_name', null);
         Session::put('customer_id', null);
         return Redirect::to('/');
