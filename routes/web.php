@@ -91,4 +91,5 @@ Route::get('/active-product/{product_id}',[ProductController::class, 'active_pro
 //Order_detail
 Route::resource('order-detail', OrderDetailController::class);
 
-
+//test view order
+Route::get('order', [CategoryController::class, 'order']);
