@@ -18,6 +18,7 @@ class SliderController extends Controller
     public function index()
     {
         // Show all sliders
+        $this->AuthLogin();
         return view('admin.slider.list_slider', ['data' => Slider::all()]);
     }
 
@@ -29,6 +30,7 @@ class SliderController extends Controller
     public function create()
     {
         // Create slider
+        $this->AuthLogin();
         return view('admin.slider.add_slider');
     }
 
@@ -40,6 +42,7 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
+        $this->AuthLogin();
         $data = new Slider;
         $data->slider_name = $request->slider_name;
         $data->slider_desc = $request->slider_desc;
@@ -105,6 +108,7 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
+        $this->AuthLogin();
         $data = Slider::find($id);
         // Xóa image cua slider
         Storage::delete('public/images/banners/' . $data->slider_image);
@@ -115,7 +119,7 @@ class SliderController extends Controller
     }
 
     public function unactive_slider($slider_id){
-        //$this->AuthLogin();
+        $this->AuthLogin();
         $data = new Slider;
         $data->where('slider_id', $slider_id)->update(['slider_status' => 1]);
         Session::put('message','Không hiển thị banner thành công');
@@ -124,10 +128,18 @@ class SliderController extends Controller
     }
 
     public function active_slider($slider_id){
-        //$this->AuthLogin();
+        $this->AuthLogin();
         $data = new Slider;
         $data->where('slider_id', $slider_id)->update(['slider_status' => 0]);
         Session::put('message','Hiển thị banner thành công');
         return Redirect::to('slider');
+    }
+    public function AuthLogin(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('dashboard');
+        }else{
+            return Redirect::to('admin')->send();
+        }
     }
 }

@@ -17,7 +17,8 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        return view('admin.all_category_product', ['data' => Category::all()]);
+        $this->AuthLogin();
+        return view('admin.category.all_category_product', ['data' => Category::all()]);
         
     }
 
@@ -29,7 +30,8 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return  view('admin.add_category_product');
+        $this->AuthLogin();
+        return  view('admin.category.add_category_product');
     }
 
     /**
@@ -41,6 +43,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $this->AuthLogin();
         $data = new Category;
         $data->category_name = $request->category_product_name;
         $data->category_slug = $request->slug_category_product;
@@ -72,7 +75,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
         //
-        return view('admin.edit_category_product', ['data' => Category::find($id)]);
+        $this->AuthLogin();
+        return view('admin.category.edit_category_product', ['data' => Category::find($id)]);
     }
 
     /**
@@ -84,6 +88,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->AuthLogin();
         $data = Category::find($id);
         $data->category_name = $request->category_product_name;
         $data->category_slug = $request->slug_category_product;
@@ -102,12 +107,13 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $this->AuthLogin();
         Category::destroy($id);
         Session::put('message','Xóa danh mục sản phẩm thành công');
         return Redirect::to('categoryProduct');
     }
     public function unactive_category_product($category_product_id){
-        //$this->AuthLogin();
+        $this->AuthLogin();
         $data = new Category;
         $data->where('category_id',$category_product_id)->update(['category_status'=>1]);
         Session::put('message','Không hiển thị danh mục sản phẩm thành công!');
@@ -115,10 +121,21 @@ class CategoryController extends Controller
 
     }
     public function active_category_product($category_product_id){
-        //$this->AuthLogin();
+        $this->AuthLogin();
         $data = new Category;
         $data->where('category_id',$category_product_id)->update(['category_status'=>0]);
         Session::put('message','Hiển thị danh mục sản phẩm thành công!');
         return Redirect::to('categoryProduct');
+    }
+    public function AuthLogin(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('dashboard');
+        }else{
+            return Redirect::to('admin')->send();
+        }
+    }
+    public function order(){
+        return view('admin.view_order');
     }
 }

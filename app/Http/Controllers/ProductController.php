@@ -24,7 +24,7 @@ class ProductController extends Controller
     {
         //phân trang
         // $data = Product::with('category', 'brand')->paginate(5); // Lấy 10 sản phẩm mỗi trang
-        
+        $this->AuthLogin();
         return view('admin.products.all_product', ['data' => Product::all()]);
     }
 
@@ -36,12 +36,11 @@ class ProductController extends Controller
     public function create()
     {
         //
+        $this->AuthLogin();
         $cate_product = DB::table('categories')->orderby('category_id', 'desc')->get();
         $brand_product = DB::table('brands')->orderby('brand_id', 'desc')->get();
         return view('admin.products.add_product')->with('cate_product', $cate_product)->with('brand_product', $brand_product);
-
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -50,7 +49,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->AuthLogin();
         $data = new Product;
 
         $data->product_name = $request->product_name;
@@ -104,6 +103,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         //
+        $this->AuthLogin();
         $cate_product = DB::table('categories')->orderby('category_id', 'desc')->get();
         $brand_product = DB::table('brands')->orderby('brand_id', 'desc')->get();
         return view('admin.products.edit_product', ['data' => Product::find($id), 'cate_product' => $cate_product, 'brand_product' => $brand_product]);
@@ -119,6 +119,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->AuthLogin();
         $data = Product::find($id);
         $data->product_name = $request->product_name;
         $data->product_qty = $request->product_quantity;
@@ -159,7 +160,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->AuthLogin();
         $data = Product::find($id);
         // Xóa image cua product
         Storage::delete('public/images/products/' . $data->product_image);
@@ -170,7 +171,7 @@ class ProductController extends Controller
 
     }
     public function unactive_product($product_id){
-        //$this->AuthLogin();
+        $this->AuthLogin();
         $data = new Product;
         $data->where('product_id',$product_id)->update(['product_status'=>1]);
         Session::put('message','Hiển thị sản phẩm không thành công!');
@@ -178,10 +179,18 @@ class ProductController extends Controller
 
     }
     public function active_product($product_id){
-        //$this->AuthLogin();
+        $this->AuthLogin();
         $data = new Product;
         $data->where('product_id',$product_id)->update(['product_status'=>0]);
         Session::put('message','Hiển thị sản phẩm thành công!');
         return Redirect::to('products');
+    }
+    public function AuthLogin(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('dashboard');
+        }else{
+            return Redirect::to('admin')->send();
+        }
     }
 }
