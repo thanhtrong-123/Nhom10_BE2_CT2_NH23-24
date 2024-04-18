@@ -135,17 +135,19 @@
                     </div><!-- End .header-left -->
 
                     <div class="header-right">
-                        <div class="header-search">
-                            <a href="#" class="search-toggle" role="button" title="Search"><i
-                                    class="icon-search"></i></a>
-                            <form action="#" method="get">
+                        <form action="{{ route('search') }}" method="get">
+                            @csrf
+                            <div class="header-search">
+                                <a href="#" class="search-toggle" role="button" title="Search"><i
+                                        class="icon-search"></i></a>
                                 <div class="header-search-wrapper">
                                     <label for="q" class="sr-only">Search</label>
                                     <input type="search" class="form-control" name="q" id="q"
                                         placeholder="Search in..." required>
+                                    <button type="submit" style="width: 50px; border-bottom-right-radius: 15px; border-top-right-radius: 15px; z-index: -11; background-color: blue"></button>
                                 </div><!-- End .header-search-wrapper -->
-                            </form>
-                        </div><!-- End .header-search -->
+                            </div><!-- End .header-search -->
+                        </form>
 
 
                         <div class="dropdown cart-dropdown">
@@ -180,7 +182,8 @@
                                             </figure>
                                             <form action="{{ route('cart.delete') }}" method="post">
                                                 @csrf
-                                                <input type="hidden" name="product_id" value="{{ $item['product_id'] }}">
+                                                <input type="hidden" name="product_id"
+                                                    value="{{ $item['product_id'] }}">
                                                 <button class="btn-remove" title="Remove Product" type="submit"><i
                                                         class="icon-close"></i></button>
                                             </form>

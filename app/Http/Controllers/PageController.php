@@ -86,4 +86,19 @@ class PageController extends Controller
     {
         return view('blog');
     }
+
+    public function search()
+    {
+        $categories = Category::where('category_status', 0)->get();
+        foreach ($categories as $key => $category) {
+            $categories[$key]['total_product'] = Product::where([
+                ['category_id', $category->category_id],
+                ['product_status', 0]
+            ])->count();
+        }
+        $brands = Brand::where('brand_status', 0)->get();
+        // $products = Product::where('product_status', 0)->get();
+        $products = Product::where('product_status', 0)->paginate(6);
+        return view('search')->with('categories', $categories)->with('brands', $brands)->with('products', $products);
+    }
 }
