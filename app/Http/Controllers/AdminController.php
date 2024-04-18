@@ -17,11 +17,13 @@ class AdminController extends Controller
 
     public function show_dashboard()
     {
+        $this->AuthLogin();
         return view('admin.dashboard');
     }
 
     public function dashboard(Request $request)
     {   
+        $this->AuthLogin();
         $admin_email = $request -> admin_email;
         $admin_password = md5($request -> admin_password);
         $result = DB::table('admins')->where('admin_email',$admin_email)->where('admin_password',$admin_password)->first();
@@ -36,12 +38,17 @@ class AdminController extends Controller
     }
     public function logout()
     {
+        $this->AuthLogin();
         Session::put('admin_name',null);
         Session::put('admin_id', null);
         return Redirect::to('/admin');
     }
-    public function add_product()
-    {
-        return view('admin.add_product');
+    public function AuthLogin(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('dashboard');
+        }else{
+            return Redirect::to('admin')->send();
+        }
     }
 }

@@ -17,7 +17,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $this->AuthLogin();
         return view('admin.brand.all_brand_product', ['data' => Brand::all()]);
         
     }
@@ -29,7 +29,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        $this->AuthLogin();
         return  view('admin.brand.add_brand_product');
     }
 
@@ -41,7 +41,7 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->AuthLogin();
         $data = new Brand;
         $data->brand_name = $request->brand_product_name;
         $data->brand_slug = $request->slug_brand_product;
@@ -87,7 +87,7 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->AuthLogin();
         return view('admin.brand.edit_brand_product', ['data' => Brand::find($id)]);
     }
 
@@ -100,7 +100,7 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->AuthLogin();
         $data = Brand::find($id);
         $data->brand_name = $request->brand_product_name;
         $data->brand_slug = $request->slug_brand_product;
@@ -137,7 +137,7 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->AuthLogin();
         $data = Brand::find($id);
         // Xóa image cua brand
         Storage::delete('public/images/brands/' . $data->brand_image);
@@ -148,7 +148,7 @@ class BrandController extends Controller
     }
 
     public function unactive_brand_product($brand_product_id){
-        //$this->AuthLogin();
+        $this->AuthLogin();
         $data = new Brand;
         $data->where('brand_id',$brand_product_id)->update(['brand_status'=>1]);
         Session::put('message','Không hiển thị thương hiệu sản phẩm thành công');
@@ -157,10 +157,18 @@ class BrandController extends Controller
     }
 
     public function active_brand_product($brand_product_id){
-        //$this->AuthLogin();
+        $this->AuthLogin();
         $data = new Brand;
         $data->where('brand_id',$brand_product_id)->update(['brand_status'=>0]);
         Session::put('message','Hiển thị thương hiệu sản phẩm thành công');
         return Redirect::to('brandProduct');
+    }
+    public function AuthLogin(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('dashboard');
+        }else{
+            return Redirect::to('admin')->send();
+        }
     }
 }

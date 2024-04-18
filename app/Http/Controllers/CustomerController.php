@@ -17,6 +17,7 @@ class CustomerController extends Controller
     public function index()
     {
         // Show all customers
+        $this->AuthLogin();
         return view('admin.users.all_users', ['data' => Customer::all()]);
     }
 
@@ -28,6 +29,7 @@ class CustomerController extends Controller
     public function create()
     {
         // Create customer
+        $this->AuthLogin();
         return view('admin.users.add_users');
     }
 
@@ -39,6 +41,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        $this->AuthLogin();
         $data = new Customer;
         $data->customer_name = $request->customer_name;
         $data->customer_email = $request->customer_email;
@@ -68,6 +71,7 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
+        $this->AuthLogin();
         return view('admin.users.edit_users', ['data' => Customer::find($id)]);
     }
 
@@ -81,6 +85,7 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         // Edit customer
+        $this->AuthLogin();
         $data = Customer::find($id);
         $data->customer_name = $request->customer_name;
         $data->customer_email = $request->customer_email;
@@ -100,8 +105,17 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         // Delete user
+        $this->AuthLogin();
         Customer::destroy($id);
         Session::put('message','Xóa user thành công');
         return Redirect::to('customer');
+    }
+    public function AuthLogin(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('dashboard');
+        }else{
+            return Redirect::to('admin')->send();
+        }
     }
 }

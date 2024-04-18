@@ -33,7 +33,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
     <link href="{{ asset('backend/css/font-awesome.css') }}" rel="stylesheet">
-
 </head>
 
 <body>
