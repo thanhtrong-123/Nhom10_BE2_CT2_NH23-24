@@ -144,7 +144,7 @@
                                     <label for="q" class="sr-only">Search</label>
                                     <input type="search" class="form-control" name="q" id="q"
                                         placeholder="Search in..." required>
-                                    <button type="submit" style="width: 50px; border-bottom-right-radius: 15px; border-top-right-radius: 15px; z-index: -11; background-color: blue"></button>
+                                    <button type="submit" style="border-bottom-right-radius: 20px; border-top-right-radius: 20px;"></button>
                                 </div><!-- End .header-search-wrapper -->
                             </div><!-- End .header-search -->
                         </form>

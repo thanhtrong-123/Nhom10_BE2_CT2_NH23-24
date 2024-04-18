@@ -67,7 +67,6 @@ class PageController extends Controller
             ])->count();
         }
         $brands = Brand::where('brand_status', 0)->get();
-        // $products = Product::where('product_status', 0)->get();
         $products = Product::where('product_status', 0)->paginate(6);
         return view('store')->with('categories', $categories)->with('brands', $brands)->with('products', $products);
     }
@@ -87,18 +86,12 @@ class PageController extends Controller
         return view('blog');
     }
 
-    public function search()
+    public function search(Request $request)
     {
-        $categories = Category::where('category_status', 0)->get();
-        foreach ($categories as $key => $category) {
-            $categories[$key]['total_product'] = Product::where([
-                ['category_id', $category->category_id],
-                ['product_status', 0]
-            ])->count();
-        }
-        $brands = Brand::where('brand_status', 0)->get();
-        // $products = Product::where('product_status', 0)->get();
-        $products = Product::where('product_status', 0)->paginate(6);
-        return view('search')->with('categories', $categories)->with('brands', $brands)->with('products', $products);
+        $products = Product::where([
+            ['product_status', 0],
+            ['product_name', 'like', '%' . $request->q . '%'] 
+        ])->paginate(6)->withQueryString();
+        return view('search')->with('products', $products);
     }
 }
