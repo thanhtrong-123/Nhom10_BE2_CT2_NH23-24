@@ -12,9 +12,8 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderDetailController;
-
-
-
+use App\Http\Controllers\Order;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,3 +92,8 @@ Route::resource('order-detail', OrderDetailController::class);
 
 //test view order
 Route::get('order', [CategoryController::class, 'order']);
+
+//Order
+Route::resource('order', OrderController::class);
+Route::get('/unactive-order/{order_id}',[OrderController::class, 'unactive_order']);
+Route::get('/active-order/{order_id}',[OrderController::class, 'active_order']);
