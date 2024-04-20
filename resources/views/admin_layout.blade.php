@@ -31,7 +31,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link rel="stylesheet" href="{{asset('backend/css/font.css')}}" type="text/css" />
     <link href="{{asset('backend/css/font-awesome.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('backend/css/morris.css')}}" type="text/css" />
-
     <!-- calendar -->
     <link rel="stylesheet" href="{{asset('backend/css/monthly.css')}}">
     <!-- //calendar -->
@@ -112,7 +111,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <span>Đơn Hàng</span>
                             </a>
                             <ul class="sub">
-                                <li><a href="{{URL::to('')}}">Thêm đơn hàng</a></li>
+                                <li><a href="{{URL::to('/order/create')}}">Thêm đơn hàng</a></li>
                                 <li><a href="{{URL::to('/order')}}">Liệt kê đơn hàng</a></li>
                             </ul>
                         </li>

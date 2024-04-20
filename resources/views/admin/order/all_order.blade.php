@@ -42,10 +42,16 @@
                                 <input type="checkbox"><i></i>
                             </label>
                         </th>
-                        <th>Tổng đơn hàng</th>
-                        <th>Hiển thị</th>
-
+                        <th>Tên khách hàng</th>
+                        <th>Giá trị đơn hàng</th>
+                        <th>Tên người đặt hàng</th>
+                        <th>Địa chỉ người đặt hàng</th>
+                        <th>Số điện thoại đặt hàng</th>
+                        <th>Số lượng đơn hàng</th>
+                        <th>Thương hiệu</th>
+                        <th>Tình trạng đơn hàng</th>
                         <th style="width:30px;"></th>
+                        <th style="width:100px;">Chi tiết đơn hàng</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,17 +59,23 @@
                     <tr>
                         <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label>
                         </td>
+                        <td>{{ $order->customer_order }}</td>
+                        <td>{{ $order->payment_id }}</td>
+                        <td>{{ $order->order_name }}</td>
+                        <td>{{ $order->order_address }}</td>
+                        <td>{{ $order->order_phone }}</td>
                         <td>{{ $order->order_total }}</td>
+                        <td>{{ $order->order_status }}</td>
 
                         <td><span class="text-ellipsis">
                                 <?php
                                 if ($order->order_status == 0) {
                                 ?>
-                                    <a href="{{URL::to('/unactive-order/'.$value->order_id)}}"><span class="fa-thumb-styling fa fa-thumbs-up"></span></a>
+                                    <a href="{{URL::to('/unactive-order/'.$order->order_id)}}"><span class="fa-thumb-styling fa fa-thumbs-up"></span></a>
                                 <?php
                                 } else {
                                 ?>
-                                    <a href="{{URL::to('/active-order/'.$value->order_id)}}"><span class="fa-thumb-styling fa fa-thumbs-down"></span></a>
+                                    <a href="{{URL::to('/active-order/'.$order->order_id)}}"><span class="fa-thumb-styling fa fa-thumbs-down"></span></a>
                                 <?php
                                 }
                                 ?>
@@ -72,15 +84,20 @@
                         <td>
 
                         <td>
-                            <a href="{{ URL::to('products/' . $value->order_id . '/edit') }}" class="active styling-edit" ui-toggle-class="">
+                            <a href="{{ URL::to('order/' . $order->order_id . '/edit') }}" class="active styling-edit" ui-toggle-class="">
                                 <i class="fa fa-pencil-square-o text-success text-active"></i>
                             </a>
 
-                            <form action="{{ URL::to('products/' . $value->order_id) }}" method="post">
+                            <form action="{{ URL::to('order/' . $order->order_id) }}" method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('delete') }}
                                 <button type="submit" class="active styling-edit" onclick="return confirm('Bạn có chắc là muốn xóa sản phẩm này không?')"><i class="fa fa-times text-danger text"></i></button>
                             </form>
+                        </td>
+                        <td>
+                            <a href="{{ URL::to('order/' . $order->order_id . '/') }}" >
+                            Chi tiết
+                            </a>
                         </td>
                     </tr>
                     @endforeach
