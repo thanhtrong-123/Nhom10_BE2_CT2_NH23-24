@@ -16,8 +16,8 @@
                         <div class="panel-body">
 
                             <div class="position-center">
-                                <form role="form" action="{{URL::to('/insert-coupon-code')}}" method="post">
-                                    @csrf
+                                <form role="form" action="{{URL::to('couponCode')}}" method="post" enctype="multipart/form-data">
+                                {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tên mã giảm giá</label>
                                     <input type="text" name="coupon_name" class="form-control" id="exampleInputEmail1" >
@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Số lượng mã</label>
-                                    <input type="text" name="coupon_time" class="form-control" id="exampleInputEmail1">
+                                    <input type="text" name="coupon_quantity" class="form-control" id="exampleInputEmail1">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Tính năng mã</label>

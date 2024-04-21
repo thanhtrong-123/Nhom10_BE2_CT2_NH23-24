@@ -14,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\Order;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CouponController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,3 +99,6 @@ Route::get('order', [CategoryController::class, 'order']);
 Route::resource('order', OrderController::class);
 Route::get('/unactive-order/{order_id}',[OrderController::class, 'unactive_order']);
 Route::get('/active-order/{order_id}',[OrderController::class, 'active_order']);
+
+//Coupon
+Route::resource('couponCode', CouponController ::class);
