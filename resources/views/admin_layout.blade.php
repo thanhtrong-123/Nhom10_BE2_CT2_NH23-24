@@ -108,7 +108,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li class="sub-menu">
                             <a href="javascript:;">
                                 <i class="fa fa-book"></i>
-                                <span>Đơn Hàng</span>
+                                <span>Đơn Hàng</span>   
                             </a>
                             <ul class="sub">
                                 <li><a href="{{URL::to('/order/create')}}">Thêm đơn hàng</a></li>
@@ -116,15 +116,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </ul>
                         </li>
                         </li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-book"></i>
-                                <span>Chi tiết đơn hàng</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="{{URL::to('/manage-order')}}">Quản lý chi tiết đơn hàng</a></li>
-                            </ul>
-                        </li>
+                        
                         <li class="sub-menu">
                             <a href="javascript:;">
                                 <i class="fa fa-book"></i>
