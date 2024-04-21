@@ -14,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\Order;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\DeliveryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,3 +99,11 @@ Route::get('order', [CategoryController::class, 'order']);
 Route::resource('order', OrderController::class);
 Route::get('/unactive-order/{order_id}',[OrderController::class, 'unactive_order']);
 Route::get('/active-order/{order_id}',[OrderController::class, 'active_order']);
+
+//Delivery
+
+Route::get('/delivery', [DeliveryController::class, 'delivery']);
+Route::post('/select-delivery',[DeliveryController::class, 'select_delivery']);
+Route::post('/insert-delivery',[DeliveryController::class, 'insert_delivery']);
+Route::post('/select-feeship',[DeliveryController::class, 'select_feeship']);
+Route::post('/update-delivery',[DeliveryController::class, 'update_delivery']);
