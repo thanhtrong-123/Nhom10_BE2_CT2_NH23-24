@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+use DB;
 
 
 class OrderController extends Controller
@@ -30,7 +31,8 @@ class OrderController extends Controller
     {
         //
         $this->AuthLogin();
-        return view('admin.order.add_order');
+        $customer_order = DB::table('customers')->orderby('customer_id', 'desc')->get();
+        return view('admin.order.add_order')->with('customer_order', $customer_order);
     /**
      * Store a newly created resource in storage.
      *
@@ -44,9 +46,11 @@ class OrderController extends Controller
         $data = new Order;
 
         $data->order_id = $request->order_id;
-        $data->customer_id = $request->customer_id;
+        $data->customer_id = $request->customer_order;
         $data->payment_id = $request->payment_id;
-        $data->shipping_id = $request->shipping_id;
+        $data->order_name = $request->order_name;
+        $data->order_address = $request->order_address;
+        $data->order_phone = $request->order_phone;
         $data->order_total = $request->order_total;
         $data->order_status = $request->order_status;
         $data->save();
@@ -76,7 +80,8 @@ class OrderController extends Controller
     {
         //
         $this->AuthLogin();
-        return view('admin.order.order');
+        $customer_order = DB::table('customers')->orderby('customer_id', 'desc')->get();
+        return view('admin.order.edit_order', ['data' => Order::find($id), 'customer_order' => $customer_order]);
     }
 
     /**
@@ -91,10 +96,12 @@ class OrderController extends Controller
         //
         $this->AuthLogin();
         $data = Order::find($id);
-        $data->order_id = $request->order_id;
-        $data->customer_id = $request->customer_id;
+        
+        $data->customer_id = $request->customer_order;
         $data->payment_id = $request->payment_id;
-        $data->shipping_id = $request->shipping_id;
+        $data->order_name = $request->order_name;
+        $data->order_address = $request->order_address;
+        $data->order_phone = $request->order_phone;
         $data->order_total = $request->order_total;
         $data->order_status = $request->order_status;
         $data->save();
@@ -131,6 +138,15 @@ class OrderController extends Controller
         $data->where('order_id',$order_id)->update(['order_status'=>0]);
         Session::put('message','Hiển thị đơn hàng thành công!');
         return Redirect::to('order');
+    }
+
+    public function AuthLogin(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('dashboard');
+        }else{
+            return Redirect::to('admin')->send();
+        }
     }
 
 }

@@ -7,6 +7,7 @@ use DB;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB as FacadesDB;
 use Storage;
 use Illuminate\Support\Facades\Session;
