@@ -45,13 +45,14 @@
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tổng đơn đặt hàng</label>
-                            <input type="text" name="order_total" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục" required>
+                            <input type="text" name="order_total" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục" required >
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Hiển thị</label>
+                            <label for="exampleInputPassword1">Tình trạng đơn hàng</label>
                             <select name="order_status" class="form-control input-sm m-bot15">
-                                <option value="0">Hiển thị</option>
-                                <option value="1">Ẩn</option>
+                                <option value="0">Chưa giao hàng</option>
+                                <option value="1">Đang giao hàng</option>
+                                <option value="2">Đả giao hàng</option>
 
                             </select>
                         </div>

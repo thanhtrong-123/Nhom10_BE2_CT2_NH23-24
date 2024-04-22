@@ -34,14 +34,14 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tổng tiền đơn hàng</label>
-                            <input type="text" name="payment_id" class="form-control" onkeyup="ChangeToSlug();" id="slug" value="{{$data->payment_id}}" require>
+                            <input type="text" name="payment_id" class="form-control" onkeyup="ChangeToSlug();" id="slug" value="{{$data->payment_id}}" require readonly>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Tên đơn đặt hàng</label>
+                            <label for="exampleInputEmail1">Tên đơn hàng</label>
                             <input type="text" name="order_name" class="form-control" onkeyup="ChangeToSlug();" id="slug" value="{{$data->order_name}}" require>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Địa chỉ đặt hàng</label>
+                            <label for="exampleInputEmail1">Địa chỉ giao hàng</label>
                             <input type="text" name="order_address" class="form-control" onkeyup="ChangeToSlug();" id="slug" value="{{$data->order_address}}" require>
                         </div>
                         <div class="form-group">
@@ -49,14 +49,15 @@
                             <input type="text" name="order_phone" class="form-control" onkeyup="ChangeToSlug();" id="slug" value="{{$data->order_phone}}" require>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Tổng đơn hàng</label>
-                            <input type="text" name="order_total" class="form-control" onkeyup="ChangeToSlug();" id="slug" value="{{$data->order_total}}" require>
+                            <label for="exampleInputEmail1">Số lượng sản phẩm</label>
+                            <input type="text" name="order_total" class="form-control" onkeyup="ChangeToSlug();" id="slug" value="{{$data->order_total}}" require readonly>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Hiển thị</label>
+                            <label for="exampleInputPassword1">Tình trạng đơn hàng</label>
                             <select name="order_status" class="form-control input-sm m-bot15">
-                                <option value="0" {{ ($data->order_status == 0) ? "selected" : "" }}>Hiển Thị</option>
-                                <option value="1" {{ ($data->order_status == 1) ? "selected" : "" }}>Ẩn</option>
+                                <option value="0" {{ ($data->order_status == 0) ? "selected" : "" }}>Chưa giao hàng</option>
+                                <option value="1" {{ ($data->order_status == 1) ? "selected" : "" }}>Đang giao hàng</option>
+                                <option value="2" {{ ($data->order_status == 2) ? "selected" : "" }}>Đả giao hàng</option>
 
                             </select>
                         </div>

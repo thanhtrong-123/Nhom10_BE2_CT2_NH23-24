@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">SL sản phẩm</label>
-                                    <input type="text" data-validation="number" data-validation-error-msg="Làm ơn điền số lượng" name="product_quantity" class="form-control" id="convert_slug" value="{{$data->product_qty}}" >
+                                    <input type="number" data-validation="number" data-validation-error-msg="Làm ơn điền số lượng" name="product_quantity" class="form-control" id="convert_slug" value="{{$data->product_qty}}" >
                                 </div>
                                  <div class="form-group">
                                     <label for="exampleInputEmail1">Slug</label>

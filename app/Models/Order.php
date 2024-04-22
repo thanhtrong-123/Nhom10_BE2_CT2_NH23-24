@@ -10,4 +10,9 @@ class Order extends Model
     use HasFactory;
 
     protected $primaryKey = 'order_id';
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
 }
