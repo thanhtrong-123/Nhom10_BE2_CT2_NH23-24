@@ -14,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\Order;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\FilterBrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +91,8 @@ Route::get('/active-product/{product_id}',[ProductController::class, 'active_pro
 
 //Order_detail
 Route::resource('order-detail', OrderDetailController::class);
+Route::get('/unactive-order/{order_details_id}',[OrderDetailController::class, 'unactive_order']);
+Route::get('/active-order/{order_details_id}',[OrderDetailController::class, 'active_order']);
 
 //test view order
 Route::get('order', [CategoryController::class, 'order']);
@@ -98,3 +101,7 @@ Route::get('order', [CategoryController::class, 'order']);
 Route::resource('order', OrderController::class);
 Route::get('/unactive-order/{order_id}',[OrderController::class, 'unactive_order']);
 Route::get('/active-order/{order_id}',[OrderController::class, 'active_order']);
+
+//FilterBrand
+Route::get('filterbrand', [FilterBrandController::class, 'store'])->name('filterbrand.store');
+

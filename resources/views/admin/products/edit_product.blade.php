@@ -82,7 +82,6 @@
                                             
                                     </select>
                                 </div>
-                               
                                 <button type="submit" name="add_product" class="btn btn-info">Cập nhật sản phẩm</button>
                                 </form>
                                 

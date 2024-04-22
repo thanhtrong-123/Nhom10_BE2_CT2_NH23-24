@@ -122,9 +122,9 @@
                                 </a>
                             </h3><!-- End .widget-title -->
 
-                            <div class="collapse show" id="widget-4">
+                            <div class="collapse show"  id="widget-4">
                                 <div class="widget-body">
-                                    <div class="filter-items">
+                                    <div class="filter-items" >
                                         @foreach ($brands as $brand)
                                             <div class="filter-item">
                                                 <div class="custom-control custom-checkbox">
@@ -146,3 +146,5 @@
         </div><!-- End .container -->
     </div><!-- End .page-content -->
 @endsection
+       
+
