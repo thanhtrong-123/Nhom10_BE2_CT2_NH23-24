@@ -128,10 +128,11 @@
                                         @foreach ($brands as $brand)
                                             <div class="filter-item">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
+                                                    <!-- <input type="checkbox" class="custom-control-input"
                                                         id="brand-{{ $brand->brand_id }}">
                                                     <label class="custom-control-label"
-                                                        for="brand-{{ $brand->brand_id }}">{{ $brand->brand_name }}</label>
+                                                        for="brand-{{ $brand->brand_id }}">{{ $brand->brand_name }}</label> -->
+                                                    <a href="{{ url('fliterBrand/' . $brand->brand_id ) }}">{{ $brand->brand_name }}</a>
                                                 </div><!-- End .custom-checkbox -->
                                             </div><!-- End .filter-item -->
                                         @endforeach
