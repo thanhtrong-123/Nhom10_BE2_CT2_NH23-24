@@ -33,6 +33,7 @@ Route::get('/', [PageController::class, 'index'])->name('index');
 Route::get('checkout', [PageController::class, 'checkout'])->name('checkout');
 Route::get('store', [PageController::class, 'store'])->name('store');
 Route::get('fliterBrand/{brand_id}', [PageController::class, 'fliterBrand'])->name('fliterBrand');
+Route::get('filterCategory/{category_id}', [PageController::class, 'filterCategory'])->name('filterCategory');
 Route::get('contact', [PageController::class, 'contact'])->name('contact');
 Route::get('dashboard_user', [PageController::class, 'dashboard_user'])->name('dashboard_user');
 Route::get('login', [PageController::class, 'login'])->name('login');

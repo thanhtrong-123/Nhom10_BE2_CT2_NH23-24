@@ -100,10 +100,11 @@
                                         @foreach ($categories as $category)
                                             <div class="filter-item">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
+                                                    <!-- <input type="checkbox" class="custom-control-input"
                                                         id="cat-{{ $category->category_id }}">
                                                     <label class="custom-control-label"
-                                                        for="cat-{{ $category->category_id }}">{{ $category->category_name }}</label>
+                                                        for="cat-{{ $category->category_id }}">{{ $category->category_name }}</label> -->
+                                                        <a href="{{ url('filterCategory/' . $category->category_id ) }}">{{ $category->category_name }}</a>
                                                 </div><!-- End .custom-checkbox -->
                                                 <span class="item-count">{{ $category->total_product }}</span>
                                             </div><!-- End .filter-item -->
