@@ -68,8 +68,8 @@
             <td>{{ $value->category->category_name ?? 'Chưa cập nhật' }}</td>
             <td>{{ $value->brand->brand_name ?? 'Chưa cập nhật' }}</td>
             <!-- <td> -->
-              <!-- Nút Like hoặc Dislike -->
-              <!-- @if($value->product_status)
+            <!-- Nút Like hoặc Dislike -->
+            <!-- @if($value->product_status)
               <a href="#" class="active styling-edit" ui-toggle-class="">
                 <i class="fa fa-thumbs-down text-danger text"></i>
               </a>
@@ -97,10 +97,11 @@
             <td>
 
             <td>
-              <a href="{{ URL::to('products/' . $value->product_id . '/edit') }}" class="active styling-edit" ui-toggle-class="">
-                <i class="fa fa-pencil-square-o text-success text-active"></i>
-              </a>
-
+              <div class="edit" style="border: 1px solid #000;  text-align: center; border-radius: 2px; margin-bottom:5px">
+                <a style="pading: 10px;" href="{{ URL::to('products/' . $value->product_id . '/edit') }}" class="active styling-edit" ui-toggle-class="">
+                  <i class="fa fa-pencil-square-o text-success text-active"></i>
+                </a>
+              </div>
               <form action="{{ URL::to('products/' . $value->product_id) }}" method="post">
                 {{ csrf_field() }}
                 {{ method_field('delete') }}

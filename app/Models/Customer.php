@@ -9,4 +9,10 @@ class Customer extends Model
 {
     use HasFactory;
     public $primaryKey = 'customer_id';
+
+    public function order()
+    {
+        return $this->hasMany(Order::class, 'customer_id');
+    }
 }
+

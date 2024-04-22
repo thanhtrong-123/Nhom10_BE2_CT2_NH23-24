@@ -48,7 +48,6 @@
                         <th>Địa chỉ người đặt hàng</th>
                         <th>Số điện thoại đặt hàng</th>
                         <th>Số lượng đơn hàng</th>
-                        <th>Thương hiệu</th>
                         <th>Tình trạng đơn hàng</th>
                         <th style="width:30px;"></th>
                         <th style="width:100px;">Chi tiết đơn hàng</th>
@@ -59,46 +58,51 @@
                     <tr>
                         <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label>
                         </td>
-                        <td>{{ $order->customer_order }}</td>
+                        <td>{{ $order->customer->customer_name }}</td>
+
                         <td>{{ $order->payment_id }}</td>
                         <td>{{ $order->order_name }}</td>
                         <td>{{ $order->order_address }}</td>
                         <td>{{ $order->order_phone }}</td>
                         <td>{{ $order->order_total }}</td>
-                        <td>{{ $order->order_status }}</td>
 
                         <td><span class="text-ellipsis">
                                 <?php
                                 if ($order->order_status == 0) {
                                 ?>
-                                    <a href="{{URL::to('/unactive-order/'.$order->order_id)}}"><span class="fa-thumb-styling fa fa-thumbs-up"></span></a>
+                                    <p>Chưa giao hàng</a>
+                                    <?php
+                                } else if ($order->order_status == 1) {
+                                    ?>
+                                    <p>Đang giao hàng</p>
                                 <?php
                                 } else {
                                 ?>
-                                    <a href="{{URL::to('/active-order/'.$order->order_id)}}"><span class="fa-thumb-styling fa fa-thumbs-down"></span></a>
+                                    <p>Đả giao hàng</p>
                                 <?php
                                 }
                                 ?>
                             </span></td>
 
                         <td>
-
                         <td>
-                            <a href="{{ URL::to('order/' . $order->order_id . '/edit') }}" class="active styling-edit" ui-toggle-class="">
-                                <i class="fa fa-pencil-square-o text-success text-active"></i>
+                            <a href="{{ URL::to('order/' . $order->order_id . '/') }}">
+                                Chi tiết
                             </a>
-
+                        </td>
+                        <td>
+                            <div class="edit" style="border: 1px solid #000;  text-align: center; border-radius: 2px; margin-bottom:5px">
+                                <a style="pading: 10px;" href="{{ URL::to('order/' . $order->order_id . '/edit') }}" class="active styling-edit" ui-toggle-class="">
+                                    <i class="fa fa-pencil-square-o text-success text-active"></i>
+                                </a>
+                            </div>
                             <form action="{{ URL::to('order/' . $order->order_id) }}" method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('delete') }}
                                 <button type="submit" class="active styling-edit" onclick="return confirm('Bạn có chắc là muốn xóa sản phẩm này không?')"><i class="fa fa-times text-danger text"></i></button>
                             </form>
                         </td>
-                        <td>
-                            <a href="{{ URL::to('order/' . $order->order_id . '/') }}" >
-                            Chi tiết
-                            </a>
-                        </td>
+
                     </tr>
                     @endforeach
                 </tbody>
