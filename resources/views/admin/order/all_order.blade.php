@@ -86,7 +86,7 @@
 
                         <td>
                         <td>
-                            <a href="{{ URL::to('order/' . $order->order_id . '/') }}">
+                            <a href="{{ URL::to('orderdetail/' . $order->order_id) }}">
                                 Chi tiết
                             </a>
                         </td>

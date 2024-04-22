@@ -91,10 +91,8 @@ Route::resource('products', ProductController::class);
 Route::get('/unactive-product/{product_id}',[ProductController::class, 'unactive_product']);
 Route::get('/active-product/{product_id}',[ProductController::class, 'active_product']);
 
-//Order_detail
-Route::resource('order-detail', OrderDetailController::class);
-Route::get('/unactive-order/{order_details_id}',[OrderDetailController::class, 'unactive_order']);
-Route::get('/active-order/{order_details_id}',[OrderDetailController::class, 'active_order']);
+// Order_detail
+Route::resource('orderdetail', OrderDetailController::class);
 
 //test view order
 Route::get('order', [CategoryController::class, 'order']);
