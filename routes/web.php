@@ -11,6 +11,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderDetail;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\Order;
 use App\Http\Controllers\OrderController;

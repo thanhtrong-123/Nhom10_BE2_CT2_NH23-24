@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\OrderDetail;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class OrderDetailController extends Controller
 {
@@ -14,7 +17,9 @@ class OrderDetailController extends Controller
     public function index($order_id)
     {
         //
-        return view ();
+        //dd($order_id);
+        $this->AuthLogin();
+        return view ('admin.orderdetail.all_orderdetail',['data' => OrderDetail::all()]);
     }
 
     /**
@@ -25,6 +30,10 @@ class OrderDetailController extends Controller
     public function create()
     {
         //
+        $this->AuthLogin();
+        $order_orderdetail = DB::table('orders')->orderby('order_id','desc')->get();
+        $product_orderdetail = DB::table('products')->orderby('product_id','desc')->get();
+        return view('admin.orderdetail.add_orderdetail')->with('order_orderdetail', $order_orderdetail, 'product_orderdetail', $product_orderdetail);
     }
 
     /**
@@ -36,6 +45,19 @@ class OrderDetailController extends Controller
     public function store(Request $request)
     {
         //
+        $this->AuthLogin();
+        $data = new OrderDetail;
+
+        $data->order_details_id = $request->order_details_id;
+        $data->order_id = $request->order_orderdetail;
+        $data->product_id = $request->product_orderdetail;
+        $data->product_name = $request->product_name;
+        $data->product_price = $request->product_price;
+        $data->product_sales_quantily = $request->product_sales_quantily;
+        
+        $data->save();
+        Session::put('message', 'Thêm sản phẩm thành công');
+        return Redirect::to('orderdetail');
     }
 
     /**
@@ -58,6 +80,10 @@ class OrderDetailController extends Controller
     public function edit($id)
     {
         //
+        $this->AuthLogin();
+        $order_orderdetail = DB::table('orders')->orderby('order_id','desc')->get();
+        $product_orderdetail = DB::table('products')->orderby('product_id','desc')->get();
+        return view('admin.orderdetail.edit_orderdetail')->with('order_orderdetail', $order_orderdetail, 'product_orderdetail', $product_orderdetail);
     }
 
     /**
@@ -70,6 +96,19 @@ class OrderDetailController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->AuthLogin();
+        $data = OrderDetail::find($id);
+
+        $data->order_details_id = $request->order_details_id;
+        $data->order_id = $request->order_orderdetail;
+        $data->product_id = $request->product_orderdetail;
+        $data->product_name = $request->product_name;
+        $data->product_price = $request->product_price;
+        $data->product_sales_quantily = $request->product_sales_quantily;
+        
+        $data->save();
+        Session::put('message', 'cập nhật sản phẩm thành công');
+        return Redirect::to('orderdetail');
     }
 
     /**
@@ -81,5 +120,18 @@ class OrderDetailController extends Controller
     public function destroy($id)
     {
         //
+        $this->AuthLogin();
+        //Delete Don hang
+        OrderDetail::destroy($id);
+        Session::put('message', 'Xóa đơn hàng thành công');
+        return Redirect::to('orderdetail');
+    }
+    public function AuthLogin(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('dashboard');
+        }else{
+            return Redirect::to('admin')->send();
+        }
     }
 }
