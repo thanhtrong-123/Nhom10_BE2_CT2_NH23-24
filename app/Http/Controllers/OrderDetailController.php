@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\OrderDetail;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\Order;
+
 
 class OrderDetailController extends Controller
 {
@@ -14,12 +14,15 @@ class OrderDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($order_id)
+    public function showOrderDetail($order_id)
     {
         //
-        //dd($order_id);
-        $this->AuthLogin();
-        return view ('admin.orderdetail.all_orderdetail',['data' => OrderDetail::all()]);
+        
+        // Retrieve the order details from the database
+        $order = Order::findOrFail($order_id);
+       
+        // Pass the order details to the view
+        return view('admin.order.order_detail', compact('order'));
     }
 
     /**
@@ -30,10 +33,63 @@ class OrderDetailController extends Controller
     public function create()
     {
         //
-        $this->AuthLogin();
-        $order_orderdetail = DB::table('orders')->orderby('order_id','desc')->get();
-        $product_orderdetail = DB::table('products')->orderby('product_id','desc')->get();
-        return view('admin.orderdetail.add_orderdetail')->with('order_orderdetail', $order_orderdetail, 'product_orderdetail', $product_orderdetail);
+    }
+
+    public function saveOrderDetail(Request $request)
+    {
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'order_id' => 'required|exists:orders,id',
+            'product_name' => 'required|string|max:100',
+            'product_price' => 'required|numeric',
+            'product_sales_quantity' => 'required|integer',
+        ]);
+
+        // Create a new OrderDetail instance
+        $orderDetail = new OrderDetail();
+        $orderDetail->order_id = $validatedData['order_id'];
+        $orderDetail->product_name = $validatedData['product_name'];
+        $orderDetail->product_price = $validatedData['product_price'];
+        $orderDetail->product_sales_quantity = $validatedData['product_sales_quantity'];
+
+        // Save the order detail to the database
+        $orderDetail->save();
+
+        // Redirect back to the order detail page
+        return redirect()->back()->with('success', 'Chi tiết đơn hàng đã được thêm thành công.');
+    }
+
+    public function showAddOrderDetailForm()
+    {
+        return view('admin.order.add_order_detail');
+    }
+
+    public function updateOrderDetail(Request $request,  $id)
+    {
+        // Validate the incoming request data
+       
+            //
+          
+            $data = Order::find($id);
+            
+            $data->customer_id = $request->customer_order;
+            $data->payment_id = $request->payment_id;
+            $data->order_name = $request->order_name;
+            $data->order_address = $request->order_address;
+            $data->order_phone = $request->order_phone;
+            $data->order_total = $request->order_total;
+            $data->order_status = $request->order_status;
+            $data->save();
+            Session::put('message', 'Cập nhật sản phẩm thành công');
+            
+        
+
+        // Redirect back to the order detail page with a success message
+        return redirect()->back()->with('success', 'Chi tiết đơn hàng đã được cập nhật thành công.');
+    }
+    public function editOrderDetail(Order $orderDetail)
+    {
+        return view('admin.order.update_order_detail', compact('orderDetail'));
     }
 
     /**
@@ -45,19 +101,9 @@ class OrderDetailController extends Controller
     public function store(Request $request)
     {
         //
-        $this->AuthLogin();
-        $data = new OrderDetail;
-
-        $data->order_details_id = $request->order_details_id;
-        $data->order_id = $request->order_orderdetail;
-        $data->product_id = $request->product_orderdetail;
-        $data->product_name = $request->product_name;
-        $data->product_price = $request->product_price;
-        $data->product_sales_quantily = $request->product_sales_quantily;
-        
-        $data->save();
-        Session::put('message', 'Thêm sản phẩm thành công');
-        return Redirect::to('orderdetail');
+   
+        $orderDetail = OrderDetail::create($request->all());
+        return response()->json($orderDetail, 201);
     }
 
     /**
@@ -69,6 +115,8 @@ class OrderDetailController extends Controller
     public function show($id)
     {
         //
+        $orderDetail = OrderDetail::findOrFail($id);
+        return response()->json($orderDetail);
     }
 
     /**
@@ -80,10 +128,10 @@ class OrderDetailController extends Controller
     public function edit($id)
     {
         //
-        $this->AuthLogin();
-        $order_orderdetail = DB::table('orders')->orderby('order_id','desc')->get();
-        $product_orderdetail = DB::table('products')->orderby('product_id','desc')->get();
-        return view('admin.orderdetail.edit_orderdetail')->with('order_orderdetail', $order_orderdetail, 'product_orderdetail', $product_orderdetail);
+     
+        $orderDetail = OrderDetail::findOrFail($id);
+        $orderDetail->update($request->all());
+        return response()->json($orderDetail, 200);
     }
 
     /**
@@ -96,19 +144,9 @@ class OrderDetailController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->AuthLogin();
-        $data = OrderDetail::find($id);
-
-        $data->order_details_id = $request->order_details_id;
-        $data->order_id = $request->order_orderdetail;
-        $data->product_id = $request->product_orderdetail;
-        $data->product_name = $request->product_name;
-        $data->product_price = $request->product_price;
-        $data->product_sales_quantily = $request->product_sales_quantily;
-        
-        $data->save();
-        Session::put('message', 'cập nhật sản phẩm thành công');
-        return Redirect::to('orderdetail');
+   
+        OrderDetail::destroy($id);
+        return response()->json(null, 204);
     }
 
     /**
@@ -120,18 +158,5 @@ class OrderDetailController extends Controller
     public function destroy($id)
     {
         //
-        $this->AuthLogin();
-        //Delete Don hang
-        OrderDetail::destroy($id);
-        Session::put('message', 'Xóa đơn hàng thành công');
-        return Redirect::to('orderdetail');
-    }
-    public function AuthLogin(){
-        $admin_id = Session::get('admin_id');
-        if($admin_id){
-            return Redirect::to('dashboard');
-        }else{
-            return Redirect::to('admin')->send();
-        }
     }
 }
