@@ -18,7 +18,8 @@ class CustomerController extends Controller
     {
         // Show all customers
         $this->AuthLogin();
-        return view('admin.users.all_users', ['data' => Customer::all()]);
+        $data = Customer::where('customer_id', '>', 0)->paginate(4);
+        return view('admin.users.all_users', ['data' => $data]);
     }
 
     /**

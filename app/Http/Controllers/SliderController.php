@@ -19,7 +19,8 @@ class SliderController extends Controller
     {
         // Show all sliders
         $this->AuthLogin();
-        return view('admin.slider.list_slider', ['data' => Slider::all()]);
+        $data = Slider::where('slider_id', '>', 0)->paginate(4);
+        return view('admin.slider.list_slider', ['data' => $data]);
     }
 
     /**

@@ -55,7 +55,7 @@
           <tr>
             <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
             <td>{{ $slider->slider_name }}</td>
-            <td><img src="{{ asset('storage/images/banners/' . $slider->slider_image) }}" height="120" width="500"></td>
+            <td><img src="{{ asset('storage/images/banners/' . $slider->slider_image) }}" height="120" width="200"></td>
             <td>{{ $slider->slider_desc }}</td>
             <td><span class="text-ellipsis">
 
@@ -92,15 +92,11 @@
     </div>
     <footer class="panel-footer">
       <div class="row">
-        
-        <div class="col-sm-5 text-center">
-          <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
-        </div>
-        <div class="col-sm-7 text-right text-center-xs">                
-          <ul class="pagination pagination-sm m-t-none m-b-none">
-              {{-- {!!$all_slide->links()!!} --}}
-          </ul>
-        </div>
+        <nav aria-label="Page navigation">
+          <div class="paginationWrap">
+              {{ $data->links('template_pagination') }}
+          </div>
+      </nav>
       </div>
     </footer>
   </div>
