@@ -23,7 +23,6 @@ class AdminController extends Controller
 
     public function dashboard(Request $request)
     {   
-        $this->AuthLogin();
         $admin_email = $request -> admin_email;
         $admin_password = md5($request -> admin_password);
         $result = DB::table('admins')->where('admin_email',$admin_email)->where('admin_password',$admin_password)->first();
