@@ -93,11 +93,11 @@ Route::get('/unactive-product/{product_id}',[ProductController::class, 'unactive
 Route::get('/active-product/{product_id}',[ProductController::class, 'active_product']);
 
 // Order_detail
-Route::get('/order/{order_id}', [OrderDetailController::class , 'showOrderDetail']);
+Route::get('/orderdetails/{order_id}', [OrderDetailController::class , 'showOrderDetail']);
 Route::get('/add_order_detail', [OrderDetailController::class, 'showAddOrderDetailForm'])->name('add_order_detail');
 Route::post('/save_order_detail', [OrderDetailController::class, 'saveOrderDetail'])->name('save_order_detail');
-Route::get('/order/{orderDetail}/edit', 'App\Http\Controllers\OrderDetailController@editOrderDetail');
-Route::put('/order/{orderDetail}/update', 'App\Http\Controllers\OrderDetailController@updateOrderDetail');
+Route::get('/orderdetails/{orderDetail}/edit', 'App\Http\Controllers\OrderDetailController@editOrderDetail');
+Route::put('/orderdetails/{orderDetail}/update', 'App\Http\Controllers\OrderDetailController@updateOrderDetail');
 
 //test view order
 Route::get('order', [CategoryController::class, 'order']);
