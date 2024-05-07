@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\OrderDetail;
 use App\Models\Order;
+use App\Models\Product;
+
 
 
 class OrderDetailController extends Controller
@@ -19,10 +21,13 @@ class OrderDetailController extends Controller
         //
         
         // Retrieve the order details from the database
-        $order = Order::findOrFail($order_id);
+        $orders = OrderDetail::where('order_id', $order_id)->get();
+        $products = Product::where('product_status', 0)->get();
        
         // Pass the order details to the view
-        return view('admin.order.order_detail', compact('order'));
+
+        return view('admin.order.order_detail')->with('orders', $orders)->with('products', $products);
+        // return view('admin.order.order_detail', compact('order'));
     }
 
     /**
