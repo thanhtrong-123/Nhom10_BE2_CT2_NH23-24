@@ -43,11 +43,11 @@
                             </label>
                         </th>
                         <th>Tên khách hàng</th>
-                        <th>Giá trị đơn hàng</th>
-                        <th>Tên người đặt hàng</th>
-                        <th>Địa chỉ người đặt hàng</th>
+                        <th>Tổng tiền đơn hàng</th>
+                        <th>Tên đơn đặt hàng</th>
+                        <th>Địa chỉ đặt hàng</th>
                         <th>Số điện thoại đặt hàng</th>
-                        <th>Số lượng đơn hàng</th>
+                        <th>Tổng số sản phẩm</th>
                         <th>Tình trạng đơn hàng</th>
                         <th style="width:30px;"></th>
                         <th style="width:100px;">Chi tiết đơn hàng</th>
@@ -60,7 +60,7 @@
                         </td>
                         <td>{{ $order->customer->customer_name }}</td>
 
-                        <td>{{ $order->payment_id }}</td>
+                        <td>{{ number_format($order->payment_id) }}</td>
                         <td>{{ $order->order_name }}</td>
                         <td>{{ $order->order_address }}</td>
                         <td>{{ $order->order_phone }}</td>
@@ -78,7 +78,7 @@
                                 <?php
                                 } else {
                                 ?>
-                                    <p>Đả giao hàng</p>
+                                    <p>Đã giao hàng</p>
                                 <?php
                                 }
                                 ?>
@@ -99,7 +99,7 @@
                             <form action="{{ URL::to('order/' . $order->order_id) }}" method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('delete') }}
-                                <button type="submit" class="active styling-edit" onclick="return confirm('Bạn có chắc là muốn xóa sản phẩm này không?')"><i class="fa fa-times text-danger text"></i></button>
+                                <button type="submit" class="active styling-edit" onclick="return confirm('Bạn có chắc là muốn xóa đơn hàng này không?')"><i class="fa fa-times text-danger text"></i></button>
                             </form>
                         </td>
 

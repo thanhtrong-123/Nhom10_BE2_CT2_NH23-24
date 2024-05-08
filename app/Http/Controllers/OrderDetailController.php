@@ -2,166 +2,96 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\OrderDetail;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Product;
-
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class OrderDetailController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showOrderDetail($order_id)
-    {
-        //
-        
-        // Retrieve the order details from the database
-        $orders = OrderDetail::where('order_id', $order_id)->get();
+    public function index($order_id) {
+        $this->AuthLogin();
+
+        $order_details = OrderDetail::where('order_id', $order_id)->get();
         $products = Product::where('product_status', 0)->get();
-       
-        // Pass the order details to the view
-
-        return view('admin.order.order_detail')->with('orders', $orders)->with('products', $products);
-        // return view('admin.order.order_detail', compact('order'));
+        return view('admin.oderdetail.all_order_detail')->with('order_details', $order_details)->with('products', $products)->with('order_id', $order_id);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    public function add(Request $request) {
+        $this->AuthLogin();
 
-    public function saveOrderDetail(Request $request)
-    {
-        // Validate the incoming request data
-        $validatedData = $request->validate([
-            'order_id' => 'required|exists:orders,id',
-            'product_name' => 'required|string|max:100',
-            'product_price' => 'required|numeric',
-            'product_sales_quantity' => 'required|integer',
-        ]);
-
-        // Create a new OrderDetail instance
-        $orderDetail = new OrderDetail();
-        $orderDetail->order_id = $validatedData['order_id'];
-        $orderDetail->product_name = $validatedData['product_name'];
-        $orderDetail->product_price = $validatedData['product_price'];
-        $orderDetail->product_sales_quantity = $validatedData['product_sales_quantity'];
-
-        // Save the order detail to the database
-        $orderDetail->save();
-
-        // Redirect back to the order detail page
-        return redirect()->back()->with('success', 'Chi tiết đơn hàng đã được thêm thành công.');
-    }
-
-    public function showAddOrderDetailForm()
-    {
-        return view('admin.order.add_order_detail');
-    }
-
-    public function updateOrderDetail(Request $request,  $id)
-    {
-        // Validate the incoming request data
-       
-            //
-          
-            $data = Order::find($id);
-            
-            $data->customer_id = $request->customer_order;
-            $data->payment_id = $request->payment_id;
-            $data->order_name = $request->order_name;
-            $data->order_address = $request->order_address;
-            $data->order_phone = $request->order_phone;
-            $data->order_total = $request->order_total;
-            $data->order_status = $request->order_status;
-            $data->save();
-            Session::put('message', 'Cập nhật sản phẩm thành công');
-            
+        // Update order (order_total and payment_id)
+        $product = Product::where('product_id', $request->product_id)->first();
+        $order = Order::find($request->order_id);
+        $order->order_total += $request->product_qty;
+        $order->payment_id += $request->product_qty *  $product->product_price;
+        $order->save();
         
-
-        // Redirect back to the order detail page with a success message
-        return redirect()->back()->with('success', 'Chi tiết đơn hàng đã được cập nhật thành công.');
-    }
-    public function editOrderDetail(Order $orderDetail)
-    {
-        return view('admin.order.update_order_detail', compact('orderDetail'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-   
-        $orderDetail = OrderDetail::create($request->all());
-        return response()->json($orderDetail, 201);
+        // Add product to order detail
+        $data = OrderDetail::where([
+            ['product_id', $request->product_id],
+            ['order_id', $request->order_id]
+            ])->first();
+        if ($data == null) {
+            $data = new OrderDetail;
+            $data->order_id = $request->order_id;
+            $data->product_id = $request->product_id;
+            $data->product_name = $product->product_name;
+            $data->product_price = $product->product_price;
+            $data->product_sales_quantily = $request->product_qty;
+        } else {
+            $data->product_sales_quantily += $request->product_qty;
+        }
+        $data->save();
+        Session::put('message','Thêm sản phẩm vào đơn hàng thành công');
+        return Redirect::to('orderdetails/' . $request->order_id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-        $orderDetail = OrderDetail::findOrFail($id);
-        return response()->json($orderDetail);
+    public function update(Request $request) {
+        $this->AuthLogin();
+
+        $order_detail = OrderDetail::find($request->order_details_id);
+        $old_qty = $order_detail->product_sales_quantily;
+        $new_qty = $request->qty;
+        $other_qty = $new_qty - $old_qty;
+        
+        // Cap nhat lai so luong
+        $order_detail->product_sales_quantily = $new_qty;
+        $order_detail->save();
+        
+        // Update order (order_total and payment_id)
+        $order = Order::find($order_detail->order_id);
+        $order->order_total += $other_qty;
+        $order->payment_id += $other_qty *  $order_detail->product_price;
+        $order->save();
+        Session::put('message', 'Cập nhật số lượng sản phẩm trong đơn hàng thành công');
+        return Redirect::to('orderdetails/' . $order_detail->order_id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-     
-        $orderDetail = OrderDetail::findOrFail($id);
-        $orderDetail->update($request->all());
-        return response()->json($orderDetail, 200);
+    public function delete(Request $request) {
+        $this->AuthLogin();
+
+        // Update order (order_total and payment_id)
+        $order_detail = OrderDetail::find($request->order_details_id);
+        $order = Order::find($request->order_id);
+        $order->order_total -= $order_detail->product_sales_quantily;
+        $order->payment_id -= $order_detail->product_sales_quantily *  $order_detail->product_price;
+        $order->save();
+
+        // Delete order detail
+        OrderDetail::destroy($request->order_details_id);
+        Session::put('message', 'Xóa sản phẩm khỏi đơn hàng thành công');
+        return Redirect::to('orderdetails/' . $request->order_id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-   
-        OrderDetail::destroy($id);
-        return response()->json(null, 204);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function AuthLogin(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('dashboard');
+        }else{
+            return Redirect::to('admin')->send();
+        }
     }
 }

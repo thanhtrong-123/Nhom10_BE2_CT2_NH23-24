@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('order_address');
             $table->string('order_phone');
             $table->integer('payment_id');
-            $table->float('order_total');
+            $table->integer('order_total');
             $table->integer('order_status');
             $table->timestamps();
         });

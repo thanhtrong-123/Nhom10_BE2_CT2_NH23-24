@@ -124,21 +124,6 @@ class OrderController extends Controller
         return Redirect::to('order');
 
     }
-    public function unactive_order($order_id){
-        $this->AuthLogin();
-        $data = new Order;
-        $data->where('order_id',$order_id)->update(['order_status'=>1]);
-        Session::put('message','Đơn hàng hiển thị không thành công!');
-        return Redirect::to('order');
-
-    }
-    public function active_order($order_id){
-        $this->AuthLogin();
-        $data = new Order;
-        $data->where('order_id',$order_id)->update(['order_status'=>0]);
-        Session::put('message','Hiển thị đơn hàng thành công!');
-        return Redirect::to('order');
-    }
 
     public function AuthLogin(){
         $admin_id = Session::get('admin_id');

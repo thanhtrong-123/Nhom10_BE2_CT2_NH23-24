@@ -45,7 +45,7 @@
                                     </h3><!-- End .product-title -->
                                 </div><!-- End .product -->
                             </td>
-                            <td class="price-col">{{ number_format($item['product_price']) }} VND</td>
+                            <td class="price-col">{{ number_format($item['product_price']) }}</td>
                             <td class="stock-col"><span class="in-stock">In stock</span></td>
                             <td class="action-col">
                                 <div class="dropdown">

@@ -28,7 +28,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tổng tiền đơn hàng</label>
-                            <input type="text" data-validation="number" data-validation-error-msg="xin vui lòng nhập chính xác..." name="payment_id" class="form-control" id="" placeholder="Tên danh mục">
+                            <input type="text" data-validation="number" data-validation-error-msg="xin vui lòng nhập chính xác..." name="payment_id" class="form-control" id="" placeholder="Tên danh mục" value="0" readonly>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên đơn đặt hàng</label>
@@ -44,15 +44,15 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Tổng đơn đặt hàng</label>
-                            <input type="text" name="order_total" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục" required >
+                            <label for="exampleInputEmail1">Tổng số sản phẩm</label>
+                            <input type="text" name="order_total" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục" value="0" readonly>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Tình trạng đơn hàng</label>
                             <select name="order_status" class="form-control input-sm m-bot15">
                                 <option value="0">Chưa giao hàng</option>
                                 <option value="1">Đang giao hàng</option>
-                                <option value="2">Đả giao hàng</option>
+                                <option value="2">Đã giao hàng</option>
 
                             </select>
                         </div>

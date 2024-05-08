@@ -48,7 +48,7 @@
                                                 </h3><!-- End .product-title -->
                                             </div><!-- End .product -->
                                         </td>
-                                        <td class="price-col">{{ number_format($item['product_price']) }} VND</td>
+                                        <td class="price-col">{{ number_format($item['product_price']) }}</td>
                                         <form action="{{ route('cart.update') }}" method="post">
                                             @csrf
                                             <input type="hidden" name="product_id" value="{{ $key }}">
@@ -60,7 +60,6 @@
                                                 </div><!-- End .cart-product-quantity -->
                                             </td>
                                             <td class="total-col">{{ number_format($item['product_price'] * $item['qty']) }}
-                                                VND
                                             </td>
                                             <td class="remove-col"><button class="btn-remove" type="submit"><i
                                                         class="icon-edit"></i></button></td>
@@ -102,7 +101,7 @@
                                 <tbody>
                                     <tr class="summary-subtotal">
                                         <td>Subtotal:</td>
-                                        <td>{{ number_format($cart->getTotalMoney()) }} VND</td>
+                                        <td>{{ number_format($cart->getTotalMoney()) }}</td>
                                     </tr><!-- End .summary-subtotal -->
                                     <tr class="summary-shipping">
                                         <td>Shipping:</td>
@@ -151,7 +150,7 @@
 
                                     <tr class="summary-total">
                                         <td>Total:</td>
-                                        <td>{{ number_format($cart->getTotalMoney()) }} VND</td>
+                                        <td>{{ number_format($cart->getTotalMoney()) }}</td>
                                     </tr><!-- End .summary-total -->
                                 </tbody>
                             </table><!-- End .table table-summary -->
