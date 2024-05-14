@@ -25,27 +25,36 @@
                             here to enter your code</span></label>
                 </form>
             </div><!-- End .checkout-discount -->
-            <form action="#">
+
+            <form action="{{ URL::to('add-checkout') }}" method="post" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <?php
+	                        use Illuminate\Support\Facades\Session;
+	                        $message = Session::get('message');
+	                        if($message){
+		                        echo '<span class="text-alert" style="color:red;">'.$message.'</span>';
+		                    Session::put('message',null);
+	                        }
+	                        ?>
                 <div class="row">
-                    <div class="col-lg-9">
-                        <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
-
-                        <label>First Name *</label>
-                        <input type="text" class="form-control" required>
-
-                        <label>Country *</label>
-                        <input type="text" class="form-control" required>
-                        <label>Street address *</label>
-                        <input type="text" class="form-control" placeholder="House number and Street name" required>
-                        <label>Phone *</label>
-                        <input type="tel" class="form-control" required>
-                        <label>Email address *</label>
-                        <input type="email" class="form-control" required>
-                        <label>Order notes (optional)</label>
-                        <textarea class="form-control" cols="30" rows="4"
-                            placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+                    <div class="col-lg-8">
+                        <h2 class="checkout-title">Billing Details</h2>
+                        @if (Session::has('customer_name'))
+                        <label>Tên Khách Hàng</label>
+                        <input type="text" class="form-control" name="customer_id" value="{{ Session::get('customer_id') }}">
+                        @else
+                        <li><a href="{{ route('login') }}"><i class="icon-user"></i> Login</a></li>
+                        @endif
+                       
+                        <label>Tên đơn dặt hàng</label>
+                        <input type="text" class="form-control" name="order_name" required>
+                        <label>Địa chỉ</label>
+                        <input type="text" class="form-control" name="order_address"
+                            placeholder="House number and Street name" required>
+                        <label>Điện thoại</label>
+                        <input type="tel" class="form-control" name="order_phone" required>
                     </div><!-- End .col-lg-9 -->
-                    <aside class="col-lg-3">
+                    <aside class="col-lg-4">
                         <div class="summary">
                             <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
 
@@ -53,23 +62,23 @@
                                 <thead>
                                     <tr>
                                         <th>Product</th>
-                                        <th>Total</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th class="text-center">Total</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
+                                    @foreach ($cart->list() as $key => $item)
                                     <tr>
-                                        <td><a href="#">Beige knitted elastic runner shoes</a></td>
-                                        <td>$84.00</td>
+                                        <input type="text" name="product_id_checkout" value="{{ $item['product_id'] }}">
+                                        <td><a href="{{ url('product/' . $key) }}">{{ $item['product_name'] }}</a><input type="hidden" name="product_name_checkout" value="{{ $item['product_name'] }}"></td>
+                                        <td class="text-center">{{$item['qty']}} <input type="hidden" name="product_quantity_checkout" value="{{$item['qty']}}"></td>
+                                        <td class="text-center">
+                                            {{ number_format($item['product_price'] * $item['qty']) }} <input type="hidden" name="product_price_checkout" value="{{ number_format($item['product_price'] * $item['qty']) }}"></td>
                                     </tr>
-
-                                    <tr>
-                                        <td><a href="#">Blue utility pinafore denimdress</a></td>
-                                        <td>$76,00</td>
-                                    </tr>
+                                    @endforeach
                                     <tr class="summary-subtotal">
                                         <td>Subtotal:</td>
-                                        <td>$160.00</td>
+                                        <td class="text-center" name="cart">{{ number_format($cart->getTotalMoney()) }}<input type="hidden" name="cart" value="{{ $cart->getTotalMoney() }}"></td>
                                     </tr><!-- End .summary-subtotal -->
                                     <tr>
                                         <td>Shipping:</td>
@@ -77,12 +86,12 @@
                                     </tr>
                                     <tr class="summary-total">
                                         <td>Total:</td>
-                                        <td>$160.00</td>
+                                        <td class="text-center">{{ number_format($cart->getTotalMoney()) }}</td>
                                     </tr><!-- End .summary-total -->
                                 </tbody>
                             </table><!-- End .table table-summary -->
 
-                            <div class="accordion-summary" id="accordion-payment">
+                            <!-- <div class="accordion-summary" id="accordion-payment">
                                 <div class="card">
                                     <div class="card-header" id="heading-1">
                                         <h2 class="card-title">
@@ -91,16 +100,16 @@
                                                 Direct bank transfer
                                             </a>
                                         </h2>
-                                    </div><!-- End .card-header -->
+                                    </div>
                                     <div id="collapse-1" class="collapse show" aria-labelledby="heading-1"
                                         data-parent="#accordion-payment">
                                         <div class="card-body">
                                             Make your payment directly into our bank account. Please use
                                             your Order ID as the payment reference. Your order will not be
                                             shipped until the funds have cleared in our account.
-                                        </div><!-- End .card-body -->
-                                    </div><!-- End .collapse -->
-                                </div><!-- End .card -->
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="card">
                                     <div class="card-header" id="heading-2">
@@ -110,15 +119,15 @@
                                                 Check payments
                                             </a>
                                         </h2>
-                                    </div><!-- End .card-header -->
+                                    </div>
                                     <div id="collapse-2" class="collapse" aria-labelledby="heading-2"
                                         data-parent="#accordion-payment">
                                         <div class="card-body">
                                             Ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
                                             Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.
-                                        </div><!-- End .card-body -->
-                                    </div><!-- End .collapse -->
-                                </div><!-- End .card -->
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="card">
                                     <div class="card-header" id="heading-3">
@@ -128,15 +137,15 @@
                                                 Cash on delivery
                                             </a>
                                         </h2>
-                                    </div><!-- End .card-header -->
+                                    </div>
                                     <div id="collapse-3" class="collapse" aria-labelledby="heading-3"
                                         data-parent="#accordion-payment">
                                         <div class="card-body">Quisque volutpat mattis eros. Lorem ipsum
                                             dolor sit amet, consectetuer adipiscing elit. Donec odio.
                                             Quisque volutpat mattis eros.
-                                        </div><!-- End .card-body -->
-                                    </div><!-- End .collapse -->
-                                </div><!-- End .card -->
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="card">
                                     <div class="card-header" id="heading-4">
@@ -147,16 +156,16 @@
                                                     PayPal?</small>
                                             </a>
                                         </h2>
-                                    </div><!-- End .card-header -->
+                                    </div>
                                     <div id="collapse-4" class="collapse" aria-labelledby="heading-4"
                                         data-parent="#accordion-payment">
                                         <div class="card-body">
                                             Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra
                                             non, semper suscipit, posuere a, pede. Donec nec justo eget
                                             felis facilisis fermentum.
-                                        </div><!-- End .card-body -->
-                                    </div><!-- End .collapse -->
-                                </div><!-- End .card -->
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="card">
                                     <div class="card-header" id="heading-5">
@@ -167,21 +176,20 @@
                                                 <img src="assets/images/payments-summary.png" alt="payments cards">
                                             </a>
                                         </h2>
-                                    </div><!-- End .card-header -->
+                                    </div>
                                     <div id="collapse-5" class="collapse" aria-labelledby="heading-5"
                                         data-parent="#accordion-payment">
                                         <div class="card-body"> Donec nec justo eget felis facilisis
                                             fermentum.Lorem ipsum dolor sit amet, consectetuer adipiscing
                                             elit. Donec odio. Quisque volutpat mattis eros. Lorem ipsum
                                             dolor sit ame.
-                                        </div><!-- End .card-body -->
-                                    </div><!-- End .collapse -->
-                                </div><!-- End .card -->
-                            </div><!-- End .accordion -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
 
                             <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
-                                <span class="btn-text">Place Order</span>
-                                <span class="btn-hover-text">Proceed to Checkout</span>
+                                Đặt Hàng
                             </button>
                         </div><!-- End .summary -->
                     </aside><!-- End .col-lg-3 -->

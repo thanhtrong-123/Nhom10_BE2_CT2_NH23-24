@@ -53,10 +53,8 @@
                                 <option value="0">Chưa giao hàng</option>
                                 <option value="1">Đang giao hàng</option>
                                 <option value="2">Đã giao hàng</option>
-
                             </select>
                         </div>
-
                         <button type="submit" name="add_slider" class="btn btn-info">Thêm Đơn hàng</button>
                     </form>
                 </div>

@@ -16,7 +16,7 @@ use App\Http\Controllers\Order;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\CouponController;
-
+use App\Http\Controllers\CheckoutController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -114,3 +114,6 @@ Route::post('/update-delivery',[DeliveryController::class, 'update_delivery']);
 
 //Coupon
 Route::resource('couponCode', CouponController ::class);
+
+//checkout
+Route::post('/add-checkout',[CheckoutController::class, 'add_checkout']);
