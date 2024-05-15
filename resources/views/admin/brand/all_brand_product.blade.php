@@ -56,7 +56,8 @@
                         <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
                         <td>{{ $brandProduct->brand_name }}</td>
                         <td>{{ $brandProduct->brand_slug }}</td>
-                        <td><img src="{{ asset('storage/images/brands/' . $brandProduct->brand_image) }}" height="150" width="150"></td>
+                        <td><img src="{{ asset('storage/images/brands/' . $brandProduct->brand_image) }}" height="150"
+                                width="150"></td>
                         <td><span class="text-ellipsis">
                                 <?php
                                 if ($brandProduct->brand_status == 0) {
@@ -82,8 +83,7 @@
                                     <i class="fa fa-pencil-square-o text-success text-active"></i></a>
                             </div>
 
-                            <form action="{{ URL::to('brandProduct/' . $brandProduct->brand_id) }}"
-                                method="post">
+                            <form action="{{ URL::to('brandProduct/' . $brandProduct->brand_id) }}" method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('delete') }}
                                 <button type="submit" class="active styling-edit"
@@ -98,15 +98,11 @@
         </div>
         <footer class="panel-footer">
             <div class="row">
-
-                <div class="col-sm-5 text-center">
-                    <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
-                </div>
-                <div class="col-sm-7 text-right text-center-xs">
-                    <ul class="pagination pagination-sm m-t-none m-b-none">
-                    {{-- {!!$admin->links()!!} --}}
-                    </ul>
-                </div>
+                <nav aria-label="Page navigation">
+                    <div class="paginationWrap">
+                        {{ $data->links('template_pagination') }}
+                    </div>
+                </nav>
             </div>
         </footer>
     </div>

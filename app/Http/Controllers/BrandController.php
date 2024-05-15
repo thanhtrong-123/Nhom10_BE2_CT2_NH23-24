@@ -18,7 +18,8 @@ class BrandController extends Controller
     public function index()
     {
         $this->AuthLogin();
-        return view('admin.brand.all_brand_product', ['data' => Brand::all()]);
+        $data = Brand::where('brand_id', '>', 0)->paginate(4);
+        return view('admin.brand.all_brand_product', ['data' => $data]);
         
     }
 

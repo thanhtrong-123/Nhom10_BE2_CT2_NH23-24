@@ -18,7 +18,8 @@ class CategoryController extends Controller
     {
         //
         $this->AuthLogin();
-        return view('admin.category.all_category_product', ['data' => Category::all()]);
+        $data = Category::where('category_id', '>', 0)->paginate(4);
+        return view('admin.category.all_category_product', ['data' => $data]);
         
     }
 
