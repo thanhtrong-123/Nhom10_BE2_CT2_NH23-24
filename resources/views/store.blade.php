@@ -60,7 +60,7 @@
                                             </div><!-- End .product-price -->
                                             <div class="ratings-container">
                                                 <div class="ratings">
-                                                    <div class="ratings-val" style="width: 20%;"></div>
+                                                    <div class="ratings-val" style="width: 80%;"></div>
                                                     <!-- End .ratings-val -->
                                                 </div><!-- End .ratings -->
                                                 <span class="ratings-text">( 2 Reviews )</span>

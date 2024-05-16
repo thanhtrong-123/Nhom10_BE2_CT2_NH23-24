@@ -17,6 +17,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ReviewController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +43,14 @@ Route::get('error404', [PageController::class, 'error404'])->name('error404');
 Route::get('about', [PageController::class, 'about'])->name('about');
 Route::get('blog', [PageController::class, 'blog'])->name('blog');
 Route::get('search', [PageController::class, 'search'])->name('search');
+
+// Review
+Route::get('index-review', [ReviewController::class, 'index']);
+Route::post('add-review', [ReviewController::class, 'add']);
+Route::get('edit-review/{review_id}', [ReviewController::class, 'edit']);
+Route::post('update-review', [ReviewController::class, 'update']);
+Route::get('delete-review/{review_id}', [ReviewController::class, 'delete']);
+
 
 // Cart
 Route::get('cart', [CartController::class, 'index'])->name('cart.index');

@@ -88,7 +88,8 @@
                                     <button type="submit" class="btn-product btn-cart"><span>add to cart</span></button>
 
                                     <div class="details-action-wrapper">
-                                        <a href="{{ url('add-wishlist/' . $product->product_id) }}" class="btn-product btn-wishlist" title="Wishlist"><span>Add to
+                                        <a href="{{ url('add-wishlist/' . $product->product_id) }}"
+                                            class="btn-product btn-wishlist" title="Wishlist"><span>Add to
                                                 Wishlist</span></a>
                                     </div><!-- End .details-action-wrapper -->
                                 </div><!-- End .product-details-action -->
@@ -120,7 +121,11 @@
             <div class="container">
                 <ul class="nav nav-pills justify-content-center" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab"
+                        <a class="nav-link active" id="product-review-link" data-toggle="tab" href="#product-review-tab"
+                            role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="product-desc-link" data-toggle="tab" href="#product-desc-tab"
                             role="tab" aria-controls="product-desc-tab" aria-selected="true">Description</a>
                     </li>
                     <li class="nav-item">
@@ -133,16 +138,11 @@
                             role="tab" aria-controls="product-shipping-tab" aria-selected="false">Shipping &
                             Returns</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab"
-                            role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews (2)</a>
-                    </li>
                 </ul>
             </div><!-- End .container -->
 
             <div class="tab-content">
-                <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel"
-                    aria-labelledby="product-desc-link">
+                <div class="tab-pane fade" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
                     <div class="product-desc-content">
                         <div class="container">
                             <h3>Description</h3>
@@ -189,69 +189,148 @@
                         </div><!-- End .container -->
                     </div><!-- End .product-desc-content -->
                 </div><!-- .End .tab-pane -->
-                <div class="tab-pane fade" id="product-review-tab" role="tabpanel"
+                <div class="tab-pane fade show active" id="product-review-tab" role="tabpanel"
                     aria-labelledby="product-review-link">
                     <div class="reviews">
                         <div class="container">
-                            <h3>Reviews (2)</h3>
-                            <div class="review">
-                                <div class="row no-gutters">
-                                    <div class="col-auto">
-                                        <h4><a href="#">Samanta J.</a></h4>
-                                        <div class="ratings-container">
-                                            <div class="ratings">
-                                                <div class="ratings-val" style="width: 80%;"></div>
-                                                <!-- End .ratings-val -->
-                                            </div><!-- End .ratings -->
-                                        </div><!-- End .rating-container -->
-                                        <span class="review-date">6 days ago</span>
-                                    </div><!-- End .col -->
-                                    <div class="col">
-                                        <h4>Good, perfect size</h4>
+                            <h3>Reviews</h3>
+                            @foreach ($reviews as $review)
+                                <div class="review">
+                                    <div class="row no-gutters">
+                                        <div class="col-auto">
+                                            <h4><a href="#">{{ $review->customer->customer_name }}</a></h4>
+                                            <div class="ratings-container">
+                                                <div class="ratings">
+                                                    <div class="ratings-val"
+                                                        style="width: {{ $review->review_rating * 20 }}%;"></div>
+                                                    <!-- End .ratings-val -->
+                                                </div><!-- End .ratings -->
+                                            </div><!-- End .rating-container -->
+                                            <span class="review-date">{{ $review->created_at }}</span>
+                                        </div><!-- End .col -->
+                                        <div class="col">
+                                            <h4>{{ $review->review_title }}</h4>
 
-                                        <div class="review-content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus cum dolores
-                                                assumenda asperiores facilis porro reprehenderit animi culpa atque
-                                                blanditiis commodi perspiciatis doloremque, possimus, explicabo, autem fugit
-                                                beatae quae voluptas!</p>
-                                        </div><!-- End .review-content -->
+                                            <div class="review-content">
+                                                <p>{{ $review->review_comment }}</p>
+                                            </div><!-- End .review-content -->
+                                            @if ($review->customer_id == Session::get('customer_id'))
+                                                <div class="review-action">
+                                                    <a href="{{ url('edit-review/' . $review->review_id) }}"><i
+                                                            class="fa fa-pencil-square-o"></i>Update</a>
+                                                    <a href="{{ url('delete-review/' . $review->review_id) }}"
+                                                        onclick="return confirm('Bạn có chắc là muốn xóa bình luận này không?')"><i
+                                                            class="fa fa-times"></i>Delete</a>
+                                                </div><!-- End .review-action -->
+                                            @endif
+                                        </div><!-- End .col-auto -->
+                                    </div><!-- End .row -->
+                                </div><!-- End .review -->
+                            @endforeach
+                            @if (Session::get('customer_id') != null)
+                                @if (Session::get('review_id') != null)
+                                    <form action="{{ url('update-review') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="review_id" value="{{ Session::get('review_id') }}">
+                                        <div class="review">
+                                            <div class="row no-gutters">
+                                                <div class="col-auto">
+                                                    <h4>Rating</h4>
+                                                    <input type="radio" id="rating1" name="rating" value="1"
+                                                        {{ Session::get('review_rating') == 1 ? 'checked' : '' }}>
+                                                    <label for="rating1">1<i class="icon-star-o"
+                                                            style="color: #fcb941;"></i></label><br>
+                                                    <input type="radio" id="rating2" name="rating" value="2"
+                                                        {{ Session::get('review_rating') == 2 ? 'checked' : '' }}>
+                                                    <label for="rating2">2<i class="icon-star-o"
+                                                            style="color: #fcb941;"></i></label><br>
+                                                    <input type="radio" id="rating3" name="rating" value="3"
+                                                        {{ Session::get('review_rating') == 3 ? 'checked' : '' }}>
+                                                    <label for="rating3">3<i class="icon-star-o"
+                                                            style="color: #fcb941;"></i></label><br>
+                                                    <input type="radio" id="rating4" name="rating" value="4"
+                                                        {{ Session::get('review_rating') == 4 ? 'checked' : '' }}>
+                                                    <label for="rating4">4<i class="icon-star-o"
+                                                            style="color: #fcb941;"></i></label><br>
+                                                    <input type="radio" id="rating5" name="rating" value="5"
+                                                        {{ Session::get('review_rating') == 5 ? 'checked' : '' }}>
+                                                    <label for="rating5">5<i class="icon-star-o"
+                                                            style="color: #fcb941;"></i></label>
+                                                </div><!-- End .col -->
+                                                <div class="col">
+                                                    <h4>Comment</h4>
 
-                                        <div class="review-action">
-                                            <a href="#"><i class="icon-thumbs-up"></i>Helpful (2)</a>
-                                            <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
-                                        </div><!-- End .review-action -->
-                                    </div><!-- End .col-auto -->
-                                </div><!-- End .row -->
-                            </div><!-- End .review -->
+                                                    <div class="contact-form mb-3">
+                                                        <label for="title" class="sr-only">Title</label>
+                                                        <input type="text" class="form-control" id="title"
+                                                            name="title" placeholder="Title *" required
+                                                            value="{{ Session::get('review_title') }}">
 
-                            <div class="review">
-                                <div class="row no-gutters">
-                                    <div class="col-auto">
-                                        <h4><a href="#">John Doe</a></h4>
-                                        <div class="ratings-container">
-                                            <div class="ratings">
-                                                <div class="ratings-val" style="width: 100%;"></div>
-                                                <!-- End .ratings-val -->
-                                            </div><!-- End .ratings -->
-                                        </div><!-- End .rating-container -->
-                                        <span class="review-date">5 days ago</span>
-                                    </div><!-- End .col -->
-                                    <div class="col">
-                                        <h4>Very good</h4>
+                                                        <label for="comment" class="sr-only">Comment</label>
+                                                        <textarea class="form-control" cols="30" rows="4" id="comment" name="comment" required
+                                                            placeholder="Comment *">{{ Session::get('review_comment') }}</textarea>
 
-                                        <div class="review-content">
-                                            <p>Sed, molestias, tempore? Ex dolor esse iure hic veniam laborum blanditiis
-                                                laudantium iste amet. Cum non voluptate eos enim, ab cumque nam, modi, quas
-                                                iure illum repellendus, blanditiis perspiciatis beatae!</p>
-                                        </div><!-- End .review-content -->
+                                                        <button type="submit"
+                                                            class="btn btn-outline-primary-2 btn-minwidth-sm">
+                                                            <span>SUBMIT</span>
+                                                            <i class="icon-long-arrow-right"></i>
+                                                        </button>
+                                                    </div><!-- End .contact-form -->
+                                                </div><!-- End .col-auto -->
+                                            </div><!-- End .row -->
+                                        </div><!-- End .review -->
+                                    </form>
+                                @else
+                                    <form action="{{ url('add-review') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="customer_id"
+                                            value="{{ Session::get('customer_id') }}">
+                                        <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                                        <div class="review">
+                                            <div class="row no-gutters">
+                                                <div class="col-auto">
+                                                    <h4>Rating</h4>
+                                                    <input type="radio" id="rating1" name="rating" value="1">
+                                                    <label for="rating1">1<i class="icon-star-o"
+                                                            style="color: #fcb941;"></i></label><br>
+                                                    <input type="radio" id="rating2" name="rating" value="2">
+                                                    <label for="rating2">2<i class="icon-star-o"
+                                                            style="color: #fcb941;"></i></label><br>
+                                                    <input type="radio" id="rating3" name="rating" value="3">
+                                                    <label for="rating3">3<i class="icon-star-o"
+                                                            style="color: #fcb941;"></i></label><br>
+                                                    <input type="radio" id="rating4" name="rating" value="4">
+                                                    <label for="rating4">4<i class="icon-star-o"
+                                                            style="color: #fcb941;"></i></label><br>
+                                                    <input type="radio" id="rating5" name="rating" value="5"
+                                                        checked>
+                                                    <label for="rating5">5<i class="icon-star-o"
+                                                            style="color: #fcb941;"></i></label>
+                                                </div><!-- End .col -->
+                                                <div class="col">
+                                                    <h4>Comment</h4>
 
-                                        <div class="review-action">
-                                            <a href="#"><i class="icon-thumbs-up"></i>Helpful (0)</a>
-                                            <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
-                                        </div><!-- End .review-action -->
-                                    </div><!-- End .col-auto -->
-                                </div><!-- End .row -->
-                            </div><!-- End .review -->
+                                                    <div class="contact-form mb-3">
+                                                        <label for="title" class="sr-only">Title</label>
+                                                        <input type="text" class="form-control" id="title"
+                                                            name="title" placeholder="Title *" required>
+
+                                                        <label for="comment" class="sr-only">Comment</label>
+                                                        <textarea class="form-control" cols="30" rows="4" id="comment" name="comment" required
+                                                            placeholder="Comment *"></textarea>
+
+                                                        <button type="submit"
+                                                            class="btn btn-outline-primary-2 btn-minwidth-sm">
+                                                            <span>SUBMIT</span>
+                                                            <i class="icon-long-arrow-right"></i>
+                                                        </button>
+                                                    </div><!-- End .contact-form -->
+                                                </div><!-- End .col-auto -->
+                                            </div><!-- End .row -->
+                                        </div><!-- End .review -->
+                                    </form>
+                                @endif
+                            @endif
                         </div><!-- End .container -->
                     </div><!-- End .reviews -->
                 </div><!-- .End .tab-pane -->
@@ -296,7 +375,8 @@
                             </a>
 
                             <div class="product-action-vertical">
-                                <a href="{{ url('add-wishlist/' . $value->product_id) }}" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
+                                <a href="{{ url('add-wishlist/' . $value->product_id) }}"
+                                    class="btn-product-icon btn-wishlist btn-expandable"><span>add to
                                         wishlist</span></a>
                             </div><!-- End .product-action-vertical -->
                             <form action="{{ route('cart.add') }}" method="post">
@@ -322,7 +402,7 @@
                             </div><!-- End .product-price -->
                             <div class="ratings-container">
                                 <div class="ratings">
-                                    <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
+                                    <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
                                 </div><!-- End .ratings -->
                                 <span class="ratings-text">( 2 Reviews )</span>
                             </div><!-- End .rating-container -->
