@@ -19,7 +19,21 @@ class OrderController extends Controller
     public function index()
     {
         $this->AuthLogin();
-        return view('admin.order.all_order', ['data' => Order::all()]);
+        $data = Order::where('order_id', '>', 0)->paginate(10);
+        return view('admin.order.all_order', ['data' => $data]);
+    }
+
+    public function searchorder(Request $request){
+        $searchorder = $request->searchorder;
+
+        $data =Order::where(function($query) use ($searchorder){
+
+            $query->where('order_name','like',"%$searchorder%")
+            ->orWhere('order_phone','like',"%$searchorder%")
+            ->orWhere('order_status','like',"%$searchorder%");
+            })
+            ->paginate(10);
+            return view('admin.order.all_order', ['data' => $data, 'searchorder']);
     }
 
     /**

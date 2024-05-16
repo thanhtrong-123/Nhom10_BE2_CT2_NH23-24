@@ -17,7 +17,19 @@ class CouponController extends Controller
     public function index()
     {
         $this->AuthLogin();
-        return view('admin.coupon.list_coupon', ['data' => Coupon::all()]);
+        $data = Coupon::where('coupon_id', '>', 0)->paginate(10);
+        return view('admin.coupon.list_coupon', ['data' => $data]);
+    }
+
+    public function searchcoupon(Request $request){
+        $searchcoupon = $request->searchcoupon;
+
+        $data =Coupon::where(function($query) use ($searchcoupon){
+
+            $query->where('coupon_name','like',"%$searchcoupon%");
+            })
+            ->paginate(10);
+            return view('admin.coupon.list_coupon', ['data' => $data, 'searchcoupon']);
     }
 
     /**

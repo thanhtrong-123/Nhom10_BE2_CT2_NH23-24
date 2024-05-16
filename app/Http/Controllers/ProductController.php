@@ -26,7 +26,20 @@ class ProductController extends Controller
         //phân trang
         // $data = Product::with('category', 'brand')->paginate(5); // Lấy 10 sản phẩm mỗi trang
         $this->AuthLogin();
-        return view('admin.products.all_product', ['data' => Product::all()]);
+        $data = Product::where('product_id', '>', 0)->paginate(10);
+        return view('admin.products.all_product', ['data' => $data]);
+    }
+
+    public function searchproduct(Request $request){
+        $searchproduct = $request->searchproduct;
+
+        $data =Product::where(function($query) use ($searchproduct){
+
+            $query->where('product_name','like',"%$searchproduct%")
+            ->orWhere('product_desc','like',"%$searchproduct%");
+            })
+            ->paginate(10);
+            return view('admin.products.all_product', ['data' => $data, 'searchproduct']);
     }
 
     /**

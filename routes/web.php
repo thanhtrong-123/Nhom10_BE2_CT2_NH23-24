@@ -73,24 +73,29 @@ Route::get('/send-mail', [PageController::class, 'send_mail'])->name('send_mail'
 Route::resource('categoryProduct',CategoryController ::class);
 Route::get('/unactive-category-product/{category_product_id}',[CategoryController::class, 'unactive_category_product']);
 Route::get('/active-category-product/{category_product_id}',[CategoryController::class, 'active_category_product']);
+Route::get('/searchcate', [CategoryController::class, 'searchcate']);
 
 // //Brand Product
 Route::resource('brandProduct', BrandController ::class);
 Route::get('/unactive-brand-product/{brand_product_id}',[BrandController::class, 'unactive_brand_product']);
 Route::get('/active-brand-product/{brand_product_id}',[BrandController::class, 'active_brand_product']);
+Route::get('/searchbrand', [BrandController::class, 'searchbrand']);
 
 // Customers
 Route::resource('customer', CustomerController::class);
+Route::get('/searchcustomer', [CustomerController::class, 'searchcustomer']);
 
 // Sliders
 Route::resource('slider', SliderController::class);
 Route::get('/unactive-slider/{slider_id}',[SliderController::class, 'unactive_slider']);
 Route::get('/active-slider/{slider_id}',[SliderController::class, 'active_slider']);
+Route::get('/searchslider', [SliderController::class, 'searchslider']);
 
 // Products
 Route::resource('products', ProductController::class);
 Route::get('/unactive-product/{product_id}',[ProductController::class, 'unactive_product']);
 Route::get('/active-product/{product_id}',[ProductController::class, 'active_product']);
+Route::get('/searchproduct', [ProductController::class, 'searchproduct']);
 
 // Order_detail
 Route::get('/orderdetails/{order_id}', [OrderDetailController::class, 'index']);
@@ -103,6 +108,7 @@ Route::get('order', [CategoryController::class, 'order']);
 
 //Order
 Route::resource('order', OrderController::class);
+Route::get('/searchorder', [OrderController::class, 'searchorder']);
 
 //Delivery
 
@@ -114,6 +120,7 @@ Route::post('/update-delivery',[DeliveryController::class, 'update_delivery']);
 
 //Coupon
 Route::resource('couponCode', CouponController ::class);
+Route::get('/searchcoupon', [CouponController::class, 'searchcoupon']);
 
 //checkout
 Route::post('/add-checkout',[CheckoutController::class, 'add_checkout']);

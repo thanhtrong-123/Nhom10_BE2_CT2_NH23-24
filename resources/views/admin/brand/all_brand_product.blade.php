@@ -18,11 +18,15 @@
             <div class="col-sm-4">
             </div>
             <div class="col-sm-3">
-                <div class="input-group">
-                    <input type="text" class="input-sm form-control" placeholder="Search">
-                    <span class="input-group-btn">
-                        <button class="btn btn-sm btn-default" type="button">Go!</button>
-                    </span>
+                <div class="form-group">
+                    <form action="/searchbrand" method="get">
+                        <div class="input-group">
+                            <input class="input-sm form-control" placeholder="Search" name="searchbrand">
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="submit">Search</button>
+                            </span>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

@@ -23,6 +23,18 @@ class CategoryController extends Controller
         
     }
 
+    public function searchcate(Request $request){
+        $searchcate = $request->searchcate;
+
+        $data =Category::where(function($query) use ($searchcate){
+
+            $query->where('category_name','like',"%$searchcate%")
+            ->orWhere('category_desc','like',"%$searchcate%");
+            })
+            ->paginate(5);
+            return view('admin.category.all_category_product', ['data' => $data, 'searchcate']);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

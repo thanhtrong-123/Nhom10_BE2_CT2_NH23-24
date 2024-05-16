@@ -18,11 +18,15 @@
             <div class="col-sm-4">
             </div>
             <div class="col-sm-3">
-                <div class="input-group">
-                    <input type="text" class="input-sm form-control" placeholder="Search">
-                    <span class="input-group-btn">
-                        <button class="btn btn-sm btn-default" type="button">Go!</button>
-                    </span>
+                <div class="form-group">
+                    <form action="/searchcoupon" method="get">
+                        <div class="input-group">
+                            <input class="input-sm form-control" placeholder="Search" name="searchcoupon">
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="submit">Search</button>
+                            </span>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -52,35 +56,34 @@
                         <td>{{ $couponCode->coupon_code }}</td>
                         <td>{{ $couponCode->coupon_qty }}</td>
                         <td><span class="text-ellipsis">
-                        <?php
+                                <?php
                         if($couponCode->coupon_condition==1){
                         ?>
-                        Giảm theo %
-                        <?php
+                                Giảm theo %
+                                <?php
                         }else{
                         ?>
-                        Giảm theo tiền
-                        <?php
+                                Giảm theo tiền
+                                <?php
                         }
                         ?>
-                        </span></td>
+                            </span></td>
                         <td><span class="text-ellipsis">
-                        <?php
+                                <?php
                         if($couponCode->coupon_condition==1){
                         ?>
-                        Giảm {{$couponCode->coupon_number}} %
-                        <?php
+                                Giảm {{$couponCode->coupon_number}} %
+                                <?php
                         }else{
                         ?>
-                        Giảm {{$couponCode->coupon_number}} k
-                        <?php
+                                Giảm {{$couponCode->coupon_number}} k
+                                <?php
                         }
                         ?>
-                        </span></td>
+                            </span></td>
 
                         <td>
-                        <form action="{{ URL::to('couponCode/' . $couponCode->coupon_id) }}"
-                                method="post">
+                            <form action="{{ URL::to('couponCode/' . $couponCode->coupon_id) }}" method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('delete') }}
                                 <button type="submit" class="active styling-edit"
@@ -95,15 +98,11 @@
         </div>
         <footer class="panel-footer">
             <div class="row">
-
-                <div class="col-sm-5 text-center">
-                    <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
-                </div>
-                <div class="col-sm-7 text-right text-center-xs">
-                    <ul class="pagination pagination-sm m-t-none m-b-none">
-                    {{-- {!!$admin->links()!!} --}}
-                    </ul>
-                </div>
+                <nav aria-label="Page navigation">
+                    <div class="paginationWrap">
+                        {{ $data->links('template_pagination') }}
+                    </div>
+                </nav>
             </div>
         </footer>
     </div>

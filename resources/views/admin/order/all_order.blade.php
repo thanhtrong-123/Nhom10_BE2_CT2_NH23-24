@@ -18,11 +18,15 @@
             <div class="col-sm-4">
             </div>
             <div class="col-sm-3">
-                <div class="input-group">
-                    <input type="text" class="input-sm form-control" placeholder="Search">
-                    <span class="input-group-btn">
-                        <button class="btn btn-sm btn-default" type="button">Go!</button>
-                    </span>
+                <div class="form-group">
+                    <form action="/searchorder" method="get">
+                        <div class="input-group">
+                            <input class="input-sm form-control" placeholder="Search" name="searchorder">
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="submit">Search</button>
+                            </span>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -70,15 +74,15 @@
                                 <?php
                                 if ($order->order_status == 0) {
                                 ?>
-                                    <p>Chưa giao hàng</a>
+                                <p>Chưa giao hàng</a>
                                     <?php
                                 } else if ($order->order_status == 1) {
                                     ?>
-                                    <p>Đang giao hàng</p>
+                                <p>Đang giao hàng</p>
                                 <?php
                                 } else {
                                 ?>
-                                    <p>Đã giao hàng</p>
+                                <p>Đã giao hàng</p>
                                 <?php
                                 }
                                 ?>
@@ -91,15 +95,19 @@
                             </a>
                         </td>
                         <td>
-                            <div class="edit" style="border: 1px solid #000;  text-align: center; border-radius: 2px; margin-bottom:5px">
-                                <a style="pading: 10px;" href="{{ URL::to('order/' . $order->order_id . '/edit') }}" class="active styling-edit" ui-toggle-class="">
+                            <div class="edit"
+                                style="border: 1px solid #000;  text-align: center; border-radius: 2px; margin-bottom:5px">
+                                <a style="pading: 10px;" href="{{ URL::to('order/' . $order->order_id . '/edit') }}"
+                                    class="active styling-edit" ui-toggle-class="">
                                     <i class="fa fa-pencil-square-o text-success text-active"></i>
                                 </a>
                             </div>
                             <form action="{{ URL::to('order/' . $order->order_id) }}" method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('delete') }}
-                                <button type="submit" class="active styling-edit" onclick="return confirm('Bạn có chắc là muốn xóa đơn hàng này không?')"><i class="fa fa-times text-danger text"></i></button>
+                                <button type="submit" class="active styling-edit"
+                                    onclick="return confirm('Bạn có chắc là muốn xóa đơn hàng này không?')"><i
+                                        class="fa fa-times text-danger text"></i></button>
                             </form>
                         </td>
 
@@ -110,15 +118,11 @@
         </div>
         <footer class="panel-footer">
             <div class="row">
-
-                <div class="col-sm-5 text-center">
-                    <small class="text-muted inline m-t-sm m-b-sm">Hiển thị 20-30 của 50 mục</small>
-                </div>
-                <div class="col-sm-7 text-right text-center-xs">
-                    <ul class="pagination pagination-sm m-t-none m-b-none">
-
-                    </ul>
-                </div>
+                <nav aria-label="Page navigation">
+                    <div class="paginationWrap">
+                        {{ $data->links('template_pagination') }}
+                    </div>
+                </nav>
             </div>
         </footer>
     </div>

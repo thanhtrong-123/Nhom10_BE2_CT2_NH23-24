@@ -18,9 +18,20 @@ class BrandController extends Controller
     public function index()
     {
         $this->AuthLogin();
-        $data = Brand::where('brand_id', '>', 0)->paginate(4);
-        return view('admin.brand.all_brand_product', ['data' => $data]);
-        
+        $data = Brand::where('brand_id', '>', 0)->paginate(5);
+        return view('admin.brand.all_brand_product', ['data' => $data]); 
+    }
+
+    public function searchbrand(Request $request){
+        $searchbrand = $request->searchbrand;
+
+        $data =Brand::where(function($query) use ($searchbrand){
+
+            $query->where('brand_name','like',"%$searchbrand%")
+            ->orWhere('brand_desc','like',"%$searchbrand%");
+            })
+            ->paginate(5);
+            return view('admin.brand.all_brand_product', ['data' => $data, 'searchbrand']);
     }
 
     /**

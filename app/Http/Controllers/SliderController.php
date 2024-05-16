@@ -19,8 +19,20 @@ class SliderController extends Controller
     {
         // Show all sliders
         $this->AuthLogin();
-        $data = Slider::where('slider_id', '>', 0)->paginate(4);
+        $data = Slider::where('slider_id', '>', 0)->paginate(5);
         return view('admin.slider.list_slider', ['data' => $data]);
+    }
+
+    public function searchslider(Request $request){
+        $searchslider = $request->searchslider;
+
+        $data =Slider::where(function($query) use ($searchslider){
+
+            $query->where('slider_name','like',"%$searchslider%")
+            ->orWhere('slider_desc','like',"%$searchslider%");
+            })
+            ->paginate(5);
+            return view('admin.slider.list_slider', ['data' => $data, 'searchslider']);
     }
 
     /**

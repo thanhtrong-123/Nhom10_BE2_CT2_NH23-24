@@ -22,6 +22,19 @@ class CustomerController extends Controller
         return view('admin.users.all_users', ['data' => $data]);
     }
 
+    public function searchcustomer(Request $request){
+        $searchcustomer = $request->searchcustomer;
+
+        $data =Customer::where(function($query) use ($searchcustomer){
+
+            $query->where('customer_name','like',"%$searchcustomer%")
+            ->orWhere('customer_email','like',"%$searchcustomer%")
+            ->orWhere('customer_phone','like',"%$searchcustomer%");
+            })
+            ->paginate(10);
+            return view('admin.users.all_users', ['data' => $data, 'searchcustomer']);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

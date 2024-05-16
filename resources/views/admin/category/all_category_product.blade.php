@@ -18,11 +18,15 @@
             <div class="col-sm-4">
             </div>
             <div class="col-sm-3">
-                <div class="input-group">
-                    <input type="text" class="input-sm form-control" placeholder="Search">
-                    <span class="input-group-btn">
-                        <button class="btn btn-sm btn-default" type="button">Go!</button>
-                    </span>
+                <div class="form-group">
+                    <form action="/searchcate" method="get">
+                        <div class="input-group">
+                            <input class="input-sm form-control" placeholder="Search" name="searchcate">
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="submit">Search</button>
+                            </span>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -72,12 +76,14 @@
                             </span></td>
 
                         <td>
-                            <div class="edit" style="border: 1px solid #000;  text-align: center; border-radius: 2px; margin-bottom:5px" >
-                                <a style="pading: 10px;" href="{{URL::to('/categoryProduct/'.$categoryProduct->category_id . '/edit') }}"
-                                class="active styling-edit" ui-toggle-class="">
-                                <i class="fa fa-pencil-square-o text-success text-active"></i></a>
+                            <div class="edit"
+                                style="border: 1px solid #000;  text-align: center; border-radius: 2px; margin-bottom:5px">
+                                <a style="pading: 10px;"
+                                    href="{{URL::to('/categoryProduct/'.$categoryProduct->category_id . '/edit') }}"
+                                    class="active styling-edit" ui-toggle-class="">
+                                    <i class="fa fa-pencil-square-o text-success text-active"></i></a>
                             </div>
-                            
+
 
                             <form action="{{ URL::to('categoryProduct/' . $categoryProduct->category_id) }}"
                                 method="post">
