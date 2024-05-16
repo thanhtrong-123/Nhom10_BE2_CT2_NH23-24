@@ -14,5 +14,10 @@ class Customer extends Model
     {
         return $this->hasMany(Order::class, 'customer_id');
     }
+
+    public function review()
+    {
+        return $this->hasMany(Review::class, 'customer_id');
+    }
 }
 

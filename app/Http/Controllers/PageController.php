@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -49,7 +50,8 @@ class PageController extends Controller
             ['product_id', '<>', $product_id],
             ['category_id', '=', $product->category_id]
         ])->get();
-        return view('product')->with('product', $product)->with('same_products', $same_products);
+        $reviews = Review::where('product_id', $product_id)->get();
+        return view('product')->with('product', $product)->with('same_products', $same_products)->with('reviews', $reviews);
     }
 
     public function contact()
