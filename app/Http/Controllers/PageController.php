@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\DB;
 use Mail;
 
@@ -35,7 +37,8 @@ class PageController extends Controller
 
     public function dashboard_user()
     {
-        return view('dashboard_user');
+        $orders = Order::where('customer_id', Session::get('customer_id'))->get()->sortByDesc('created_at')->all();
+        return view('dashboard_user')->with('orders', $orders);
     }
 
     public function login()
