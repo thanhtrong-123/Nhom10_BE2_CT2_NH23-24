@@ -151,12 +151,17 @@ class BrandController extends Controller
     {
         $this->AuthLogin();
         $data = Brand::find($id);
-        // Xóa image cua brand
-        Storage::delete('public/images/brands/' . $data->brand_image);
-        // Delete Brand
-        Brand::destroy($id);
-        Session::put('message','Xóa thương hiệu sản phẩm thành công');
-        return Redirect::to('brandProduct');
+        if ($data->products()->exists()) {
+            Session::put('message','Xóa thương hiệu sản phẩm thất bại');
+            return Redirect::to('brandProduct');
+        }else{
+            // Xóa image cua brand
+            Storage::delete('public/images/brands/' . $data->brand_image);
+            // Delete Brand
+            Brand::destroy($id);
+            Session::put('message','Xóa thương hiệu sản phẩm thành công');
+            return Redirect::to('brandProduct');
+        } 
     }
 
     public function unactive_brand_product($brand_product_id){

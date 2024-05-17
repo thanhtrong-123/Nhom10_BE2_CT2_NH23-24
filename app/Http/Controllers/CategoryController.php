@@ -121,9 +121,15 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $this->AuthLogin();
-        Category::destroy($id);
-        Session::put('message','Xóa danh mục sản phẩm thành công');
-        return Redirect::to('categoryProduct');
+        $data = Category::find($id);
+        if ($data->products()->exists()) {
+            Session::put('message','Xóa danh mục sản phẩm thất bại');
+            return Redirect::to('categoryProduct');
+        }else{
+            Category::destroy($id);
+            Session::put('message','Xóa danh mục sản phẩm thành công');
+            return Redirect::to('categoryProduct');
+        }
     }
     public function unactive_category_product($category_product_id){
         $this->AuthLogin();
