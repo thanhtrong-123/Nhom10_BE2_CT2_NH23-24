@@ -8,6 +8,10 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\Slider;
+use App\Models\City;
+use App\Models\Province;
+use App\Models\Wards;
+use App\Models\Feeship;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -32,7 +36,11 @@ class PageController extends Controller
 
     public function checkout()
     {
-        return view('checkout');
+        $city = City::orderby('matp','ASC')->get();
+        // $province = Province::orderby('maqh','ASC')->get();
+        // $wards = Wards::orderby('xaid','ASC')->get();
+        return view('checkout')->with('city',$city);
+        //->with('province',$province)->with('wards',$wards);
     }
 
     public function dashboard_user()
@@ -131,5 +139,24 @@ class PageController extends Controller
             ['product_name', 'like', '%' . $request->q . '%'] 
         ])->paginate(6)->withQueryString();
         return view('search')->with('products', $products);
+    }
+    public function calculate_fee(Request $request){
+        $data = $request->all();
+        if($data['matp']){
+            $feeship = Feeship::where('fee_matp',$data['matp'])->where('fee_maqh',$data['maqh'])->where('fee_xaid',$data['xaid'])->get();
+            if($feeship){
+                $count_feeship = $feeship->count();
+                if($count_feeship>0){
+                     foreach($feeship as $key => $fee){
+                        Session::put('fee',$fee->fee_feeship);
+                        Session::save();
+                    }
+                }else{ 
+                    Session::put('fee',25000);
+                    Session::save();
+                }
+            }
+           
+        }
     }
 }

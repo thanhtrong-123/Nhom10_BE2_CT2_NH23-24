@@ -18,13 +18,73 @@
 <div class="page-content">
     <div class="checkout">
         <div class="container">
-            <div class="checkout-discount">
-                <form action="#">
-                    <input type="text" class="form-control" required id="checkout-discount-input">
-                    <label for="checkout-discount-input" class="text-truncate">Have a coupon? <span>Click
-                            here to enter your code</span></label>
-                </form>
-            </div><!-- End .checkout-discount -->
+            <div class="row">
+                <div class="col-3">
+                    <div class="checkout-discount">
+                        @if(Session::get('cart'))
+                        <form action="{{ URL::to('checkcoupon') }}" method="post">
+                            {{ csrf_field() }}
+                            <?php
+	                        
+	                        $message = Session::get('message');
+	                        if($message){
+		                        echo '<span class="text-alert" style="color:red;">'.$message.'</span>';
+		                    Session::put('message',null);
+	                        }
+	                        ?>
+                            <input type="text" class="form-control" required id="checkout-discount-input" name="coupon"
+                                placeholder="Click here to enter your code">
+
+                            <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+                                Tính mã giảm giá
+                            </button>
+                            @if(Session::get('coupon'))
+                            <a class="btn btn-outline-primary-2 btn-order btn-block" href="/del-coupon">
+                                Xóa mã giảm giá
+                            </a>
+                            @endif
+                        </form>
+                        @endif
+                    </div><!-- End .checkout-discount -->
+                </div>
+                <div class="col-9">
+
+                    <form>
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Chọn thành phố</label>
+                            <select name="city" id="city" class="form-control input-sm m-bot15 choose city">
+
+                                <option value="">--Chọn tỉnh thành phố--</option>
+                                @foreach($city as $key => $ci)
+                                <option value="{{$ci->matp}}">{{$ci->name_city}}</option>
+                                @endforeach
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Chọn quận huyện</label>
+                            <select name="province" id="province" class="form-control input-sm m-bot15 province choose">
+                                <option value="">--Chọn quận huyện--</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Chọn xã phường</label>
+                            <select name="wards" id="wards" class="form-control input-sm m-bot15 wards">
+                                <option value="">--Chọn xã phường--</option>
+                            </select>
+                        </div>
+
+
+                        <input type="button" value="Tính phí vận chuyển" name="calculate_order"
+                            class="btn btn-primary btn-sm calculate_delivery">
+                    </form>
+                </div>
+            </div>
+
+
 
             <form action="{{ URL::to('add-checkout') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -40,12 +100,18 @@
                     <div class="col-lg-8">
                         <h2 class="checkout-title">Billing Details</h2>
                         @if (Session::has('customer_name'))
-                        <label>Tên Khách Hàng</label>
-                        <input type="text" class="form-control" name="customer_id" value="{{ Session::get('customer_id') }}">
+                        <label>Tên Khách Hàng: <span
+                                style="margin: 10px; font-size: 20px;">{{ Session::get('customer_name') }}</span></label>
+
+                        <input type="hidden" class="form-control" name="customer_id"
+                            value="{{ Session::get('customer_id') }}">
+
+
+
                         @else
                         <li><a href="{{ route('login') }}"><i class="icon-user"></i> Login</a></li>
                         @endif
-                       
+                        <br>
                         <label>Tên đơn dặt hàng</label>
                         <input type="text" class="form-control" name="order_name" required>
                         <label>Địa chỉ</label>
@@ -69,25 +135,85 @@
                                 <tbody>
                                     @foreach ($cart->list() as $key => $item)
                                     <tr>
-                                        <input type="text" name="product_id_checkout" value="{{ $item['product_id'] }}">
-                                        <td><a href="{{ url('product/' . $key) }}">{{ $item['product_name'] }}</a><input type="hidden" name="product_name_checkout" value="{{ $item['product_name'] }}"></td>
-                                        <td class="text-center">{{$item['qty']}} <input type="hidden" name="product_quantity_checkout" value="{{$item['qty']}}"></td>
+                                        <input type="hidden" name="product_id_checkout"
+                                            value="{{ $item['product_id'] }}">
+                                        <td><a href="{{ url('product/' . $key) }}">{{ $item['product_name'] }}</a><input
+                                                type="hidden" name="product_name_checkout"
+                                                value="{{ $item['product_name'] }}"></td>
+                                        <td class="text-center">{{$item['qty']}} <input type="hidden"
+                                                name="product_quantity_checkout" value="{{$item['qty']}}"></td>
                                         <td class="text-center">
-                                            {{ number_format($item['product_price'] * $item['qty']) }} <input type="hidden" name="product_price_checkout" value="{{ number_format($item['product_price'] * $item['qty']) }}"></td>
+                                            {{ number_format($item['product_price'] * $item['qty']) }} <input
+                                                type="hidden" name="product_price_checkout"
+                                                value="{{ $item['product_price'] * $item['qty'] }}"></td>
                                     </tr>
                                     @endforeach
                                     <tr class="summary-subtotal">
                                         <td>Subtotal:</td>
-                                        <td class="text-center" name="cart">{{ number_format($cart->getTotalMoney()) }}<input type="hidden" name="cart" value="{{ $cart->getTotalMoney() }}"></td>
+                                        <td class="text-center">
+                                            {{ number_format($cart->getTotalMoney()) }}</td>
                                     </tr><!-- End .summary-subtotal -->
                                     <tr>
-                                        <td>Shipping:</td>
-                                        <td>Free shipping</td>
+                                        <td>Mã giảm giá:</td>
+                                        <td class="text-center">
+                                            @if(Session::get('coupon'))
+                                            @foreach(Session::get('coupon') as $key => $cou)
+                                            @if($cou['coupon_condition']==1)
+                                            {{$cou['coupon_number']}} %
+
+                                            <?php
+                                                    $tongTienGiamGia = ($cart->getTotalMoney()*$cou['coupon_number'])/100;
+                                                    $total_coupon = $cart->getTotalMoney() - $tongTienGiamGia;
+                                                    ?>
+                                            @elseif($cou['coupon_condition']==2)
+                                            {{number_format($cou['coupon_number'])}} vnđ
+                                            @php
+                                            $total_coupon = $cart->getTotalMoney() - $cou['coupon_number'];
+                                            @endphp
+                                            @endif
+                                            @endforeach
+                                            @endif
+                                        </td>
                                     </tr>
+                                    <tr>
+                                        <td>Số tiền giảm:</td>
+                                        <td class="text-center">
+                                            @if(Session::get('coupon'))
+                                            @foreach(Session::get('coupon') as $key => $cou)
+                                            @if($cou['coupon_condition']==1)
+                                            {{number_format($tongTienGiamGia)}}
+                                            @elseif($cou['coupon_condition']==2)
+                                            {{number_format($cou['coupon_number'])}}
+                                            @php
+                                            $total_coupon = $cart->getTotalMoney() - $cou['coupon_number'];
+                                            @endphp
+                                            @endif
+                                            @endforeach
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shipping:</td>
+                                        <td class="text-center">{{number_format(Session::get('fee'))}}</td>
+                                        @php
+                                            $fee = Session::get('fee');
+                                        @endphp
+                                    </tr>
+                                    @if(Session::get('coupon'))
                                     <tr class="summary-total">
                                         <td>Total:</td>
-                                        <td class="text-center">{{ number_format($cart->getTotalMoney()) }}</td>
+                                        <td class="text-center" name="cart">{{number_format($total_coupon - $fee)}}
+                                            <input type="hidden" name="cart" value="{{$total_coupon - $fee}}">
+                                        </td>
                                     </tr><!-- End .summary-total -->
+                                    @else
+                                    <tr class="summary-total">
+                                        <td>Total:</td>
+                                        <td class="text-center" name="cart">{{$cart->getTotalMoney() - $fee}}
+                                            <input type="hidden" name="cart" value="{{$cart->getTotalMoney() - $fee}}">
+                                        </td>
+                                    </tr><!-- End .summary-total -->
+                                    @endif
                                 </tbody>
                             </table><!-- End .table table-summary -->
 

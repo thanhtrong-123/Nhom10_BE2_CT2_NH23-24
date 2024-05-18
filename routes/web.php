@@ -133,3 +133,6 @@ Route::get('/searchcoupon', [CouponController::class, 'searchcoupon']);
 
 //checkout
 Route::post('/add-checkout',[CheckoutController::class, 'add_checkout']);
+Route::post('/checkcoupon',[CheckoutController::class, 'checkcoupon']);
+Route::get('/del-coupon',[CheckoutController::class, 'del_coupon']);
+Route::post('calculate-fee', [PageController::class, 'calculate_fee'])->name('calculate_fee');

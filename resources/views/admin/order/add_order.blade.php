@@ -58,9 +58,7 @@
                         <button type="submit" name="add_slider" class="btn btn-info">Thêm Đơn hàng</button>
                     </form>
                 </div>
-
             </div>
         </section>
-
     </div>
     @endsection

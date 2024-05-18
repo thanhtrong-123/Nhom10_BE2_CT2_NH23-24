@@ -61,14 +61,10 @@
 
                             </select>
                         </div>
-
                         <button type="submit" name="add_order" class="btn btn-info">Cập nhật đơn hàng</button>
                     </form>
-
                 </div>
-
             </div>
         </section>
-
     </div>
     @endsection
