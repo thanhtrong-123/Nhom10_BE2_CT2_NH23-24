@@ -18,6 +18,7 @@ use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ChangePassword;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -93,6 +94,10 @@ Route::get('/searchbrand', [BrandController::class, 'searchbrand']);
 // Customers
 Route::resource('customer', CustomerController::class);
 Route::get('/searchcustomer', [CustomerController::class, 'searchcustomer']);
+// Route::get('/changepw', function() {
+//     return view('dashboard_user');
+// })->middleware('auth');
+
 
 // Sliders
 Route::resource('slider', SliderController::class);
@@ -136,3 +141,5 @@ Route::post('/add-checkout',[CheckoutController::class, 'add_checkout']);
 Route::post('/checkcoupon',[CheckoutController::class, 'checkcoupon']);
 Route::get('/del-coupon',[CheckoutController::class, 'del_coupon']);
 Route::post('calculate-fee', [PageController::class, 'calculate_fee'])->name('calculate_fee');
+//change password
+Route::post('/changepw', [ChangePassword::class, 'updatepassword']);

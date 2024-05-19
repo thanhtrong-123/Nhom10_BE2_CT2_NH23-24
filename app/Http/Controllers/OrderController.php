@@ -11,7 +11,7 @@ use DB;
 
 class OrderController extends Controller
 {
-/**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -23,17 +23,18 @@ class OrderController extends Controller
         return view('admin.order.all_order', ['data' => $data]);
     }
 
-    public function searchorder(Request $request){
+    public function searchorder(Request $request)
+    {
         $searchorder = $request->searchorder;
 
-        $data =Order::where(function($query) use ($searchorder){
+        $data = Order::where(function ($query) use ($searchorder) {
 
-            $query->where('order_name','like',"%$searchorder%")
-            ->orWhere('order_phone','like',"%$searchorder%")
-            ->orWhere('order_status','like',"%$searchorder%");
-            })
+            $query->where('order_name', 'like', "%$searchorder%")
+                ->orWhere('order_phone', 'like', "%$searchorder%")
+                ->orWhere('order_status', 'like', "%$searchorder%");
+        })
             ->paginate(10);
-            return view('admin.order.all_order', ['data' => $data, 'searchorder']);
+        return view('admin.order.all_order', ['data' => $data, 'searchorder']);
     }
 
     /**
@@ -47,12 +48,12 @@ class OrderController extends Controller
         $this->AuthLogin();
         $customer_order = DB::table('customers')->orderby('customer_id', 'desc')->get();
         return view('admin.order.add_order')->with('customer_order', $customer_order);
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+        /**
+         * Store a newly created resource in storage.
+         *
+         * @param  \Illuminate\Http\Request  $request
+         * @return \Illuminate\Http\Response
+         */
     }
     public function store(Request $request)
     {
@@ -70,7 +71,6 @@ class OrderController extends Controller
         $data->save();
         Session::put('message', 'Thêm sản phẩm thành công');
         return Redirect::to('order');
-
     }
 
     /**
@@ -110,7 +110,7 @@ class OrderController extends Controller
         //
         $this->AuthLogin();
         $data = Order::find($id);
-        
+
         $data->customer_id = $request->customer_order;
         $data->payment_id = $request->payment_id;
         $data->order_name = $request->order_name;
@@ -136,17 +136,15 @@ class OrderController extends Controller
         Order::destroy($id);
         Session::put('message', 'Xóa đơn hàng thành công');
         return Redirect::to('order');
-
     }
 
-    public function AuthLogin(){
+    public function AuthLogin()
+    {
         $admin_id = Session::get('admin_id');
-        if($admin_id){
+        if ($admin_id) {
             return Redirect::to('dashboard');
-        }else{
+        } else {
             return Redirect::to('admin')->send();
         }
     }
-
 }
-    

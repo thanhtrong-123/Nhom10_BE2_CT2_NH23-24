@@ -6,6 +6,9 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class CustomerController extends Controller
 {
@@ -132,4 +135,5 @@ class CustomerController extends Controller
             return Redirect::to('admin')->send();
         }
     }
+    
 }
