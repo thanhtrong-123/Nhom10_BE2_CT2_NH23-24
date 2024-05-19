@@ -14,7 +14,17 @@
         </ol>
     </div><!-- End .container -->
 </nav><!-- End .breadcrumb-nav -->
-
+<div class="message-checkout text-center">
+    <h3>
+        <?php
+	                        
+	                        $message = Session::get('message');
+	                        if($message){
+		                        echo '<span class="text-alert" style="color:red;">'.$message.'</span>';
+		                    Session::put('message',null);
+	                        }
+	                        ?></h3>
+</div>
 <div class="page-content">
     <div class="checkout">
         <div class="container">
@@ -24,14 +34,7 @@
                         @if(Session::get('cart'))
                         <form action="{{ URL::to('checkcoupon') }}" method="post">
                             {{ csrf_field() }}
-                            <?php
-	                        
-	                        $message = Session::get('message');
-	                        if($message){
-		                        echo '<span class="text-alert" style="color:red;">'.$message.'</span>';
-		                    Session::put('message',null);
-	                        }
-	                        ?>
+
                             <input type="text" class="form-control" required id="checkout-discount-input" name="coupon"
                                 placeholder="Click here to enter your code">
 
@@ -196,7 +199,7 @@
                                         <td>Shipping:</td>
                                         <td class="text-center">{{number_format(Session::get('fee'))}}</td>
                                         @php
-                                            $fee = Session::get('fee');
+                                        $fee = Session::get('fee');
                                         @endphp
                                     </tr>
                                     @if(Session::get('coupon'))

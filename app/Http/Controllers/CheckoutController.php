@@ -25,27 +25,33 @@ class CheckoutController extends Controller
     {
         //$this->AuthLogin();
         $customer_id = Session::get('customer_id');
+        $cart = Session::get('cart');
         if($customer_id){
         $data = new Order;
-        $data2 = new OrderDetail;
+        $total_quantity = array_sum(array_column($cart, 'qty'));
         $data->order_id = $request->order_id;
         $data->customer_id = $request->customer_id;
         $data->payment_id = $request->cart;
         $data->order_name = $request->order_name;
         $data->order_address = $request->order_address;
         $data->order_phone = $request->order_phone;
-        $data->order_total = $request->product_quantity_checkout;
+        $data->order_total = $total_quantity;
         $data->order_status = $request->has('order_status') ? $request->order_status : 0;
         $data->save();
-        
+
+       
         $order_id = $data->getKey();
-        $data2->order_details_id = $request->order_details_id;
-        $data2->order_id = $order_id;
-        $data2->product_id = $request->product_id_checkout;
-        $data2->product_name = $request->product_name_checkout;
-        $data2->product_price = $request->product_price_checkout;
-        $data2->product_sales_quantily = $request->product_quantity_checkout;
-        $data2->save();
+        foreach ($cart as $key => $item){
+            $data2 = new OrderDetail;
+            $data2->order_details_id = $request->order_details_id;
+            $data2->order_id = $order_id;
+            $data2->product_id = $item['product_id'];
+            $data2->product_name = $item['product_name'];
+            $data2->product_price = $item['product_price'];
+            $data2->product_sales_quantily = $item['qty'];
+            $data2->save();
+        }
+        
         Session::put('message', 'Thanh toán đơn hàng thành công');
         return Redirect::to('checkout');
         }else{  
