@@ -53,7 +53,7 @@ class CheckoutController extends Controller
         }
         
         Session::put('message', 'Thanh toán đơn hàng thành công');
-        return Redirect::to('checkout');
+        return Redirect::to('dashboard_user');
         }else{  
             return Redirect::to('login')->send();
         }
