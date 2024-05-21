@@ -35,29 +35,13 @@ class CheckoutController extends Controller
         $data->order_name = $request->order_name;
         $data->order_address = $request->order_address;
         $data->order_phone = $request->order_phone;
-<<<<<<< Updated upstream
         $data->order_total = $total_quantity;
         $data->order_status = $request->has('order_status') ? $request->order_status : 0;
-        $data->save();
-
-       
+        $data->save();       
         $order_id = $data->getKey();
         foreach ($cart as $key => $item){
             $data2 = new OrderDetail;
             $data2->order_details_id = $request->order_details_id;
-=======
-        foreach (Session::get('cart') as $key => $item){
-            $cart = Session::get('cart');
-            $data->order_total = array_sum(array_column($cart, 'qty'));
-        }
-        $data->order_total = $request->product_quantity_checkout;
-        $data->order_status = $request->has('order_status') ? $request->order_status : 0;
-        $data->save();
-        $cart = Session::get('cart');
-        $order_id = $data->getKey();
-        foreach ($cart as $key => $item){
-            $data2 = new OrderDetail;
->>>>>>> Stashed changes
             $data2->order_id = $order_id;
             $data2->product_id = $item['product_id'];
             $data2->product_name = $item['product_name'];

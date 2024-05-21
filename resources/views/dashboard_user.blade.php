@@ -47,26 +47,8 @@
                 <div class="col-md-8 col-lg-9">
                     <div class="tab-content">
                         @if (Session::has('customer_name'))
-<<<<<<< Updated upstream
-                            <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel"
-                                aria-labelledby="tab-dashboard-link">
-                                <p style="font-size:18px;">Hello <span class="font-weight-normal text-dark"
-                                        style="font-size:22px;">{{ Session::get('customer_name') }}</span> (not
-                                    <span style="font-size:22px;"
-                                        class="font-weight-normal text-dark">{{ Session::get('customer_name') }}</span>?
-                                    <a href="{{ URL::to('/logoutuser') }}">Log out</a>)
-                                    <br>
-                                    From your account dashboard you can view your <a href="#tab-orders"
-                                        class="tab-trigger-link link-underline">recent orders</a>, manage your <a
-                                        href="#tab-address" class="tab-trigger-link">shipping and billing addresses</a>,
-                                    and
-                                    <a href="#tab-account" class="tab-trigger-link">edit your password and account
-                                        details</a>.
-                                </p>
-                            </div><!-- .End .tab-pane -->
-=======
-                        <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel"
-                            aria-labelledby="tab-dashboard-link">
+                       <div class="tab-pane fade show active" id="tab-dashboard"
+                            role="tabpanel" aria-labelledby="tab-dashboard-link">
                             <p style="font-size:18px;">Hello <span class="font-weight-normal text-dark"
                                     style="font-size:22px;">{{ Session::get('customer_name') }}</span> (not
                                 <span style="font-size:22px;"
@@ -80,173 +62,125 @@
                                 <a href="#tab-account" class="tab-trigger-link">edit your password and account
                                     details</a>.
                             </p>
-                        </div><!-- .End .tab-pane -->
->>>>>>> Stashed changes
-                        @else
-                        @endif
-                        <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
-                            <table class="table table-cart table-mobile">
-                                <thead>
-                                    <tr>
-                                        <th>Order name</th>
-                                        <th>Address</th>
-                                        <th>Phone</th>
-                                        <th>Quantity</th>
-                                        <th>Total</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
+                    </div><!-- .End .tab-pane -->
+                    @else
+                    @endif
+                    <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
+                        <table class="table table-cart table-mobile">
+                            <thead>
+                                <tr>
+                                    <th>Order name</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
 
-                                <tbody>
-                                    @foreach ($orders as $order)
-<<<<<<< Updated upstream
-                                                                        <tr>
-                                                                            <td class="product-col">
-                                                                                <div class="product">
-                                                                                    <h3 class="product-title">
-                                                                                        {{ $order->order_name }}
-                                                                                    </h3><!-- End .product-title -->
-                                                                                </div><!-- End .product -->
-                                                                            </td>
-                                                                            <td>{{ $order->order_address }}</td>
-                                                                            <td>{{ $order->order_phone }}</td>
-                                                                            <td>{{ $order->order_total }}</td>
-                                                                            <td class="price-col">{{ number_format($order->payment_id) }}</td>
-                                                                            <td class="price-col"><span class="text-ellipsis">
-                                                                                    <?php
+                            <tbody>
+                                @foreach ($orders as $order)
+                                <tr>
+                                    <td class="product-col">
+                                        <div class="product">
+                                            <h3 class="product-title">
+                                                {{ $order->order_name }}
+                                            </h3><!-- End .product-title -->
+                                        </div><!-- End .product -->
+                                    </td>
+                                    <td>{{ $order->order_address }}</td>
+                                    <td>{{ $order->order_phone }}</td>
+                                    <td>{{ $order->order_total }}</td>
+                                    <td class="price-col">{{ number_format($order->payment_id) }}</td>
+                                    <td class="price-col"><span class="text-ellipsis">
+                                            <?php
                                         if ($order->order_status == 0) {
                                                                                     ?>
-                                                                                    <p>Chưa giao hàng</a>
-                                                                                        <?php
+                                            <p>Chưa giao hàng</a>
+                                                <?php
                                         } else if ($order->order_status == 1) {
                                                                                         ?>
-                                                                                    <p>Đang giao hàng</p>
-                                                                                    <?php
+                                            <p>Đang giao hàng</p>
+                                            <?php
                                             } else {
                                                                                     ?>
-                                                                                    <p>Đã giao hàng</p>
-                                                                                    <?php
+                                            <p>Đã giao hàng</p>
+                                            <?php
                                             }
                                                                                     ?>
-                                                                                </span></td>
-                                                                        </tr>
-=======
-                                    <tr>
-                                        <td class="product-col">
-                                            <div class="product">
-                                                <h3 class="product-title">
-                                                    {{ $order->order_name }}
-                                                </h3><!-- End .product-title -->
-                                            </div><!-- End .product -->
-                                        </td>
-                                        <td>{{ $order->order_address }}</td>
-                                        <td>{{ $order->order_phone }}</td>
-                                        <td>{{ $order->order_total }}</td>
-                                        <td class="price-col">{{ number_format($order->payment_id) }}</td>
-                                        <td class="price-col"><span class="text-ellipsis">
-                                                <?php
-                                                    if ($order->order_status == 0) {
-                                                    ?>
-                                                <p>Chưa giao hàng</a>
-                                                    <?php
-                                                    } else if ($order->order_status == 1) {
-                                                        ?>
-                                                <p>Đang giao hàng</p>
-                                                <?php
-                                                    } else {
-                                                    ?>
-                                                <p>Đã giao hàng</p>
-                                                <?php
-                                                    }
-                                                    ?>
-                                            </span></td>
-                                    </tr>
->>>>>>> Stashed changes
-                                    @endforeach
+                                        </span></td>
+                                </tr>
+                                @endforeach
 
-                                </tbody>
-                            </table><!-- End .table table-wishlist -->
-                            <a href="{{ route('store') }}" class="btn btn-outline-primary-2"><span>GO SHOP</span><i
-                                    class="icon-long-arrow-right"></i></a>
-                        </div><!-- .End .tab-pane -->
-                        <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
-                            <p>The following addresses will be used on the checkout page by default.</p>
+                            </tbody>
+                        </table><!-- End .table table-wishlist -->
+                        <a href="{{ route('store') }}" class="btn btn-outline-primary-2"><span>GO SHOP</span><i
+                                class="icon-long-arrow-right"></i></a>
+                    </div><!-- .End .tab-pane -->
+                    <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
+                        <p>The following addresses will be used on the checkout page by default.</p>
 
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="card card-dashboard">
-                                        <div class="card-body">
-                                            <h3 class="card-title">Billing Address</h3><!-- End .card-title -->
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card card-dashboard">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Billing Address</h3><!-- End .card-title -->
 
-                                            <p>User Name<br>
-                                                User Company<br>
-                                                John str<br>
-                                                New York, NY 10001<br>
-                                                1-234-987-6543<br>
-                                                yourmail@mail.com<br>
-                                                <a href="#">Edit <i class="icon-edit"></i></a>
-                                            </p>
-                                        </div><!-- End .card-body -->
-                                    </div><!-- End .card-dashboard -->
-                                </div><!-- End .col-lg-6 -->
+                                        <p>User Name<br>
+                                            User Company<br>
+                                            John str<br>
+                                            New York, NY 10001<br>
+                                            1-234-987-6543<br>
+                                            yourmail@mail.com<br>
+                                            <a href="#">Edit <i class="icon-edit"></i></a>
+                                        </p>
+                                    </div><!-- End .card-body -->
+                                </div><!-- End .card-dashboard -->
+                            </div><!-- End .col-lg-6 -->
 
-                                <div class="col-lg-6">
-                                    <div class="card card-dashboard">
-                                        <div class="card-body">
-                                            <h3 class="card-title">Shipping Address</h3><!-- End .card-title -->
+                            <div class="col-lg-6">
+                                <div class="card card-dashboard">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Shipping Address</h3><!-- End .card-title -->
 
-                                            <p>You have not set up this type of address yet.<br>
-                                                <a href="#">Edit <i class="icon-edit"></i></a>
-                                            </p>
-                                        </div><!-- End .card-body -->
-                                    </div><!-- End .card-dashboard -->
-                                </div><!-- End .col-lg-6 -->
-                            </div><!-- End .row -->
-                        </div><!-- .End .tab-pane -->
+                                        <p>You have not set up this type of address yet.<br>
+                                            <a href="#">Edit <i class="icon-edit"></i></a>
+                                        </p>
+                                    </div><!-- End .card-body -->
+                                </div><!-- End .card-dashboard -->
+                            </div><!-- End .col-lg-6 -->
+                        </div><!-- End .row -->
+                    </div><!-- .End .tab-pane -->
 
-                        <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
-<<<<<<< Updated upstream
+                    <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
+                       <form method="POST" action="{{ URL::to('changepw') }}">
+                            @csrf
+                            <input type="hidden" class="form-control" name="namepw"
+                                value="{{ Session::get('customer_name') }}" required>
+                            <input type="hidden" class="form-control" name="emailpw"
+                                value="{{ Session::get('customer_email') }}" required>
+                            <input type="hidden" class="form-control" name="phonepw"
+                                value="{{ Session::get('customer_phone') }}" required>
 
-                            <form method="POST" action="{{ URL::to('changepw') }}">
-                                @csrf
-                                <input type="hidden" class="form-control" name="namepw"
-                                    value="{{ Session::get('customer_name') }}" required>
-                                <input type="hidden" class="form-control" name="emailpw"
-                                    value="{{ Session::get('customer_email') }}" required>
-                                <input type="hidden" class="form-control" name="phonepw"
-                                    value="{{ Session::get('customer_phone') }}" required>
+                            <label>Current password</label>
+                            <input type="password" class="form-control" name="current_password" required>
+                            <label>New password</label>
+                            <input type="password" class="form-control" name="new_password" required>
 
-                                <label>Current password</label>
-                                <input type="password" class="form-control" name="current_password" required>
-                                <label>New password</label>
-                                <input type="password" class="form-control" name="new_password" required>
-
-                                <label>Confirm new password</label>
-                                <input type="password" class="form-control mb-2" name="new_password_confirmation"
-                                    required>
-=======
-                            <form action="#">
-                                <label>Current password (leave blank to leave unchanged)</label>
-                                <input type="password" class="form-control">
-
-                                <label>New password (leave blank to leave unchanged)</label>
-                                <input type="password" class="form-control">
-
-                                <label>Confirm new password</label>
-                                <input type="password" class="form-control mb-2">
->>>>>>> Stashed changes
-
+                            <label>Confirm new password</label>
+                            <input type="password" class="form-control mb-2" name="new_password_confirmation" required>
+                           
                                 <button type="submit" class="btn btn-outline-primary-2">
                                     <span>SAVE CHANGES</span>
                                     <i class="icon-long-arrow-right"></i>
                                 </button>
                             </form>
-                        </div><!-- .End .tab-pane -->
+                    </div><!-- .End .tab-pane -->
 
-                    </div>
-                </div><!-- End .col-lg-9 -->
-            </div><!-- End .row -->
-        </div><!-- End .container -->
-    </div><!-- End .dashboard -->
+                </div>
+            </div><!-- End .col-lg-9 -->
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+</div><!-- End .dashboard -->
 </div><!-- End .page-content -->
 @endsection
