@@ -47,6 +47,7 @@
                 <div class="col-md-8 col-lg-9">
                     <div class="tab-content">
                         @if (Session::has('customer_name'))
+<<<<<<< Updated upstream
                             <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel"
                                 aria-labelledby="tab-dashboard-link">
                                 <p style="font-size:18px;">Hello <span class="font-weight-normal text-dark"
@@ -63,6 +64,24 @@
                                         details</a>.
                                 </p>
                             </div><!-- .End .tab-pane -->
+=======
+                        <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel"
+                            aria-labelledby="tab-dashboard-link">
+                            <p style="font-size:18px;">Hello <span class="font-weight-normal text-dark"
+                                    style="font-size:22px;">{{ Session::get('customer_name') }}</span> (not
+                                <span style="font-size:22px;"
+                                    class="font-weight-normal text-dark">{{ Session::get('customer_name') }}</span>?
+                                <a href="{{ URL::to('/logoutuser') }}">Log out</a>)
+                                <br>
+                                From your account dashboard you can view your <a href="#tab-orders"
+                                    class="tab-trigger-link link-underline">recent orders</a>, manage your <a
+                                    href="#tab-address" class="tab-trigger-link">shipping and billing addresses</a>,
+                                and
+                                <a href="#tab-account" class="tab-trigger-link">edit your password and account
+                                    details</a>.
+                            </p>
+                        </div><!-- .End .tab-pane -->
+>>>>>>> Stashed changes
                         @else
                         @endif
                         <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
@@ -80,6 +99,7 @@
 
                                 <tbody>
                                     @foreach ($orders as $order)
+<<<<<<< Updated upstream
                                                                         <tr>
                                                                             <td class="product-col">
                                                                                 <div class="product">
@@ -110,6 +130,38 @@
                                                                                     ?>
                                                                                 </span></td>
                                                                         </tr>
+=======
+                                    <tr>
+                                        <td class="product-col">
+                                            <div class="product">
+                                                <h3 class="product-title">
+                                                    {{ $order->order_name }}
+                                                </h3><!-- End .product-title -->
+                                            </div><!-- End .product -->
+                                        </td>
+                                        <td>{{ $order->order_address }}</td>
+                                        <td>{{ $order->order_phone }}</td>
+                                        <td>{{ $order->order_total }}</td>
+                                        <td class="price-col">{{ number_format($order->payment_id) }}</td>
+                                        <td class="price-col"><span class="text-ellipsis">
+                                                <?php
+                                                    if ($order->order_status == 0) {
+                                                    ?>
+                                                <p>Chưa giao hàng</a>
+                                                    <?php
+                                                    } else if ($order->order_status == 1) {
+                                                        ?>
+                                                <p>Đang giao hàng</p>
+                                                <?php
+                                                    } else {
+                                                    ?>
+                                                <p>Đã giao hàng</p>
+                                                <?php
+                                                    }
+                                                    ?>
+                                            </span></td>
+                                    </tr>
+>>>>>>> Stashed changes
                                     @endforeach
 
                                 </tbody>
@@ -153,6 +205,7 @@
                         </div><!-- .End .tab-pane -->
 
                         <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
+<<<<<<< Updated upstream
 
                             <form method="POST" action="{{ URL::to('changepw') }}">
                                 @csrf
@@ -171,6 +224,17 @@
                                 <label>Confirm new password</label>
                                 <input type="password" class="form-control mb-2" name="new_password_confirmation"
                                     required>
+=======
+                            <form action="#">
+                                <label>Current password (leave blank to leave unchanged)</label>
+                                <input type="password" class="form-control">
+
+                                <label>New password (leave blank to leave unchanged)</label>
+                                <input type="password" class="form-control">
+
+                                <label>Confirm new password</label>
+                                <input type="password" class="form-control mb-2">
+>>>>>>> Stashed changes
 
                                 <button type="submit" class="btn btn-outline-primary-2">
                                     <span>SAVE CHANGES</span>

@@ -23,8 +23,16 @@
 		                        echo '<span class="text-alert" style="color:red;">'.$message.'</span>';
 		                    Session::put('message',null);
 	                        }
+<<<<<<< Updated upstream
 	                        ?></h3>
 </div>
+=======
+	                        ?>
+    </h3>
+    
+</div>
+
+>>>>>>> Stashed changes
 <div class="page-content">
     <div class="checkout">
         <div class="container">

@@ -35,6 +35,7 @@ class CheckoutController extends Controller
         $data->order_name = $request->order_name;
         $data->order_address = $request->order_address;
         $data->order_phone = $request->order_phone;
+<<<<<<< Updated upstream
         $data->order_total = $total_quantity;
         $data->order_status = $request->has('order_status') ? $request->order_status : 0;
         $data->save();
@@ -44,6 +45,19 @@ class CheckoutController extends Controller
         foreach ($cart as $key => $item){
             $data2 = new OrderDetail;
             $data2->order_details_id = $request->order_details_id;
+=======
+        foreach (Session::get('cart') as $key => $item){
+            $cart = Session::get('cart');
+            $data->order_total = array_sum(array_column($cart, 'qty'));
+        }
+        $data->order_total = $request->product_quantity_checkout;
+        $data->order_status = $request->has('order_status') ? $request->order_status : 0;
+        $data->save();
+        $cart = Session::get('cart');
+        $order_id = $data->getKey();
+        foreach ($cart as $key => $item){
+            $data2 = new OrderDetail;
+>>>>>>> Stashed changes
             $data2->order_id = $order_id;
             $data2->product_id = $item['product_id'];
             $data2->product_name = $item['product_name'];
@@ -82,14 +96,12 @@ class CheckoutController extends Controller
                             'coupon_code' => $coupon->coupon_code,
                             'coupon_condition' => $coupon->coupon_condition,
                             'coupon_number' => $coupon->coupon_number,
-
                         );
                     Session::put('coupon',$cou);
                 }
                 Session::save();
                 return redirect()->back()->with('message','Thêm mã giảm giá thành công');
             }
-
         }else{
             return redirect()->back()->with('message','Mã giảm giá không đúng');
         }
@@ -102,5 +114,4 @@ class CheckoutController extends Controller
             return redirect()->back()->with('message','Xóa mã khuyến mãi thành công');
         }
     }
-    
 }
