@@ -162,14 +162,14 @@
                                             @if(Session::get('coupon'))
                                             @foreach(Session::get('coupon') as $key => $cou)
                                             @if($cou['coupon_condition']==1)
-                                            {{$cou['coupon_number']}} %
+                                            {{$cou['coupon_code']}}
 
                                             <?php
                                                     $tongTienGiamGia = ($cart->getTotalMoney()*$cou['coupon_number'])/100;
                                                     $total_coupon = $cart->getTotalMoney() - $tongTienGiamGia;
                                                     ?>
                                             @elseif($cou['coupon_condition']==2)
-                                            {{number_format($cou['coupon_number'])}} vnđ
+                                            {{$cou['coupon_code']}}
                                             @php
                                             $total_coupon = $cart->getTotalMoney() - $cou['coupon_number'];
                                             @endphp
@@ -184,9 +184,9 @@
                                             @if(Session::get('coupon'))
                                             @foreach(Session::get('coupon') as $key => $cou)
                                             @if($cou['coupon_condition']==1)
-                                            {{number_format($tongTienGiamGia)}}
+                                            {{number_format($tongTienGiamGia)}} vnđ
                                             @elseif($cou['coupon_condition']==2)
-                                            {{number_format($cou['coupon_number'])}}
+                                            {{number_format($cou['coupon_number'])}} vnđ
                                             @php
                                             $total_coupon = $cart->getTotalMoney() - $cou['coupon_number'];
                                             @endphp
@@ -205,7 +205,7 @@
                                     @if(Session::get('coupon'))
                                     <tr class="summary-total">
                                         <td>Total:</td>
-                                        <td class="text-center" name="cart">{{number_format($total_coupon - $fee)}}
+                                        <td class="text-center" name="cart">{{number_format($total_coupon + $fee)}}
                                             <input type="hidden" name="cart" value="{{$total_coupon - $fee}}">
                                         </td>
                                     </tr><!-- End .summary-total -->

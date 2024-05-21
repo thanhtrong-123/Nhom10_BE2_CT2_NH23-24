@@ -76,7 +76,7 @@
                                 <?php
                         }else{
                         ?>
-                                Giảm {{$couponCode->coupon_number}} k
+                                Giảm {{$couponCode->coupon_number}} vnđ
                                 <?php
                         }
                         ?>
